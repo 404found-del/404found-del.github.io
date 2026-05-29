@@ -3,7 +3,49 @@ permalink: /robots.txt
 layout: null
 sitemap: false
 ---
+# robots.txt — dataarchitect.studio
+# Goal: maximum visibility to humans and to AI answer engines.
+
+# --- Standard search engines (Google, Bing, etc.) ---
 User-agent: *
+Allow: /
+
+# --- AI SEARCH / RETRIEVAL crawlers ---------------------------------
+# These fetch pages in real time when someone asks ChatGPT, Claude, or
+# Perplexity a question, then cite you with a link. Keep ALLOWED — this
+# is what makes your essays quotable and sends you readers.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# --- AI TRAINING crawlers -------------------------------------------
+# These ingest content to train future models (usually no link/traffic).
+# Currently ALLOWED, so your thinking can shape the models. To OPT OUT of
+# training, change each "Allow: /" below to "Disallow: /".
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
 Allow: /
 
 Sitemap: {{ '/sitemap.xml' | absolute_url }}

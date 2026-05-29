@@ -1,0 +1,24 @@
+---
+permalink: /llms-full.txt
+layout: null
+sitemap: false
+---
+# {{ site.title }} — Full Text
+
+> {{ site.description }}
+
+Source: {{ '/' | absolute_url }}
+This file contains the complete text of every essay published on the site, for
+retrieval and long-context use by AI systems. Each essay is delimited and includes
+its canonical source URL for attribution.
+{% for post in site.posts %}
+
+================================================================================
+# {{ post.title }}
+Source: {{ post.url | absolute_url }}
+Published: {{ post.date | date: "%Y-%m-%d" }}
+Topic: {{ post.topic }}
+================================================================================
+
+{{ post.content | strip_html | strip }}
+{% endfor %}

@@ -1,0 +1,23 @@
+---
+permalink: /llms.txt
+layout: null
+sitemap: false
+---
+# {{ site.title }}
+
+> {{ site.description }}
+
+Essays and field notes on data architecture for practitioners: data modeling,
+dimensional modeling, data contracts, the semantic layer, the lakehouse, and the
+craft of building systems that make information trustworthy. Written in an
+answer-first style; each essay states its core claim up front.
+
+## Essays
+{% for post in site.posts %}- [{{ post.title }}]({{ post.url | absolute_url }}): {{ post.description }}
+{% endfor %}
+## About
+- [About this studio]({{ '/about/' | absolute_url }}): What the site covers and the perspective behind it.
+
+## Optional
+- [Full text for LLMs]({{ '/llms-full.txt' | absolute_url }}): The complete text of every essay in one file.
+- [RSS feed]({{ '/feed.xml' | absolute_url }}): Full-text feed of new essays.
