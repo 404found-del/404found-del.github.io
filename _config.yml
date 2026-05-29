@@ -1,5 +1,50 @@
-title: dataarchitect.studio
-email: your@email.com
-description: Thoughts on data architecture, design and engineering
+# --- Site identity -----------------------------------------------------------
+title: "dataarchitect.studio"
+tagline: "Notes on the architecture of data"
+description: >-
+  Essays and field notes on data architecture, modeling, and the craft of
+  designing systems that make information trustworthy.
+author: "Vikas Maheshwari"
 url: "https://dataarchitect.studio"
-github_username: 404found-del
+baseurl: ""
+lang: en
+
+# --- Build -------------------------------------------------------------------
+permalink: /essays/:title/
+timezone: Asia/Kolkata
+
+# Reading column / list behaviour
+paginate_path: "/page:num/"
+
+# --- Collections defaults ----------------------------------------------------
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+    values:
+      layout: "page"
+
+# --- Plugins (all whitelisted on GitHub Pages) -------------------------------
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# --- Exclude from build ------------------------------------------------------
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - README.md
+  - .sass-cache
+  - .jekyll-cache
+
+# --- Social / meta (used by jekyll-seo-tag) ----------------------------------
+social:
+  name: "Vikas Maheshwari"
+  links:
+    - https://github.com/404found-del

@@ -1,0 +1,39 @@
+---
+layout: default
+---
+
+<section class="hero">
+  <div class="wrap">
+    <p class="hero__kicker reveal">{{ site.tagline }}</p>
+    <h1 class="reveal d1">Designing the structures that make data <em>trustworthy</em>.</h1>
+    <p class="hero__lede reveal d2">
+      {{ site.description }}
+    </p>
+  </div>
+</section>
+
+<div class="wrap">
+  <p class="section-label reveal d3">
+    <span>Essays &amp; field notes</span>
+    <span class="count">{{ site.posts | size }} pieces</span>
+  </p>
+</div>
+
+<section class="wrap essays">
+  {%- for post in site.posts -%}
+  {%- assign words = post.content | number_of_words -%}
+  {%- assign minutes = words | divided_by: 200 | plus: 1 -%}
+  <a class="essay-row reveal" href="{{ post.url | relative_url }}">
+    <span class="essay-row__no">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+    <span class="essay-row__body">
+      {%- if post.kicker -%}<p class="essay-row__kicker">{{ post.kicker }}</p>{%- endif -%}
+      <h2 class="essay-row__title">{{ post.title }}</h2>
+      <p class="essay-row__excerpt">{{ post.summary | default: post.excerpt | strip_html | truncate: 168 }}</p>
+    </span>
+    <span class="essay-row__meta">
+      {{ post.date | date: "%b %d, %Y" }}
+      <span class="read">{{ minutes }} min</span>
+    </span>
+  </a>
+  {%- endfor -%}
+</section>
