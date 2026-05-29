@@ -4,8 +4,6 @@
    Paper + ink + a single vermilion accent. Blueprint hairlines.
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
-
 /* ---- Tokens -------------------------------------------------------------- */
 :root {
   --paper:      #f6f3ec;

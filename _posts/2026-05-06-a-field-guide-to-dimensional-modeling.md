@@ -3,7 +3,7 @@ title: "A Field Guide to Dimensional Modeling"
 kicker: "Field Notes"
 topic: "Modeling"
 date: 2026-05-06
-summary: "Facts, dimensions, and grain — the three ideas that quietly run most analytics, explained without the dogma."
+description: "Facts, dimensions, and grain — the three ideas that quietly run most analytics, explained without the dogma."
 ---
 
 Dimensional modeling has a reputation problem. To newcomers it sounds like a relic

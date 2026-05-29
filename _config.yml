@@ -2,19 +2,19 @@
 title: "dataarchitect.studio"
 tagline: "Notes on the architecture of data"
 description: >-
-  Essays and field notes on data architecture, modeling, and the craft of
-  designing systems that make information trustworthy.
-author: "Vikas Maheshwari"
+  Essays and field notes on data architecture, data modeling, dimensional
+  modeling, data contracts, and the lakehouse — practical writing for data
+  engineers and architects who design systems that make information trustworthy.
 url: "https://dataarchitect.studio"
 baseurl: ""
 lang: en
 
+# Author / publisher is the publication itself — no personal name.
+author: "dataarchitect.studio"
+
 # --- Build -------------------------------------------------------------------
 permalink: /essays/:title/
 timezone: Asia/Kolkata
-
-# Reading column / list behaviour
-paginate_path: "/page:num/"
 
 # --- Collections defaults ----------------------------------------------------
 defaults:
@@ -34,17 +34,25 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
 
+# --- SEO (consumed by jekyll-seo-tag) ----------------------------------------
+# Default social-share card used when a page has no image of its own.
+image: /assets/og-default.png
+logo: /assets/logo.png
+
+twitter:
+  card: summary_large_image
+
+social:
+  name: "dataarchitect.studio"
+  links:
+    - https://github.com/404found-del
+
 # --- Exclude from build ------------------------------------------------------
 exclude:
   - Gemfile
   - Gemfile.lock
   - vendor
   - README.md
+  - preview.html
   - .sass-cache
   - .jekyll-cache
-
-# --- Social / meta (used by jekyll-seo-tag) ----------------------------------
-social:
-  name: "Vikas Maheshwari"
-  links:
-    - https://github.com/404found-del

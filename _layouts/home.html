@@ -28,7 +28,7 @@ layout: default
     <span class="essay-row__body">
       {%- if post.kicker -%}<p class="essay-row__kicker">{{ post.kicker }}</p>{%- endif -%}
       <h2 class="essay-row__title">{{ post.title }}</h2>
-      <p class="essay-row__excerpt">{{ post.summary | default: post.excerpt | strip_html | truncate: 168 }}</p>
+      <p class="essay-row__excerpt">{{ post.description | default: post.excerpt | strip_html | truncate: 168 }}</p>
     </span>
     <span class="essay-row__meta">
       {{ post.date | date: "%b %d, %Y" }}

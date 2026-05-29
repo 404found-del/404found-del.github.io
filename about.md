@@ -8,10 +8,10 @@ permalink: /about/
 This is a working notebook on **data architecture** — the discipline of deciding
 how information is shaped, stored, moved, and trusted inside an organisation.
 
-I'm Vikas Maheshwari, a data architect. I spend my days drawing the boundaries
-between systems: where a fact lives, who owns it, what it's allowed to mean, and
-how it survives contact with a hundred downstream consumers who each want it
-slightly differently. This site is where I think out loud about that work.
+I'm a working data architect. I spend my days drawing the boundaries between
+systems: where a fact lives, who owns it, what it's allowed to mean, and how it
+survives contact with a hundred downstream consumers who each want it slightly
+differently. This site is where I think out loud about that work.
 
 ## What you'll find here
 

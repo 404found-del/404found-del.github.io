@@ -3,7 +3,7 @@ title: "The Medallion Architecture, Reconsidered"
 kicker: "Reconsidered"
 topic: "Architecture"
 date: 2026-05-27
-summary: "Bronze, silver, gold is a useful default and a dangerous dogma. A second look at what the layers get right, and where they quietly fall apart."
+description: "Bronze, silver, gold is a useful default and a dangerous dogma. A second look at what the layers get right, and where they quietly fall apart."
 ---
 
 The medallion architecture — bronze, silver, gold — has become the default mental

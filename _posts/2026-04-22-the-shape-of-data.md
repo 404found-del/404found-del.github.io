@@ -3,7 +3,7 @@ title: "The Shape of Data"
 kicker: "Manifesto"
 topic: "Architecture"
 date: 2026-04-22
-summary: "Every dataset has a shape. The only question is whether you chose it, or whether it happened to you."
+description: "Every dataset has a shape. The only question is whether you chose it, or whether it happened to you."
 ---
 
 Every dataset has a shape. The columns it carries, the grain it's recorded at, the

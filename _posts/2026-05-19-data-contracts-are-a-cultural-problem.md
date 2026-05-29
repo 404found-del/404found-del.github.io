@@ -3,7 +3,7 @@ title: "Data Contracts Are a Cultural Problem"
 kicker: "Essay"
 topic: "Governance"
 date: 2026-05-19
-summary: "A schema check is the easy 10% of a data contract. The other 90% is an organizational agreement that no YAML file can enforce for you."
+description: "A schema check is the easy 10% of a data contract. The other 90% is an organizational agreement that no YAML file can enforce for you."
 ---
 
 The phrase "data contract" makes the hard thing sound easy. It conjures a tidy
