@@ -4,6 +4,13 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "A data warehouse stores structured, modeled data for analytics. A data lake stores raw data of any shape, cheaply. A lakehouse tries to be both. Here's the real trade-off and how to choose."
 date: 2026-05-30
+faq:
+  - q: "Can a lakehouse fully replace a data warehouse?"
+    a: "For many teams, yes — open table formats give lake storage the transactions and schema enforcement that BI needs. But a turnkey warehouse is still the simpler choice when your workload is purely structured analytics. Replace only if you genuinely also need lake-style raw and ML workloads."
+  - q: "Is a data lake cheaper than a data warehouse?"
+    a: "Storage, yes — object storage costs far less per terabyte. Total cost depends on the engineering needed to keep the lake organized and trustworthy. An ungoverned lake saves on storage and pays it back in confusion."
+  - q: "What are open table formats like Iceberg and Delta Lake?"
+    a: "Metadata layers that sit over files in object storage and add what raw lakes lack: ACID transactions, schema enforcement and evolution, and time travel. They are the technology that makes the lakehouse pattern possible."
 ---
 
 Three terms get used almost interchangeably and mean genuinely different things: the

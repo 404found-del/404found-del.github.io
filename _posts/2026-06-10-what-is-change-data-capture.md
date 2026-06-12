@@ -4,6 +4,13 @@ kicker: "Field Notes"
 topic: "Engineering"
 description: "Change data capture identifies inserts, updates, and deletes in a source database and delivers them downstream. Here's how log-based, trigger-based, and query-based CDC compare — and when a nightly batch is still fine."
 date: 2026-06-10
+faq:
+  - q: "What is the best CDC method?"
+    a: "Log-based CDC, where available. Reading the database's transaction log captures every change including deletes, in commit order, with minimal load on the source and no application changes. Triggers and timestamp polling are compromises for when log access isn't possible."
+  - q: "Does change data capture capture deletes?"
+    a: "Log-based and trigger-based CDC do. Query-based polling on an updated-at column does not — a deleted row leaves nothing behind to poll, which is that method's biggest structural weakness."
+  - q: "Is CDC real-time?"
+    a: "Capture is near-real-time — changes appear in the stream seconds after commit. End-to-end latency then depends on how you process the stream, which can be continuous streaming or micro-batches, depending on what the consuming decision needs."
 ---
 
 Somewhere between your application's database and your warehouse sits an unglamorous

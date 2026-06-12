@@ -21,6 +21,10 @@ layout: default
       {{ content }}
     </div>
 
+    {% include faq.html %}
+    {% include related.html %}
+    {% include subscribe.html %}
+
     <footer class="article__foot">
       <a href="{{ '/' | relative_url }}">← All essays</a>
       <p class="signoff">

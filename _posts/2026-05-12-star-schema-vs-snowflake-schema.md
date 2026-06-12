@@ -4,6 +4,13 @@ kicker: "Field Notes"
 topic: "Modeling"
 description: "Star schema vs snowflake schema comes down to one decision — whether to normalize your dimensions. Here's the trade-off, and why the star usually wins in a modern warehouse."
 date: 2026-05-12
+faq:
+  - q: "Which is faster, star schema or snowflake schema?"
+    a: "On modern columnar warehouses, usually the star. Denormalized dimensions mean fewer joins at query time, and columnar compression shrinks the repeated values that normalization was meant to eliminate — so the snowflake's storage saving rarely outweighs its join cost."
+  - q: "Can I mix star and snowflake in one model?"
+    a: "Yes, and it's often the pragmatic answer. Keep the model a star by default and normalize only the specific dimension that genuinely needs it — a mostly-star schema with one snowflaked dimension is a perfectly reasonable design."
+  - q: "Is the snowflake schema related to the Snowflake data warehouse?"
+    a: "No. The schema pattern is decades older than the vendor and the two are unrelated — you can build star or snowflake schemas on any warehouse, including Snowflake."
 ---
 
 The difference between a star schema and a snowflake schema is smaller than the

@@ -4,6 +4,13 @@ kicker: "Essay"
 topic: "Architecture"
 description: "A semantic layer is the single, governed place where business metrics are defined once — independent of any dashboard. Here's what it is, what it isn't, and why it fixes the 'three numbers for one metric' problem."
 date: 2026-05-28
+faq:
+  - q: "Is a semantic layer the same as a data catalog?"
+    a: "No. A catalog is an inventory — it documents what data exists, where it lives, and who owns it. A semantic layer defines what metrics mean and computes them consistently at query time. The catalog describes your data; the semantic layer enforces its definitions."
+  - q: "Do I still need a semantic layer if I use a transformation tool like dbt?"
+    a: "Transformation tools model tables; metric definitions can still fragment across the dashboards that query those tables. A semantic layer adds governed metric definitions on top, so every tool computes revenue or active users the same way. They are complementary layers, not substitutes."
+  - q: "When is a semantic layer overkill?"
+    a: "A single small team with one BI tool and a handful of metrics can keep definitions centralized inside that tool. A dedicated semantic layer becomes necessary once multiple tools, teams, or AI consumers must agree on the same numbers."
 ---
 
 Here is a problem every data team eventually has. Three dashboards show "active

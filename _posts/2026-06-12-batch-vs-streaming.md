@@ -4,6 +4,13 @@ kicker: "Field Notes"
 topic: "Engineering"
 description: "Batch vs streaming isn't legacy vs modern. The real question: what latency does the decision consuming the data actually require? Default to batch; promote pipelines to streaming one named use case at a time."
 date: 2026-06-12
+faq:
+  - q: "Is streaming replacing batch processing?"
+    a: "No. They are complementary. Batch remains the right default for analytics consumed on human cadences — daily and weekly decisions — while streaming earns its complexity for operational decisions made by machines in seconds to minutes."
+  - q: "What is micro-batching?"
+    a: "Processing small batches on a frequent schedule, typically every few minutes. It covers a large share of real-time requirements at a fraction of true streaming's complexity, and much of what is marketed as streaming is micro-batch underneath."
+  - q: "Does using CDC mean I have to do stream processing?"
+    a: "No. Change data capture is a way of capturing changes from a source; how you process them is a separate decision. Landing a CDC stream into micro-batches is a common and perfectly sound architecture."
 ---
 
 The batch-vs-streaming question is usually framed as legacy versus modern — batch as

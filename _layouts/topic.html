@@ -1,0 +1,26 @@
+---
+layout: default
+---
+{% assign topic_posts = site.posts | where: "topic", page.topic_name %}
+<div class="wrap">
+  <header class="page-head">
+    <p class="article__kicker">Topic — {{ topic_posts | size }} essays</p>
+    <h1>{{ page.title }}</h1>
+  </header>
+  <p class="hero__lede" style="margin-top:1.6rem;">{{ page.description }}</p>
+</div>
+<section class="wrap essays" style="margin-top:1.5rem;">
+  {% for post in topic_posts %}
+  {% assign words = post.content | number_of_words %}
+  {% assign minutes = words | divided_by: 200 | plus: 1 %}
+  <a class="essay-row" href="{{ post.url | relative_url }}">
+    <span class="essay-row__no">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+    <span class="essay-row__body">
+      <p class="essay-row__kicker">{{ post.kicker }}</p>
+      <h2 class="essay-row__title">{{ post.title }}</h2>
+      <p class="essay-row__excerpt">{{ post.description | strip_html | truncate: 168 }}</p>
+    </span>
+    <span class="essay-row__meta">{{ post.date | date: "%b %d, %Y" }}<span class="read">{{ minutes }} min</span></span>
+  </a>
+  {% endfor %}
+</section>

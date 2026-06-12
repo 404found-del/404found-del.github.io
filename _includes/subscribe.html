@@ -1,0 +1,10 @@
+{% if site.buttondown_username and site.buttondown_username != "" %}
+<section class="subscribe">
+  <p class="subscribe__label">Essays by email</p>
+  <p class="subscribe__pitch">One new essay on data architecture, straight to your inbox. No noise, unsubscribe anytime.</p>
+  <form class="subscribe__form" action="https://buttondown.com/api/emails/embed-subscribe/{{ site.buttondown_username }}" method="post" target="popupwindow">
+    <input class="subscribe__input" type="email" name="email" placeholder="you@example.com" required>
+    <button class="subscribe__btn" type="submit">Subscribe</button>
+  </form>
+</section>
+{% endif %}

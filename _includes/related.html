@@ -1,0 +1,18 @@
+{% assign shown = 0 %}
+<aside class="related">
+  <p class="related__label">Keep reading</p>
+  <div class="related__grid">
+    {% for p in site.posts %}{% if p.url != page.url and p.topic == page.topic and shown < 3 %}
+    <a class="related__card" href="{{ p.url | relative_url }}">
+      <span class="related__kicker">{{ p.kicker }}</span>
+      <span class="related__title">{{ p.title }}</span>
+    </a>{% assign shown = shown | plus: 1 %}
+    {% endif %}{% endfor %}
+    {% for p in site.posts %}{% if p.url != page.url and p.topic != page.topic and shown < 3 %}
+    <a class="related__card" href="{{ p.url | relative_url }}">
+      <span class="related__kicker">{{ p.kicker }}</span>
+      <span class="related__title">{{ p.title }}</span>
+    </a>{% assign shown = shown | plus: 1 %}
+    {% endif %}{% endfor %}
+  </div>
+</aside>
