@@ -60,11 +60,11 @@ exclude:
 # --- Growth integrations (fill these in to activate) ---------------------------
 # Privacy-friendly analytics: create a free account at goatcounter.com,
 # choose a code (e.g. "dataarchitect"), and put it here. Script renders only when set.
-goatcounter_code: ""
+goatcounter_code: "vmaheshwari"
 
 # Email list: create a free account at buttondown.com and put your username here.
 # The subscribe form renders only when set.
-buttondown_username: ""
+buttondown_username: "maheshwari"
 
 # Search engine verification: paste tokens from Google Search Console and
 # Bing Webmaster Tools (DNS verification also works; then leave these blank).
