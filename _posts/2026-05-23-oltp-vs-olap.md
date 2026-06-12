@@ -67,7 +67,7 @@ it: checkouts hang, pages time out. You've made your app slow to compute a repor
 Because one system can't serve both workloads well, the standard architecture is to
 **keep them separate and move data from one to the other.** Your application writes to
 its OLTP database, optimised for transactions. On some cadence — batch jobs, or
-[change data capture](/essays/how-to-make-a-data-pipeline-idempotent/) streaming
+[change data capture](/essays/what-is-change-data-capture/) streaming
 changes continuously — that data is copied into a separate analytical store (a
 warehouse or lakehouse) optimised for OLAP, where it's reshaped into denormalized,
 column-stored, analytics-friendly models.
