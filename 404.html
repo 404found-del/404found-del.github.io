@@ -1,25 +1,26 @@
 ---
+layout: default
 permalink: /404.html
-layout: page
+sitemap: false
 ---
 
-<style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-</style>
+<div class="wrap">
+  <header class="page-head">
+    <p class="article__kicker">Error 404</p>
+    <h1>This page took a wrong turn.</h1>
+  </header>
+  <p class="hero__lede" style="margin-top:1.4rem;">
+    The page you're looking for doesn't exist or may have moved. Search for what you
+    need, or jump back to the essays below.
+  </p>
 
-<div class="container">
-  <h1>404</h1>
+  {% include search-box.html %}
 
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
+  <p style="font-family:var(--mono);font-size:0.8rem;color:var(--ink-faint);margin-top:2.2rem;">
+    Or head to
+    <a href="{{ '/' | relative_url }}" style="color:var(--accent-deep)">all essays</a>,
+    browse by <a href="{{ '/topics/' | relative_url }}" style="color:var(--accent-deep)">topic</a>,
+    or read <a href="{{ '/about/' | relative_url }}" style="color:var(--accent-deep)">about the studio</a>.
+  </p>
+  <div style="height:clamp(3rem,8vw,6rem)"></div>
 </div>

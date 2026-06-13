@@ -1,0 +1,96 @@
+<div class="search">
+  <input id="ss-input" class="search__input" type="search" placeholder="Search essays — e.g. star schema, data contracts, RAG…" autocomplete="off" autofocus aria-label="Search essays">
+  <p id="ss-status" class="search__status" role="status" aria-live="polite"></p>
+  <div id="ss-results" class="search__results"></div>
+</div>
+<script>
+(function () {
+  var input = document.getElementById('ss-input');
+  var results = document.getElementById('ss-results');
+  var statusEl = document.getElementById('ss-status');
+  if (!input) return;
+
+  var docs = [], ready = false;
+  var endpoint = '{{ "/search.json" | relative_url }}';
+
+  fetch(endpoint)
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      docs = d; ready = true;
+      var q = getParam('q');
+      if (q) { input.value = q; run(q); }
+    })
+    .catch(function () { statusEl.textContent = 'Search is unavailable right now.'; });
+
+  function getParam(n) {
+    var m = new RegExp('[?&]' + n + '=([^&]+)').exec(location.search);
+    return m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : '';
+  }
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return c === '&' ? '&amp;' : c === '<' ? '&lt;' : c === '>' ? '&gt;' : '&quot;';
+    });
+  }
+  function scoreDoc(doc, terms) {
+    var t = doc.title.toLowerCase();
+    var tp = (doc.topic || '').toLowerCase();
+    var d = (doc.description || '').toLowerCase();
+    var b = (doc.body || '').toLowerCase();
+    var s = 0;
+    for (var i = 0; i < terms.length; i++) {
+      var term = terms[i];
+      if (t.indexOf(term) > -1) s += 10;
+      if (tp.indexOf(term) > -1) s += 4;
+      if (d.indexOf(term) > -1) s += 4;
+      if (b.indexOf(term) > -1) s += 1;
+    }
+    return s;
+  }
+  function makeSnippet(doc, terms) {
+    var b = doc.body || doc.description || '';
+    var lb = b.toLowerCase();
+    var pos = -1;
+    for (var i = 0; i < terms.length; i++) {
+      var p = lb.indexOf(terms[i]);
+      if (p > -1) { pos = p; break; }
+    }
+    if (pos < 0) return (doc.description || '').slice(0, 150);
+    var start = Math.max(0, pos - 55);
+    var end = Math.min(b.length, pos + 95);
+    return (start > 0 ? '… ' : '') + b.slice(start, end).trim() + (end < b.length ? ' …' : '');
+  }
+  function run(q) {
+    var query = (q || '').trim().toLowerCase();
+    if (!query) { results.innerHTML = ''; statusEl.textContent = ''; return; }
+    if (!ready) { statusEl.textContent = 'Loading…'; return; }
+    var terms = query.split(/\s+/);
+    var scored = docs
+      .map(function (doc) { return { doc: doc, s: scoreDoc(doc, terms) }; })
+      .filter(function (x) { return x.s > 0; })
+      .sort(function (a, b) { return b.s - a.s; })
+      .slice(0, 12);
+    if (!scored.length) {
+      statusEl.textContent = 'No essays match “' + esc(q) + '”.';
+      results.innerHTML = '';
+      return;
+    }
+    statusEl.textContent = scored.length + (scored.length === 1 ? ' result' : ' results');
+    var html = '';
+    for (var i = 0; i < scored.length; i++) {
+      var doc = scored[i].doc;
+      html += '<a class="search__hit" href="' + doc.url + '">' +
+              '<span class="search__hit-meta">' + esc(doc.kicker || '') + ' · ' + esc(doc.topic || '') + ' · ' + esc(doc.date || '') + '</span>' +
+              '<span class="search__hit-title">' + esc(doc.title) + '</span>' +
+              '<span class="search__hit-snip">' + esc(makeSnippet(doc, terms)) + '</span>' +
+              '</a>';
+    }
+    results.innerHTML = html;
+  }
+
+  var timer;
+  input.addEventListener('input', function () {
+    clearTimeout(timer);
+    timer = setTimeout(function () { run(input.value); }, 120);
+  });
+})();
+</script>

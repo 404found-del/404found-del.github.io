@@ -1,3 +1,8 @@
+---
+permalink: /robots.txt
+layout: null
+sitemap: false
+---
 # robots.txt — dataarchitect.studio
 # Goal: maximum visibility to humans and to AI answer engines.
 
@@ -43,4 +48,4 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-Sitemap: https://dataarchitect.studio/sitemap.xml
+Sitemap: {{ '/sitemap.xml' | absolute_url }}
