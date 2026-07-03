@@ -3,7 +3,7 @@ title: "Why a New Data Source Still Takes Weeks When You Already Have a Connecto
 kicker: "Field Notes"
 topic: "Engineering"
 description: "A connector copies data from source to destination — and that's one step out of eleven. Here's the other ten, and why 'just add a connector' quietly hides most of the actual work of onboarding a data source."
-date: 2026-07-03
+date: 2026-07-01
 faq:
   - q: "If I have a connector, why does adding a data source still take so long?"
     a: "Because the connector only does one part of the job — copying data from source to destination. The time goes into everything around it: understanding the data, securing the path, wiring authentication, building change-data-capture logic, validating correctness, orchestrating pipelines, testing end to end, and surfacing the data to users. The copy is fast; certifying and delivering the data is the work."
