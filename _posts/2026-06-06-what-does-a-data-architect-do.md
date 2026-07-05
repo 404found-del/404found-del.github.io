@@ -4,6 +4,7 @@ kicker: "Essay"
 topic: "Craft"
 description: "A data architect's job isn't drawing diagrams or picking tools. It's making the deliberate decisions about how data is shaped, defined, owned, and trusted — and defending them against entropy."
 date: 2026-06-06
+last_modified_at: 2026-07-05
 ---
 
 Ask ten people what a data architect does and you'll get two common answers, both
@@ -83,7 +84,8 @@ infrastructure. An **analytics engineer** models cleaned data into the tables an
 use. A **data architect** decides the structure, standards, and principles that both
 operate within — the shape of the whole, not the construction of each part. On a small
 team one person wears all three hats; the *architecture* hat is the one concerned with
-how it all fits together and whether it'll still make sense in two years.
+how it all fits together and whether it'll still make sense in two years. (The
+three roles get a [full comparison of their own](/essays/data-engineer-vs-data-architect-vs-analytics-engineer/).)
 
 ## The real description
 

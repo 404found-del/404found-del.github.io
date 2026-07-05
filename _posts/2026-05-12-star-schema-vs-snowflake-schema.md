@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Modeling"
 description: "Star schema vs snowflake schema comes down to one decision — whether you normalize your dimensions. Here's the difference, a worked example, a diagram, and why the star usually wins on a modern warehouse."
 date: 2026-05-12
-last_modified_at: 2026-06-20
+last_modified_at: 2026-07-05
 faq:
   - q: "What is the difference between a star schema and a snowflake schema?"
     a: "A star schema keeps each dimension in a single flat, denormalized table. A snowflake schema normalizes those dimensions into multiple related sub-tables. That one choice — denormalized versus normalized dimensions — is the entire distinction; the fact table is the same in both."
@@ -17,8 +17,8 @@ faq:
 ---
 
 The difference between a star schema and a snowflake schema is smaller than the
-debate around it suggests. Both are dimensional models — a central fact table
-surrounded by dimensions — and the *entire* distinction is one decision: **do you
+debate around it suggests. Both are dimensional models — a central
+[fact table surrounded by dimensions](/essays/fact-table-vs-dimension-table/) — and the *entire* distinction is one decision: **do you
 keep each dimension in a single flat table (star), or normalize it into related
 sub-tables (snowflake)?** For analytics on a modern cloud warehouse, the star is
 almost always the better default. Here's why, with a worked example and a diagram.

@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "A data warehouse stores structured, modeled data. A data lake stores raw data of any shape, cheaply. A lakehouse tries to be both. Here's a side-by-side comparison, a diagram, and how to choose."
 date: 2026-05-30
-last_modified_at: 2026-06-20
+last_modified_at: 2026-07-05
 faq:
   - q: "What is the difference between a data warehouse, a data lake, and a lakehouse?"
     a: "A data warehouse stores structured, modeled data with schema enforced on write, optimized for reliable analytics. A data lake stores raw data of any shape cheaply, with schema applied on read. A lakehouse adds a metadata and table layer over cheap lake storage to deliver warehouse-like reliability on lake economics."
@@ -112,7 +112,7 @@ which makes reliable, concurrent analytics hard.
 
 The lakehouse keeps your data in cheap object storage as files — the lake part — but
 adds a **metadata and table layer** on top that brings the structure and guarantees a
-warehouse has. That layer is delivered by **open table formats** — Apache Iceberg,
+warehouse has. That layer is delivered by **[open table formats](/essays/what-is-an-open-table-format/)** — Apache Iceberg,
 Delta Lake, Apache Hudi — which provide what raw lakes lacked: ACID transactions,
 schema enforcement and evolution, and time travel. The result is one system that runs
 both flexible ML-style workloads *and* reliable structured BI, without maintaining a

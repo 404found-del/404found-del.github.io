@@ -4,6 +4,7 @@ kicker: "Field Notes"
 topic: "Modeling"
 date: 2026-05-06
 description: "Facts, dimensions, and grain — the three ideas that quietly run most analytics, explained without the dogma."
+last_modified_at: 2026-07-05
 ---
 
 Dimensional modeling has a reputation problem. To newcomers it sounds like a relic
@@ -20,7 +21,8 @@ of clicks. And there are the things that give those measurements **context** —
 customer, the product, the store, the day.
 
 Dimensional modeling takes this split seriously. Measurements go in **fact tables**.
-Context goes in **dimension tables**. That's the whole foundation. A fact table is
+Context goes in **dimension tables**. That's the whole foundation. A
+[fact table](/essays/fact-table-vs-dimension-table/) is
 a long, narrow log of events, each row a thing that happened, carrying its numbers
 and a set of foreign keys. A dimension table is a wide, shorter reference of
 descriptive attributes you filter and group by.
@@ -54,12 +56,17 @@ The shape of the model matches the shape of the questions.
 ## The second idea: grain is everything
 
 Before you write a single column, you answer one question: **what does one row of
-this fact table represent?** This is the *grain*, and getting it wrong is the most
+this fact table represent?** This is the [*grain*](/essays/fact-table-grain/), and
+getting it wrong is the most
 common — and most expensive — modeling mistake there is.
 
 > Declare the grain in a single sentence, in plain language, before anything else.
 > "One row per order line." "One row per shipment." "One row per daily account
 > balance." If you can't say it cleanly, you don't understand the fact yet.
+
+Those three sentences also happen to name the three
+[fact table types](/essays/fact-table-types/) — transaction, periodic snapshot,
+accumulating snapshot — but the discipline is the same for all of them.
 
 Grain discipline prevents the classic disaster: mixing levels of detail in one
 table so that a naïve `SUM()` double-counts. If some rows are per-order and others
@@ -71,8 +78,9 @@ polish will save you. Pick the finest grain you can afford — you can always ro
 
 Customers move cities. Products get recategorised. A store changes region. The
 question is: when an attribute changes, do you want history to reflect the new
-value, or preserve the old one? This is the entire content of **slowly changing
-dimensions**, and it's less arcane than it sounds. In practice you mostly choose
+value, or preserve the old one? This is the entire content of
+**[slowly changing dimensions](/essays/slowly-changing-dimensions-explained/)**,
+and it's less arcane than it sounds. In practice you mostly choose
 between two behaviours:
 
 - **Overwrite (Type 1).** Keep only the current value. Simple. You lose history —
@@ -94,7 +102,8 @@ readability, and predictable performance. It's a poor fit for a few cases worth
 naming:
 
 - **Operational, transactional workloads** where you're reading and writing single
-  records at high frequency — that's what normalised OLTP schemas are for.
+  records at high frequency — that's what normalised
+  [OLTP schemas](/essays/oltp-vs-olap/) are for.
 - **Exploratory, one-off analysis** on data nobody will touch again — modeling it
   is wasted ceremony.
 - **Genuinely document-shaped or graph-shaped data**, where forcing a star schema
@@ -108,6 +117,8 @@ question and reaching for the model that fits it.
 When a dimensional model is done well, something subtle happens: people stop
 arguing about numbers. The grain is declared, the measures live in one place, the
 dimensions mean one thing, and "revenue by category last quarter" returns the same
-answer no matter who asks. That consistency is the real product. The star schema is
+answer no matter who asks. That consistency is the real product. The
+[star schema](/essays/star-schema-vs-snowflake-schema/) is
 just the machinery that delivers it — old, unglamorous, and still quietly
-indispensable.
+indispensable. (Whether you even need the machinery, or can get away with
+[one big table](/essays/one-big-table-vs-star-schema/), is its own argument.)

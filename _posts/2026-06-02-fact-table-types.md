@@ -4,10 +4,12 @@ kicker: "Field Notes"
 topic: "Modeling"
 description: "There are three kinds of fact table, distinguished by what one row represents over time: transaction, periodic snapshot, and accumulating snapshot. Here's how each works and how to pick the right one."
 date: 2026-06-02
+last_modified_at: 2026-07-05
 ---
 
 Most people who've built [a dimensional model](/essays/a-field-guide-to-dimensional-modeling/)
-know what a fact table is — measurements at a declared grain, surrounded by
+know what a fact table is — measurements at a
+[declared grain](/essays/fact-table-grain/), surrounded by
 dimensions in a [star schema](/essays/star-schema-vs-snowflake-schema/). Fewer know
 that fact tables come in three distinct flavours, and that
 choosing the wrong one quietly makes a whole class of questions awkward or

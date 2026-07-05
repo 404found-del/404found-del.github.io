@@ -3,11 +3,12 @@ title: "The Medallion Architecture, Reconsidered"
 kicker: "Reconsidered"
 topic: "Architecture"
 date: 2026-05-27
+last_modified_at: 2026-07-05
 description: "Bronze, silver, gold is a useful default and a dangerous dogma. A second look at what the layers get right, and where they quietly fall apart."
 ---
 
 The medallion architecture — bronze, silver, gold — has become the default mental
-model for organising a data lakehouse, and for good reason. It's memorable, it maps
+model for organising a [data lakehouse](/essays/data-warehouse-vs-data-lake-vs-lakehouse/), and for good reason. It's memorable, it maps
 to an intuition everyone shares, and it gives a sprawling pile of data a sense of
 direction. I've recommended it. I still do, sometimes. But defaults have a way of
 hardening into dogma, and this one has hardened more than most. It's worth a second,
@@ -17,7 +18,7 @@ honest look.
 
 Stripped to its essence, the pattern says: data should flow through stages of
 increasing refinement and trust. **Bronze** is raw, as-ingested, untouched —
-history you can always replay from. **Silver** is cleaned, conformed, deduplicated
+history you can always replay from. **Silver** is cleaned, [conformed](/essays/conformed-dimensions/), deduplicated
 — the validated, queryable middle. **Gold** is business-ready — the curated,
 aggregated tables that feed dashboards and decisions.
 

@@ -4,6 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "A data lake stores raw files cheaply but offers no guarantees. A lakehouse adds a table layer over those same files to give them ACID transactions, schema, and reliability. Here's the real difference and when each fits."
 date: 2026-06-20 10:00:00 +0530
+last_modified_at: 2026-07-05
 faq:
   - q: "What is the difference between a data lake and a lakehouse?"
     a: "A data lake is raw files in cheap object storage with no transactions, no enforced schema, and no guarantees. A lakehouse keeps those same files but adds an open table format on top — Iceberg, Delta Lake, or Hudi — that provides ACID transactions, schema enforcement, and time travel. The lakehouse is a data lake plus a table layer."
@@ -52,7 +53,8 @@ lets it rot.
 ## What a lakehouse adds: the table format
 
 The lakehouse fixes this without giving up cheap storage. It keeps your data as files
-in object storage and adds a **metadata layer on top** — an *open table format* such as
+in object storage and adds a **metadata layer on top** — an
+[*open table format*](/essays/what-is-an-open-table-format/) such as
 Apache Iceberg, Delta Lake, or Apache Hudi. That layer tracks which files make up a
 table, in what version, under what schema, and in doing so retrofits the guarantees a
 lake never had.
