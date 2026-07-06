@@ -6,6 +6,13 @@ essays:
   - the-medallion-architecture-reconsidered
   - data-lake-vs-lakehouse
   - how-to-make-a-data-pipeline-idempotent
+faq:
+  - q: "What are the bronze, silver, and gold layers?"
+    a: "Bronze holds raw data exactly as ingested, append-only and replayable. Silver holds cleaned, typed, deduplicated, conformed data. Gold holds modelled, business-ready tables — dimensional models or aggregates — that consumers actually query. Trust increases as data moves from bronze to gold."
+  - q: "Do I always need all three medallion layers?"
+    a: "No. The layer count is a default, not a law. A clean, well-modelled CDC source may not need a separate silver step, and latency-sensitive pipelines may collapse layers. What matters is keeping immutable raw history and a declared, modelled serving layer — however many stages sit between."
+  - q: "Is the medallion architecture the same as a lakehouse?"
+    a: "No — the lakehouse is the platform (open-format tables on object storage); the medallion architecture is a convention for organising data within it. You can run a lakehouse without medallion layers, and apply bronze/silver/gold thinking in a plain warehouse."
 ---
 
 ## Intent

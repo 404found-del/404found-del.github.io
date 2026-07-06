@@ -9,6 +9,9 @@
 {%- elsif page.collection == "glossary" -%}
   {%- assign crumb_mid_name = "Glossary" -%}
   {%- assign crumb_mid_url = "/glossary/" -%}
+{%- elsif page.topic_name -%}
+  {%- assign crumb_mid_name = "Topics" -%}
+  {%- assign crumb_mid_url = "/topics/" -%}
 {%- endif -%}
 {%- if crumb_mid_name -%}
 <nav class="breadcrumbs" aria-label="Breadcrumb" style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.1rem;">

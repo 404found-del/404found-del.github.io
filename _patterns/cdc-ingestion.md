@@ -6,6 +6,13 @@ essays:
   - what-is-change-data-capture
   - batch-vs-streaming
   - how-to-make-a-data-pipeline-idempotent
+faq:
+  - q: "What is change data capture in simple terms?"
+    a: "Instead of repeatedly querying a database for what changed, CDC reads the transaction log the database already writes. Every insert, update, and delete comes out complete, in order, including deletes — with almost no load on the source system."
+  - q: "What is log-based CDC?"
+    a: "The standard modern implementation: a reader (such as Debezium) tails the database's write-ahead log and emits each change as an event into a durable stream, which a sink job then merges into the analytical copy. It contrasts with query-based CDC, which polls tables and misses deletes."
+  - q: "When is CDC overkill?"
+    a: "Small tables, daily-batch freshness needs, soft-delete-only sources, or databases you can't get log access to. A scheduled incremental extract is simpler to run and honestly sufficient there. CDC earns its operational machinery when deletes, freshness, or source load genuinely matter."
 ---
 
 ## Intent

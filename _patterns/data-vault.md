@@ -5,6 +5,13 @@ description: "The data vault pattern: hubs, links, and satellites, what it buys 
 essays:
   - data-vault-vs-dimensional-modeling
   - kimball-vs-inmon
+faq:
+  - q: "What are hubs, links, and satellites in data vault?"
+    a: "Hubs store just the business keys of entities (customer, order). Links store relationships between hubs. Satellites store the descriptive attributes and their full history, attached to a hub or link. Everything is append-only and stamped with load time and source."
+  - q: "When should I use data vault instead of dimensional modeling?"
+    a: "When you have many volatile sources, hard audit requirements, and the cost of remodelling marts on every source change has become unbearable — data vault absorbs change by adding tables. With few sources and no audit mandate, dimensional modeling alone is simpler and sufficient."
+  - q: "Can you query a data vault directly?"
+    a: "In practice, no — the hub/link/satellite split means even simple questions need many joins. A data vault is an integration layer; you build a presentation layer, usually star schemas, on top of it for analysts and BI tools."
 ---
 
 ## Intent

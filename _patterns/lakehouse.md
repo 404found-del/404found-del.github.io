@@ -6,6 +6,13 @@ essays:
   - what-is-an-open-table-format
   - data-warehouse-vs-data-lake-vs-lakehouse
   - data-lake-vs-lakehouse
+faq:
+  - q: "What is a data lakehouse in simple terms?"
+    a: "One copy of data, stored as open-format tables (Iceberg, Delta) on cheap object storage, with warehouse-grade guarantees — ACID transactions, schema enforcement, time travel — queryable by any engine: SQL for BI, Spark for ML, streaming for pipelines."
+  - q: "Do I need a lakehouse if I already have a data warehouse?"
+    a: "Only when the second workload actually appears. If all your work is structured BI in one engine, a warehouse is simpler and easier to run. The lakehouse earns its moving parts when ML, data science, or multi-engine access would otherwise force a second copy of the data."
+  - q: "Which table format should a lakehouse use?"
+    a: "Apache Iceberg has become the neutral standard — Databricks, Snowflake, BigQuery, and Fabric all read and write it. Delta Lake remains excellent inside Databricks, with UniForm bridging the two. The more consequential choice now is the catalog that governs the tables."
 ---
 
 ## Intent

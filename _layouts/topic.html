@@ -3,6 +3,7 @@ layout: default
 ---
 {% assign topic_posts = site.posts | where: "topic", page.topic_name %}
 <div class="wrap">
+  {% include breadcrumbs.html %}
   <header class="page-head">
     <p class="article__kicker">Topic — {{ topic_posts | size }} essays</p>
     <h1>{{ page.title }}</h1>

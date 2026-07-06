@@ -7,6 +7,13 @@ essays:
   - a-field-guide-to-dimensional-modeling
   - fact-table-vs-dimension-table
   - one-big-table-vs-star-schema
+faq:
+  - q: "What is a star schema in simple terms?"
+    a: "A central fact table of measurements (one row per event, like an order line) joined directly to flat dimension tables of context (customer, product, date). Every query is the same shape: aggregate measures from the fact, filtered and grouped by dimension attributes."
+  - q: "Should I use a star schema or a snowflake schema?"
+    a: "Default to the star. The only difference is whether dimensions stay flat (star) or are normalized into sub-tables (snowflake), and on modern columnar warehouses the snowflake's storage saving is negligible while its extra joins are permanent. Snowflake a dimension only for a specific, nameable problem."
+  - q: "Is the star schema still relevant in the lakehouse era?"
+    a: "Yes. Storage formats changed; the query shape of analytics didn't. Gold-layer tables in a lakehouse are very often star schemas, and semantic layers compile metrics down to them. The star survives because it matches how business questions are asked."
 ---
 
 ## Intent
