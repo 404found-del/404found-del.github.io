@@ -17,4 +17,9 @@
   {% if site.goatcounter_code and site.goatcounter_code != "" %}
   <script data-goatcounter="https://{{ site.goatcounter_code }}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
   {% endif %}
+  {% if page.url == "/" %}
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebSite","name":{{ site.title | jsonify }},"url":"{{ '/' | absolute_url }}","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"{{ '/search/' | absolute_url }}?q={search_term_string}"},"query-input":"required name=search_term_string"}}
+  </script>
+  {% endif %}
 </head>
