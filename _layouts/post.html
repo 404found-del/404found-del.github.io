@@ -6,6 +6,7 @@ layout: default
 
 <article class="article">
   <div class="wrap">
+    {% include breadcrumbs.html %}
     <header class="article__head">
       {%- if page.kicker -%}<p class="article__kicker">{{ page.kicker }}</p>{%- endif -%}
       <h1 class="article__title">{{ page.title }}</h1>

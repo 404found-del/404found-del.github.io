@@ -1,0 +1,49 @@
+---
+layout: default
+---
+<article class="article">
+  <div class="wrap">
+    {% include breadcrumbs.html %}
+    <header class="article__head">
+      <p class="article__kicker">{{ page.kicker }}</p>
+      <h1 class="article__title">{{ page.title }}</h1>
+    </header>
+
+    <div class="prose">
+      {{ content }}
+      {%- if page.essay -%}
+      {%- assign essay_url = "/essays/" | append: page.essay | append: "/" -%}
+      {%- assign essay = site.posts | where: "url", essay_url | first -%}
+      {%- if essay -%}
+      <p><strong>Go deeper:</strong> <a href="{{ essay.url | relative_url }}">{{ essay.title }}</a></p>
+      {%- endif -%}
+      {%- endif -%}
+    </div>
+
+    {%- if page.related_terms -%}
+    <aside class="related">
+      <p class="related__label">Related terms</p>
+      <div class="related__grid">
+        {%- for t in page.related_terms -%}
+        {%- assign term_url = "/glossary/" | append: t | append: "/" -%}
+        {%- assign term = site.glossary | where: "url", term_url | first -%}
+        {%- if term -%}
+        <a class="related__card" href="{{ term.url | relative_url }}">
+          <span class="related__kicker">Glossary</span>
+          <span class="related__title">{{ term.title }}</span>
+        </a>
+        {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </aside>
+    {%- endif -%}
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"DefinedTerm","name":{{ page.title | jsonify }},"description":{{ page.description | jsonify }},"url":"{{ page.url | absolute_url }}","inDefinedTermSet":{"@type":"DefinedTermSet","name":"Data Architecture Glossary — dataarchitect.studio","url":"{{ '/glossary/' | absolute_url }}"}}
+    </script>
+
+    <footer class="article__foot">
+      <a href="{{ '/glossary/' | relative_url }}">← Full glossary</a>
+    </footer>
+  </div>
+</article>

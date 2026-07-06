@@ -1,0 +1,43 @@
+---
+layout: default
+---
+<article class="article">
+  <div class="wrap">
+    {% include breadcrumbs.html %}
+    <header class="article__head">
+      <p class="article__kicker">{{ page.kicker }}</p>
+      <h1 class="article__title">{{ page.title }}</h1>
+      {%- if page.intent -%}
+      <div class="article__meta"><span>{{ page.intent }}</span></div>
+      {%- endif -%}
+    </header>
+
+    <div class="prose">
+      {{ content }}
+    </div>
+
+    {%- if page.essays -%}
+    <aside class="related">
+      <p class="related__label">Essays on this pattern</p>
+      <div class="related__grid">
+        {%- for slug in page.essays -%}
+        {%- assign essay_url = "/essays/" | append: slug | append: "/" -%}
+        {%- assign essay = site.posts | where: "url", essay_url | first -%}
+        {%- if essay -%}
+        <a class="related__card" href="{{ essay.url | relative_url }}">
+          <span class="related__kicker">{{ essay.kicker }}</span>
+          <span class="related__title">{{ essay.title }}</span>
+        </a>
+        {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </aside>
+    {%- endif -%}
+
+    {% include subscribe.html %}
+
+    <footer class="article__foot">
+      <a href="{{ '/patterns/' | relative_url }}">← All patterns</a>
+    </footer>
+  </div>
+</article>

@@ -22,3 +22,22 @@ Topic: {{ post.topic }}
 
 {{ post.content | strip_html | strip }}
 {% endfor %}
+{% for pattern in site.patterns %}
+
+================================================================================
+# Pattern: {{ pattern.title }}
+Source: {{ pattern.url | absolute_url }}
+Intent: {{ pattern.intent }}
+================================================================================
+
+{{ pattern.content | strip_html | strip }}
+{% endfor %}
+{% assign sorted_terms = site.glossary | sort: "title" %}{% for term in sorted_terms %}
+
+================================================================================
+# Glossary: {{ term.title }}
+Source: {{ term.url | absolute_url }}
+================================================================================
+
+{{ term.content | strip_html | strip }}
+{% endfor %}

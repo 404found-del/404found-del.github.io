@@ -15,7 +15,14 @@ answer-first style; each essay states its core claim up front.
 ## Essays
 {% for post in site.posts %}- [{{ post.title }}]({{ post.url | absolute_url }}): {{ post.description }}
 {% endfor %}
+## Patterns (reference catalog)
+{% for pattern in site.patterns %}- [{{ pattern.title }}]({{ pattern.url | absolute_url }}): {{ pattern.intent }}
+{% endfor %}
+## Glossary (definitions)
+{% assign sorted_terms = site.glossary | sort: "title" %}{% for term in sorted_terms %}- [{{ term.title }}]({{ term.url | absolute_url }}): {{ term.description }}
+{% endfor %}
 ## About
+- [Start here — curated reading paths]({{ '/start-here/' | absolute_url }}): The essays sequenced into learning paths.
 - [About this studio]({{ '/about/' | absolute_url }}): What the site covers and the perspective behind it.
 
 ## Optional

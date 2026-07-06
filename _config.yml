@@ -16,6 +16,15 @@ author: "dataarchitect.studio"
 permalink: /essays/:title/
 timezone: Asia/Kolkata
 
+# --- Collections ---------------------------------------------------------------
+collections:
+  patterns:
+    output: true
+    permalink: /patterns/:name/
+  glossary:
+    output: true
+    permalink: /glossary/:name/
+
 # --- Collections defaults ----------------------------------------------------
 defaults:
   - scope:
@@ -23,6 +32,18 @@ defaults:
       type: "posts"
     values:
       layout: "post"
+  - scope:
+      path: ""
+      type: "patterns"
+    values:
+      layout: "pattern"
+      kicker: "Pattern"
+  - scope:
+      path: ""
+      type: "glossary"
+    values:
+      layout: "term"
+      kicker: "Glossary"
   - scope:
       path: ""
     values:

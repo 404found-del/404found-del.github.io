@@ -13,6 +13,26 @@ layout: default
 </section>
 
 <div class="wrap">
+  <aside class="related reveal d3" style="margin-top:0;">
+    <p class="related__label">Three ways in</p>
+    <div class="related__grid">
+      <a class="related__card" href="{{ '/start-here/' | relative_url }}">
+        <span class="related__kicker">New here?</span>
+        <span class="related__title">Start here — curated reading paths through the essays</span>
+      </a>
+      <a class="related__card" href="{{ '/patterns/' | relative_url }}">
+        <span class="related__kicker">Reference</span>
+        <span class="related__title">The patterns catalog — architectures with honest trade-offs</span>
+      </a>
+      <a class="related__card" href="{{ '/glossary/' | relative_url }}">
+        <span class="related__kicker">Lookup</span>
+        <span class="related__title">The glossary — {{ site.glossary | size }} terms, defined in a paragraph each</span>
+      </a>
+    </div>
+  </aside>
+</div>
+
+<div class="wrap">
   <p class="section-label reveal d3">
     <span>Essays &amp; field notes</span>
     <span class="count">{{ site.posts | size }} pieces</span>

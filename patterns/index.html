@@ -1,0 +1,34 @@
+---
+layout: default
+title: "Data Architecture Patterns"
+description: "A reference catalog of data architecture patterns — intent, structure, honest trade-offs, and when not to use each one. Medallion, star schema, data vault, lakehouse, CDC, and growing."
+permalink: /patterns/
+---
+<div class="wrap">
+  <header class="page-head">
+    <p class="article__kicker">Reference — {{ site.patterns | size }} patterns</p>
+    <h1>{{ page.title }}</h1>
+  </header>
+  <p class="hero__lede" style="margin-top:1.6rem;">
+    Recurring solutions to recurring problems in data architecture, catalogued the
+    way patterns should be: what each one intends, how it's structured, what it
+    honestly costs, and when <em>not</em> to reach for it. Each entry links to the
+    essays that examine it in depth. The catalog grows over time.
+  </p>
+</div>
+<section class="wrap essays" style="margin-top:1.5rem;">
+  {%- assign sorted_patterns = site.patterns | sort: "title" -%}
+  {%- for pattern in sorted_patterns -%}
+  <a class="essay-row" href="{{ pattern.url | relative_url }}">
+    <span class="essay-row__no">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+    <span class="essay-row__body">
+      <p class="essay-row__kicker">Pattern</p>
+      <h2 class="essay-row__title">{{ pattern.title }}</h2>
+      <p class="essay-row__excerpt">{{ pattern.intent }}</p>
+    </span>
+  </a>
+  {%- endfor -%}
+</section>
+<div class="wrap" style="padding-bottom: clamp(3rem, 8vw, 6rem);">
+  {% include subscribe.html %}
+</div>

@@ -1,0 +1,30 @@
+---
+layout: default
+title: "Data Architecture Glossary"
+description: "Plain-language definitions of data architecture terms — fact tables, grain, star schemas, open table formats, CDC, lakehouse, and more — each linked to a full essay."
+permalink: /glossary/
+---
+<div class="wrap">
+  <header class="page-head">
+    <p class="article__kicker">Reference — {{ site.glossary | size }} terms</p>
+    <h1>{{ page.title }}</h1>
+  </header>
+  <p class="hero__lede" style="margin-top:1.6rem;">
+    Short, precise definitions of the vocabulary of data architecture — written to
+    be quotable, not exhaustive. Most terms link to a full essay that goes deeper.
+  </p>
+</div>
+<section class="wrap" style="margin-top:2.5rem;padding-bottom:1rem;">
+  {%- assign sorted_terms = site.glossary | sort: "title" -%}
+  {%- for term in sorted_terms -%}
+  <a class="essay-row" href="{{ term.url | relative_url }}" style="grid-template-columns:1fr;">
+    <span class="essay-row__body">
+      <h2 class="essay-row__title" style="font-size:1.15rem;">{{ term.title }}</h2>
+      <p class="essay-row__excerpt">{{ term.description }}</p>
+    </span>
+  </a>
+  {%- endfor -%}
+</section>
+<div class="wrap" style="padding-bottom: clamp(3rem, 8vw, 6rem);">
+  {% include subscribe.html %}
+</div>
