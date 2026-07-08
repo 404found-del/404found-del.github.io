@@ -6,6 +6,7 @@ essays:
   - what-is-an-open-table-format
   - data-warehouse-vs-data-lake-vs-lakehouse
   - data-lake-vs-lakehouse
+  - iceberg-vs-delta-lake
 faq:
   - q: "What is a data lakehouse in simple terms?"
     a: "One copy of data, stored as open-format tables (Iceberg, Delta) on cheap object storage, with warehouse-grade guarantees — ACID transactions, schema enforcement, time travel — queryable by any engine: SQL for BI, Spark for ML, streaming for pipelines."

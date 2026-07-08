@@ -3,9 +3,9 @@ title: "Open Table Format"
 description: "An open table format is a published metadata spec — Iceberg, Delta Lake, Hudi — that turns files in object storage into tables with ACID transactions and time travel."
 essay: what-is-an-open-table-format
 related_terms:
+  - apache-iceberg
+  - delta-lake
   - data-lakehouse
-  - data-lake
-  - change-data-capture
 ---
 
 An **open table format** is a published, engine-neutral metadata specification

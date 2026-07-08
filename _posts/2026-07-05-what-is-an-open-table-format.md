@@ -4,6 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "An open table format is a metadata spec that turns raw files in object storage into real tables — with ACID transactions, schema evolution, and time travel."
 date: 2026-07-05 09:00:00 +0530
+last_modified_at: 2026-07-06
 faq:
   - q: "What is an open table format in simple terms?"
     a: "It's a published specification for a metadata layer that sits on top of data files in object storage and makes them behave like a database table — tracking which files belong to the table, what schema they follow, and what the table looked like at any point in time. Apache Iceberg, Delta Lake, and Apache Hudi are the three main ones."
@@ -119,7 +120,9 @@ tongue of Databricks; UniForm lets a Delta table present itself as Iceberg. **Hu
 retains a niche for high-frequency upsert ingestion but has faded as a default
 choice. The 2026 spec work (Iceberg v3: deletion vectors, the variant type for
 semi-structured data, geo types) landed in both Snowflake and Databricks the same
-year — the formats are converging on the same capabilities.
+year — the formats are converging on the same capabilities. If you're facing the
+choice directly, the [Iceberg vs Delta decision](/essays/iceberg-vs-delta-lake/)
+gets its own field note.
 
 Which is why the real architectural decision has moved up a layer: not *which
 format*, but *which catalog* — the component that holds those atomic pointers and
