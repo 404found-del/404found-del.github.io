@@ -77,6 +77,9 @@ exclude:
   - preview.html
   - .sass-cache
   - .jekyll-cache
+  - submit-indexnow.ps1
+  - tools
+  - distribution
 
 # --- Growth integrations (fill these in to activate) ---------------------------
 # Privacy-friendly analytics: create a free account at goatcounter.com,

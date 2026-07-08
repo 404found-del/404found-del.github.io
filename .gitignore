@@ -5,3 +5,8 @@ _site/
 vendor/
 .bundle/
 Gemfile.lock
+
+# local tooling & drafts — never publish (API keys, distribution drafts)
+tools/
+distribution/
+submit-indexnow.ps1

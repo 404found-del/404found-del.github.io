@@ -118,4 +118,6 @@ Glue (AWS), Nessie, and others. The catalog is where access control, auditing,
 and cross-engine governance actually happen, and switching catalogs is far more
 painful than translating table metadata. If you're building a
 [lakehouse](/essays/data-lake-vs-lakehouse/) in 2026, spend your evaluation
-weeks there — the format choice, pleasantly, has become the easy part.
+weeks there — [choosing the catalog](/essays/how-to-choose-an-iceberg-catalog/)
+is its own decision, and the format choice, pleasantly, has become the easy
+part.

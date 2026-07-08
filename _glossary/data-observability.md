@@ -1,6 +1,7 @@
 ---
 title: "Data Observability"
 description: "Data observability is automated monitoring of data health in production — freshness, volume, schema, and distribution — so teams detect bad data before consumers do."
+essay: data-observability-vs-data-quality
 related_terms:
   - data-lineage
   - data-contract
