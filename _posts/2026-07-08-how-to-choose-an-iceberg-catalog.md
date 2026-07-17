@@ -4,6 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "The table format war is settled; the catalog decides governance and lock-in now. How Iceberg catalogs work, compared honestly — and a decision rule that holds."
 date: 2026-07-08 19:00:00 +0530
+last_modified_at: 2026-07-16
 faq:
   - q: "What does an Iceberg catalog actually do?"
     a: "It holds the authoritative pointer to each table's current metadata file and swaps that pointer atomically on every commit — which is what makes transactions work. On top of that mechanical job, catalogs layer the governance: who may read, write, or commit to which table, from which engine, with what audit trail."
@@ -13,6 +14,8 @@ faq:
     a: "Yes, but it's the painful migration in a lakehouse. The data files don't move, but every engine's connection config, all access-control policies, and any audit or lineage history live in the catalog. That switching cost — not the table format — is where lock-in lives in 2026, so choose deliberately."
   - q: "Which Iceberg catalog should I default to?"
     a: "Match your platform gravity: Unity if you're Databricks-centred, Glue if you're deep in AWS, Polaris (or Snowflake's managed Open Catalog) for a neutral, multi-engine REST catalog, Nessie if you specifically want git-like branching of your whole catalog. Neutral-by-default: Polaris."
+  - q: "Unity Catalog vs Glue Catalog — how do they compare?"
+    a: "They're the two gravity choices, and the trade is governance depth versus cloud convenience. Glue is IAM-native, serverless, and near-zero setup inside AWS, but its governance is thinner and it deepens your commitment to one cloud. Unity brings much richer governance — lineage, fine-grained policies, audit in one place — priced in Databricks commitment. Teams running Databricks on AWS commonly use both: Unity as the governing catalog, with Glue federated in for legacy tables."
 ---
 
 The [table format decision](/essays/iceberg-vs-delta-lake/) got easy in 2026 —
