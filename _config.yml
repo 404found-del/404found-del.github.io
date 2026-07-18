@@ -48,6 +48,12 @@ defaults:
       path: ""
     values:
       layout: "page"
+  # Site-wide social/schema image fallback: every page gets og:image + JSON-LD
+  # image (jekyll-seo-tag reads page.image; this default supplies it everywhere).
+  - scope:
+      path: ""
+    values:
+      image: /assets/og-default.png
 
 # --- Plugins (all whitelisted on GitHub Pages) -------------------------------
 plugins:
@@ -90,8 +96,5 @@ goatcounter_code: "vmaheshwari"
 # The subscribe form renders only when set.
 buttondown_username: "maheshwari"
 
-# Search engine verification: paste tokens from Google Search Console and
-# Bing Webmaster Tools (DNS verification also works; then leave these blank).
-webmaster_verifications:
-  google: ""
-  bing: ""
+# Search engine verification: both GSC and Bing are DNS-verified, so no meta
+# tokens are needed (empty tokens previously shipped dead meta tags on every page).

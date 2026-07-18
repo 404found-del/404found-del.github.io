@@ -5,6 +5,11 @@ description: "The data vault pattern: hubs, links, and satellites, what it buys 
 essays:
   - data-vault-vs-dimensional-modeling
   - kimball-vs-inmon
+terms:
+  - data-vault
+  - data-warehouse
+  - surrogate-key
+  - natural-key
 faq:
   - q: "What are hubs, links, and satellites in data vault?"
     a: "Hubs store just the business keys of entities (customer, order). Links store relationships between hubs. Satellites store the descriptive attributes and their full history, attached to a hub or link. Everything is append-only and stamped with load time and source."

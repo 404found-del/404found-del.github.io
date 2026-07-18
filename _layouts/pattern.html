@@ -18,6 +18,24 @@ layout: default
 
     {% include faq.html %}
 
+    {%- if page.terms -%}
+    <aside class="related">
+      <p class="related__label">Key terms</p>
+      <div class="related__grid">
+        {%- for t in page.terms -%}
+        {%- assign term_url = "/glossary/" | append: t | append: "/" -%}
+        {%- assign term = site.glossary | where: "url", term_url | first -%}
+        {%- if term -%}
+        <a class="related__card" href="{{ term.url | relative_url }}">
+          <span class="related__kicker">Glossary</span>
+          <span class="related__title">{{ term.title }}</span>
+        </a>
+        {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </aside>
+    {%- endif -%}
+
     {%- if page.essays -%}
     <aside class="related">
       <p class="related__label">Essays on this pattern</p>

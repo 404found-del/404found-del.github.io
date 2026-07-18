@@ -7,6 +7,11 @@ essays:
   - a-field-guide-to-dimensional-modeling
   - fact-table-vs-dimension-table
   - one-big-table-vs-star-schema
+terms:
+  - star-schema
+  - fact-table
+  - dimension-table
+  - grain
 faq:
   - q: "What is a star schema in simple terms?"
     a: "A central fact table of measurements (one row per event, like an order line) joined directly to flat dimension tables of context (customer, product, date). Every query is the same shape: aggregate measures from the fact, filtered and grouped by dimension attributes."

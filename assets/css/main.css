@@ -459,7 +459,26 @@ a {
 /* ---- Responsive ---------------------------------------------------------- */
 @media (max-width: 640px) {
   body { font-size: 1.06rem; }
-  .nav { gap: 1.1rem; }
+  /* Mobile nav: wrap instead of overflowing the viewport; larger type and
+     >=48px tap targets; masthead unsticks so it doesn't eat the screen. */
+  .masthead { position: static; }
+  .masthead__inner {
+    flex-wrap: wrap;
+    row-gap: 0;
+    padding-block: 0.75rem;
+  }
+  .nav {
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 0 1.1rem;
+    font-size: 0.82rem;
+  }
+  .nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    padding-inline: 0.2rem;
+  }
   .essay-row {
     grid-template-columns: 1fr;
     gap: 0.4rem;

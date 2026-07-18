@@ -6,6 +6,11 @@ essays:
   - the-medallion-architecture-reconsidered
   - data-lake-vs-lakehouse
   - how-to-make-a-data-pipeline-idempotent
+terms:
+  - medallion-architecture
+  - data-lakehouse
+  - idempotent-pipeline
+  - elt
 faq:
   - q: "What are the bronze, silver, and gold layers?"
     a: "Bronze holds raw data exactly as ingested, append-only and replayable. Silver holds cleaned, typed, deduplicated, conformed data. Gold holds modelled, business-ready tables — dimensional models or aggregates — that consumers actually query. Trust increases as data moves from bronze to gold."

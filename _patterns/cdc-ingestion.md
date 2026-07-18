@@ -6,6 +6,11 @@ essays:
   - what-is-change-data-capture
   - batch-vs-streaming
   - how-to-make-a-data-pipeline-idempotent
+terms:
+  - change-data-capture
+  - idempotent-pipeline
+  - etl
+  - elt
 faq:
   - q: "What is change data capture in simple terms?"
     a: "Instead of repeatedly querying a database for what changed, CDC reads the transaction log the database already writes. Every insert, update, and delete comes out complete, in order, including deletes — with almost no load on the source system."
