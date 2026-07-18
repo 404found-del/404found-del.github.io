@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-06
 title: "Fact Table"
 description: "A fact table stores the measurements of a business process — one row per event at a declared grain, carrying numeric measures and foreign keys to dimensions."
 essay: fact-table-vs-dimension-table

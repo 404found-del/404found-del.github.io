@@ -3,6 +3,8 @@ layout: page
 title: "About this studio"
 kicker: "Colophon"
 permalink: /about/
+seo:
+  type: "AboutPage"
 description: "What dataarchitect.studio covers, who writes it, how the essays are made, and the editorial standards behind them."
 ---
 

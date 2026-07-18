@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-06
 title: "Snowflake Schema"
 description: "A snowflake schema is a dimensional model whose dimensions are normalized into multiple related sub-tables instead of kept flat as in a star schema."
 essay: star-schema-vs-snowflake-schema

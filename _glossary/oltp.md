@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-06
 title: "OLTP (Online Transaction Processing)"
 description: "OLTP systems run the business in real time — many small, concurrent reads and writes of individual records, on normalized schemas optimized for integrity."
 essay: oltp-vs-olap

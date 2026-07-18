@@ -85,9 +85,9 @@ Two things make Type 2 work, and both are worth noticing. First, the validity
 columns (`valid_from`, `valid_to`, `is_current`) are what let two versions of "the
 same" customer coexist and be queried by date. Second — and this is why I keep
 linking them — Type 2 is *only possible* because of a [surrogate
-key](/essays/surrogate-keys-vs-natural-keys/). The natural key `C-1077` is identical
+key](/essays/surrogate-keys-vs-natural-keys/). The [natural key](/glossary/natural-key/) `C-1077` is identical
 on both rows; it's the meaningless surrogate (`4401` vs `8902`) that distinguishes
-the versions and gives facts something stable to point at. Without a surrogate key,
+the versions and gives facts something stable to point at. Without a [surrogate key](/glossary/surrogate-key/),
 you simply cannot represent history this way.
 
 The cost of Type 2 is that the dimension grows over time and your pipeline gets more

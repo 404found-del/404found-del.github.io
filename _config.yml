@@ -38,12 +38,16 @@ defaults:
     values:
       layout: "pattern"
       kicker: "Pattern"
+      seo:
+        type: "TechArticle"
   - scope:
       path: ""
       type: "glossary"
     values:
       layout: "term"
       kicker: "Glossary"
+      seo:
+        type: "WebPage"
   - scope:
       path: ""
     values:

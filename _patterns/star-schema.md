@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-18
 title: "Star Schema"
 intent: "Model analytical data as central fact tables of measurements surrounded by flat, denormalized dimension tables of context."
 description: "The star schema pattern: fact and dimension structure, why it optimizes for reads and readability, trade-offs, and when a star is the wrong shape."

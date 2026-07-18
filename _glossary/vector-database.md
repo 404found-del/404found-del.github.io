@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-06
 title: "Vector Database"
 description: "A vector database stores embeddings — numeric representations of meaning — and retrieves items by similarity, powering semantic search and RAG in AI systems."
 essay: what-is-a-vector-database

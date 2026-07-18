@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-06
 title: "Data Lake"
 description: "A data lake is a large store of raw files in cheap object storage — any shape, structured later on read, with no transactions or enforced schema of its own."
 essay: data-lake-vs-lakehouse

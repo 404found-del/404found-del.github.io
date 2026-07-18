@@ -4,7 +4,15 @@ kicker: "Field Notes"
 topic: "Modeling"
 description: "There are three kinds of fact table, distinguished by what one row represents over time: transaction, periodic snapshot, and accumulating snapshot. Here's how each works and how to pick the right one."
 date: 2026-06-02
-last_modified_at: 2026-07-05
+last_modified_at: 2026-07-18
+faq:
+  - q: "What are the three types of fact table?"
+    a: "Transaction facts record individual events — one row per sale or click. Periodic snapshots record state at regular intervals — one row per account per month. Accumulating snapshots track a process's lifecycle — one row per order, updated as it hits each milestone. The type follows directly from what one row represents."
+  - q: "How do I choose which fact table type to use?"
+    a: "Say the grain out loud. 'One row per event' is a transaction fact; 'one row per thing per period' is a periodic snapshot; 'one row per process instance, updated over time' is an accumulating snapshot. Many processes deserve two — a transaction fact for detail plus a snapshot for balances or pipeline views."
+  - q: "Can one business process need more than one fact table?"
+    a: "Commonly, yes. Orders generate a transaction fact for line-level detail and an accumulating snapshot for fulfilment-cycle analysis; accounts pair a transaction fact of movements with a monthly balance snapshot. Never force measurements at different grains into one table — build one per declared grain."
+
 ---
 
 Most people who've built [a dimensional model](/essays/a-field-guide-to-dimensional-modeling/)

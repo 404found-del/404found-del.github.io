@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-17
 title: "Reverse ETL"
 description: "Reverse ETL syncs modelled data from the warehouse back into operational tools — CRMs, ad platforms, support systems — so business teams act on it where they work."
 essay: what-is-reverse-etl

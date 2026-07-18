@@ -4,11 +4,19 @@ kicker: "Field Notes"
 topic: "Modeling"
 date: 2026-05-06
 description: "Facts, dimensions, and grain — the three ideas that quietly run most analytics, explained without the dogma."
-last_modified_at: 2026-07-05
+last_modified_at: 2026-07-18
+faq:
+  - q: "What is dimensional modeling in simple terms?"
+    a: "A way of organizing analytical data around two kinds of table: fact tables holding the measurements of business events, and dimension tables holding the context you slice those measurements by. Declare what one fact row represents (the grain), keep measures true to it, and queries start reading like business questions."
+  - q: "What are the three core ideas of dimensional modeling?"
+    a: "First, separate measurements (facts) from context (dimensions). Second, declare the grain — what one fact row represents — before anything else. Third, decide deliberately how dimensions handle change over time (the slowly changing dimension problem). Everything else in the discipline elaborates those three."
+  - q: "Is dimensional modeling still relevant with modern warehouses and lakehouses?"
+    a: "Yes — storage changed, question shapes didn't. Gold-layer lakehouse tables are routinely star schemas, semantic layers compile metrics down to dimensional models, and the consistency argument (one declared grain, one home per measure) matters more as more tools query the same data."
+
 ---
 
 Dimensional modeling has a reputation problem. To newcomers it sounds like a relic
-— star schemas, Kimball, slowly changing dimensions, the kind of vocabulary that
+— [star schemas](/glossary/star-schema/), Kimball, [slowly changing dimensions](/glossary/slowly-changing-dimension/), the kind of vocabulary that
 suggests a beige conference room in 2004. But strip away the era and the jargon
 and you're left with three ideas that quietly run most analytics on earth. They're
 worth understanding properly, not as ritual but as tools.
@@ -21,7 +29,7 @@ of clicks. And there are the things that give those measurements **context** —
 customer, the product, the store, the day.
 
 Dimensional modeling takes this split seriously. Measurements go in **fact tables**.
-Context goes in **dimension tables**. That's the whole foundation. A
+Context goes in **[dimension tables](/glossary/dimension-table/)**. That's the whole foundation. A
 [fact table](/essays/fact-table-vs-dimension-table/) is
 a long, narrow log of events, each row a thing that happened, carrying its numbers
 and a set of foreign keys. A dimension table is a wide, shorter reference of

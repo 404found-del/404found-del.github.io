@@ -13,7 +13,7 @@ faq:
     a: "Yes, and many teams do. A common hybrid keeps a normalized or raw integration layer (Inmon-flavored) as the source of truth and serves dimensional marts (Kimball) on top for analytics. The modern layered warehouse is essentially this combination."
 ---
 
-Two names have defined how organizations build data warehouses for thirty years:
+Two names have defined how organizations build [data warehouses](/glossary/data-warehouse/) for thirty years:
 Ralph Kimball and Bill Inmon. The "Kimball vs Inmon" debate has consumed an
 absurd amount of practitioner energy, usually framed as a doctrinal war. It's
 simpler than that. The two approaches differ on exactly one decision — *what you
@@ -32,7 +32,7 @@ spin off dimensional data marts from it for individual departments.
 
 **Kimball says bottom-up.** Build **dimensional data marts** for individual business
 processes directly, and let the enterprise warehouse *emerge* from those marts as
-they're connected through shared, conformed dimensions.
+they're connected through shared, [conformed dimensions](/glossary/conformed-dimension/).
 
 That's the whole fork. Integrate first and deliver later (Inmon), or deliver first
 and integrate as you go (Kimball). Everything else — the schemas, the methodologies,
@@ -101,7 +101,7 @@ keeps the marts coherent.
 Here's the part that makes the old debate feel dated. Kimball and Inmon argued in an
 era of expensive storage and scarce compute, when *where* you spent your modeling
 effort had real hardware consequences. The cloud changed the economics. Storage is
-cheap, ELT is normal, and most modern teams build a **layered architecture** that
+cheap, [ELT](/glossary/elt/) is normal, and most modern teams build a **layered architecture** that
 quietly borrows from both: a raw and integrated layer underneath (Inmon's instinct
 for an integrated source of truth, even if not strictly 3NF) feeding dimensional
 marts on top (Kimball's instinct for business-friendly consumption). The

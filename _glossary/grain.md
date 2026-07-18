@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-06
 title: "Grain"
 description: "The grain is the business definition of what one row in a fact table represents — declared first, before dimensions and measures, in dimensional modeling."
 essay: fact-table-grain

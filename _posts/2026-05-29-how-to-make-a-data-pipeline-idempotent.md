@@ -4,6 +4,14 @@ kicker: "Field Notes"
 topic: "Engineering"
 description: "An idempotent data pipeline produces the same result whether it runs once or five times. Here are the concrete patterns — partition overwrite, merge on keys, delete-insert — that make retries and backfills safe."
 date: 2026-05-29
+last_modified_at: 2026-07-18
+faq:
+  - q: "What does idempotent mean for a data pipeline?"
+    a: "Running it once or five times over the same input produces the same correct end state. Rerunning yesterday's load doesn't duplicate yesterday's rows; replaying a failed week converges to the same tables as an incident-free week. It's the property that makes retries and backfills safe."
+  - q: "What are the main techniques for pipeline idempotency?"
+    a: "Overwrite deterministic partitions instead of appending; MERGE on stable business keys instead of blind inserts; delete-then-insert within a bounded window; and derive everything from immutable raw inputs so any downstream table can be rebuilt by replay. Choose per table based on how it's keyed and partitioned."
+  - q: "Why is idempotency so important for orchestration?"
+    a: "Because schedulers retry, backfills happen, and incidents demand replays. A non-idempotent pipeline turns every one of those routine events into potential data corruption — and every 3 a.m. failure into a manual cleanup. Idempotency is what makes operating pipelines boring, which is the goal."
 ---
 
 A data pipeline that can't be safely re-run is a liability waiting for a bad night.
@@ -89,7 +97,7 @@ merge.
 
 For systems without merge, you can lean on the storage layer's uniqueness. Compute a
 **deterministic primary key** for each output row from its inputs — say, a hash of
-the natural key plus the event timestamp — and write with insert-or-ignore / upsert
+the [natural key](/glossary/natural-key/) plus the event timestamp — and write with insert-or-ignore / upsert
 semantics. Because the same input always produces the same key, a re-run collides
 with the rows it wrote last time instead of duplicating them. The key *is* the
 idempotency.

@@ -14,6 +14,10 @@ direction. I've recommended it. I still do, sometimes. But defaults have a way o
 hardening into dogma, and this one has hardened more than most. It's worth a second,
 honest look.
 
+*(For the neutral reference version — intent, structure, trade-offs — see the
+[medallion architecture pattern](/patterns/medallion-architecture/); this essay is
+its critical companion.)*
+
 ## What the layers get right
 
 Stripped to its essence, the pattern says: data should flow through stages of
@@ -55,7 +59,7 @@ conformed" means, silver fills with tables that are *sort of* clean — half-mod
 inconsistently grained, owned by no one. It's no longer raw and not yet trustworthy,
 which is the worst of both worlds: a layer everyone reads from and no one believes.
 
-**The layers masquerade as a semantic layer.** This is the deepest problem. Medallion
+**The layers masquerade as a [semantic layer](/glossary/semantic-layer/).** This is the deepest problem. Medallion
 describes *physical refinement* — how raw bytes become clean tables. It says nothing
 about *meaning* — what a "customer" is, how "active" is defined, which metric is
 canonical. Teams keep trying to solve semantic problems by adding more gold tables,

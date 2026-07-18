@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-06
 title: "Data Warehouse"
 description: "A data warehouse is a centralized, structured analytical database — modelled, governed, and optimized for reliable BI queries across an organisation."
 essay: data-warehouse-vs-data-lake-vs-lakehouse

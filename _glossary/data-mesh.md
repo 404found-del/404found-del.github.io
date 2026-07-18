@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-08
 title: "Data Mesh"
 description: "Data mesh is an organisational architecture that decentralizes data ownership to domain teams, treating data as a product with federated governance."
 related_terms:

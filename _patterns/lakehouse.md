@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-18
 title: "Lakehouse"
 intent: "Keep one copy of data as open-format tables on cheap object storage, and let every engine — SQL, Spark, ML — read and write it with warehouse-grade guarantees."
 description: "The lakehouse pattern: open table formats over object storage, one copy of data for every engine, trade-offs, and when a plain warehouse is still right."

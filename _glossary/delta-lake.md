@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-08
 title: "Delta Lake"
 description: "Delta Lake is an open table format created by Databricks — native to Databricks and Microsoft Fabric, with UniForm presenting Delta tables as Iceberg."
 essay: iceberg-vs-delta-lake

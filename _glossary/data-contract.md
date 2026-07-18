@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-06
 title: "Data Contract"
 description: "A data contract is an explicit, enforced agreement between a data producer and its consumers covering schema, semantics, quality, and change management."
 essay: data-contracts-are-a-cultural-problem

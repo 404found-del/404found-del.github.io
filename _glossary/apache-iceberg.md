@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-08
 title: "Apache Iceberg"
 description: "Apache Iceberg is an open table format for data lakes — vendor-neutral, ASF-governed, and in 2026 the industry's default standard for multi-engine lakehouse tables."
 essay: iceberg-vs-delta-lake

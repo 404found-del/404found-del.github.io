@@ -4,6 +4,14 @@ kicker: "Field Notes"
 topic: "Modeling"
 description: "Surrogate key vs natural key is a decision every data model faces. The practical rule: use surrogate keys for dimensions, keep the natural key as an attribute, and here's exactly why."
 date: 2026-04-29
+last_modified_at: 2026-07-18
+faq:
+  - q: "What is the difference between a surrogate key and a natural key?"
+    a: "A natural key comes from the business itself — an email, SKU, or account number. A surrogate key is a meaningless, system-generated identifier the warehouse assigns. The practical rule: use surrogates as dimension primary keys, and keep the natural key as an ordinary attribute for matching back to source systems."
+  - q: "Why not just use natural keys as primary keys?"
+    a: "Because source systems recycle them, reformat them, and duplicate them across systems — and because a natural key can only ever identify one version of an entity. A Type 2 slowly changing dimension needs multiple rows for the same customer, each with its own key, which only a surrogate can provide."
+  - q: "Are surrogate keys still needed in modern cloud warehouses?"
+    a: "Yes, wherever dimensional history matters. Cheap compute didn't change the logical problem: source keys aren't stable and can't version history. Hash-based surrogates have joined sequence numbers as a common implementation, but the role of the surrogate is unchanged."
 ---
 
 Every table needs a way to identify a row, and you have two choices for what that
@@ -48,10 +56,10 @@ dim_customer (
 )
 ```
 
-Your fact tables then carry `customer_key`, not `customer_id`. This buys you several
+Your [fact tables](/glossary/fact-table/) then carry `customer_key`, not `customer_id`. This buys you several
 things that are hard to get any other way.
 
-**Slowly changing dimensions become possible.** To keep history with [SCD Type
+**[Slowly changing dimensions](/glossary/slowly-changing-dimension/) become possible.** To keep history with [SCD Type
 2](/essays/a-field-guide-to-dimensional-modeling/), you insert a *new row* each time
 a customer's attributes change — same `customer_id`, new `customer_key`. The
 surrogate key is what lets two versions of "the same" customer coexist as distinct

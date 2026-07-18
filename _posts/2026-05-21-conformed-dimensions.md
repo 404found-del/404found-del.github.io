@@ -14,7 +14,7 @@ faq:
 ---
 
 [Dimensional modeling](/essays/a-field-guide-to-dimensional-modeling/) is usually
-taught one star at a time — a fact table, its dimensions, done. But real
+taught one star at a time — a [fact table](/glossary/fact-table/), its dimensions, done. But real
 organizations have *many* business processes, each with its own fact table: sales,
 shipping, support tickets, web sessions. The question that decides whether those
 separate stars add up to a coherent warehouse or a pile of disconnected silos is
@@ -24,8 +24,8 @@ idea for making a multi-process warehouse hang together.
 
 ## The definition
 
-A conformed dimension is a dimension table that is used **identically** across
-multiple fact tables — the same surrogate keys, the same attributes, the same
+A conformed dimension is a [dimension table](/glossary/dimension-table/) that is used **identically** across
+multiple fact tables — the same [surrogate keys](/glossary/surrogate-key/), the same attributes, the same
 meanings. There is one `dim_customer`, one `dim_product`, one
 [`dim_date`](/essays/date-dimension-table/), and *every* fact table that needs
 customer, product, or date points at that same shared table.

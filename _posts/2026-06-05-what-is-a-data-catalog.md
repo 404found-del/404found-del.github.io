@@ -39,7 +39,7 @@ institutional memory that a sprawling data estate otherwise loses.
 
 Two confusions cause most disappointed catalog rollouts.
 
-**It is not a semantic layer.** A catalog *documents* that a `revenue` column exists
+**It is not a [semantic layer](/glossary/semantic-layer/).** A catalog *documents* that a `revenue` column exists
 and describes it in prose. A [semantic layer](/essays/what-is-a-semantic-layer/)
 *defines and computes* revenue consistently for every consumer at query time. One
 helps you find and understand data; the other governs and serves the actual numbers.

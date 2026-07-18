@@ -33,7 +33,7 @@ date_key | full_date  | year | quarter | month | month_name | day_of_week | is_w
 20260515 | 2026-05-15 | 2026 |    2    |   5   |    May     |   Friday    |   false    |   FY26-Q3  |   false
 ```
 
-Every fact table that records *when* something happened stores a `date_key` and joins
+Every [fact table](/glossary/fact-table/) that records *when* something happened stores a `date_key` and joins
 to this one table. The single integer `20260515` immediately unlocks the year, the
 quarter, the month name, the weekday, the weekend flag, the fiscal period, and
 anything else you've chosen to store — all without computing a thing at query time.

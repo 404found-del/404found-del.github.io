@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-06
 title: "Change Data Capture (CDC)"
 description: "Change data capture streams every insert, update, and delete out of a database by reading its transaction log, instead of repeatedly querying for changes."
 essay: what-is-change-data-capture

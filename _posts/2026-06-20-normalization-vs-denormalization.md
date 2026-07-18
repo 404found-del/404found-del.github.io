@@ -33,7 +33,7 @@ the trade-off and how it decides your warehouse design.
 | **Write/update speed** | Fast, update in one place | Slower, update many copies |
 | **Read speed** | Slower (join cost) | Faster (no joins) |
 | **Integrity** | Strong by design | Must be maintained |
-| **Best for** | Transactional systems (OLTP) | Analytics & reporting (OLAP) |
+| **Best for** | Transactional systems ([OLTP](/glossary/oltp/)) | Analytics & reporting ([OLAP](/glossary/olap/)) |
 
 ## What normalization is
 
@@ -134,7 +134,7 @@ transactional data.
 
 ## Why warehouses denormalize
 
-This is the key insight for analytics: a **data warehouse is overwhelmingly
+This is the key insight for analytics: a **[data warehouse](/glossary/data-warehouse/) is overwhelmingly
 read-heavy** — written by a handful of pipelines, queried by everyone — so it should
 optimize for reads, which means **denormalizing.** That's the entire reason
 [dimensional models](/essays/a-field-guide-to-dimensional-modeling/) and

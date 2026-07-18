@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-06
 title: "ELT (Extract, Load, Transform)"
 description: "ELT loads raw data into the warehouse first and transforms it there with SQL — the modern default, keeping raw history and putting logic where analysts work."
 essay: etl-vs-elt

@@ -16,7 +16,7 @@ on whether a buzzword has expired.
 ## What the modern data stack was
 
 The "modern data stack" was less a technology than a movement that crystallised in
-the late 2010s. Its center of gravity was the cloud data warehouse, and its defining
+the late 2010s. Its center of gravity was the cloud [data warehouse](/glossary/data-warehouse/), and its defining
 idea was **unbundling**: rather than one monolithic platform, you'd pick the best
 specialised tool for each layer — a managed connector service for ingestion, a
 SQL-based tool for transformation, a slick BI tool for consumption, plus separate
@@ -57,7 +57,7 @@ companies bought a stack built for problems they didn't have.
 ## The swing back
 
 What's actually happening now isn't death; it's a **swing back toward consolidation.**
-The big platform vendors are absorbing adjacent layers — the warehouse and lakehouse
+The big platform vendors are absorbing adjacent layers — the warehouse and [lakehouse](/glossary/data-lakehouse/)
 players moving up into transformation, cataloging, and applications; all-in-one
 platforms pitching fewer tools and fewer seams. And [AI is arriving as the newest
 layer](/essays/your-ai-is-only-as-good-as-your-data-architecture/) everyone wants to

@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-06
 title: "Star Schema"
 description: "A star schema is a dimensional model with a central fact table joined directly to flat, denormalized dimension tables — the default shape for analytics."
 essay: star-schema-vs-snowflake-schema

@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-06
 title: "Factless Fact Table"
 description: "A factless fact table records that an event or condition occurred — with no numeric measures — such as attendance, eligibility, or a promotion being active."
 essay: factless-fact-tables

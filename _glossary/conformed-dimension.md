@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-06
 title: "Conformed Dimension"
 description: "A conformed dimension is a dimension shared with identical meaning across multiple fact tables, letting metrics from different processes be compared correctly."
 essay: conformed-dimensions

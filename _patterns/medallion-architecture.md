@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-18
 title: "Medallion Architecture"
 intent: "Organise a lakehouse into layers of increasing refinement and trust: bronze (raw), silver (cleaned), gold (consumable)."
 description: "The medallion architecture pattern: structure, the problems each layer solves, honest trade-offs, and the situations where bronze/silver/gold is the wrong default."

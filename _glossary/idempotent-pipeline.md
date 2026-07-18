@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-06
 title: "Idempotent Pipeline"
 description: "An idempotent pipeline produces the same correct result whether run once or five times — the property that makes retries, backfills, and replays safe."
 essay: how-to-make-a-data-pipeline-idempotent

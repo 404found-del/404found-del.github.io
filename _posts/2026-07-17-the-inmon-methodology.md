@@ -18,7 +18,7 @@ faq:
 Bill Inmon's methodology — the **top-down** approach, the **Corporate Information
 Factory (CIF)** — answers one question before all others: *what does the
 enterprise's single version of the truth look like?* His answer: build the
-**enterprise data warehouse (EDW)** first, as a **normalized (3NF)**, integrated,
+**enterprise [data warehouse](/glossary/data-warehouse/) (EDW)** first, as a **normalized (3NF)**, integrated,
 historical store of everything the business does — and only then derive the
 department-facing **data marts** (usually [star schemas](/patterns/star-schema/))
 from it. Integrate once, upstream; serve many, downstream. Kimball famously

@@ -22,7 +22,7 @@ The [table format decision](/essays/iceberg-vs-delta-lake/) got easy in 2026 —
 which means the hard decision moved. Every Iceberg table has exactly one
 authoritative record of "which metadata file is current," and the component that
 holds it — the **catalog** — is now where governance, auditability, and the real
-lock-in of a lakehouse live. The main contenders: **Unity Catalog**
+lock-in of a [lakehouse](/glossary/data-lakehouse/) live. The main contenders: **Unity Catalog**
 (Databricks), **Apache Polaris** (open-sourced by Snowflake), **AWS Glue**, and
 **Nessie**. The decision rule, up front: **follow your platform gravity — Unity
 for Databricks estates, Glue for deep-AWS shops — and when you want genuine

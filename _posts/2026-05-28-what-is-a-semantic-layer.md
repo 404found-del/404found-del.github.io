@@ -71,7 +71,7 @@ tables with no single governed definition of "revenue" is just a tidier way to
 produce three different revenue numbers. The semantic layer is the thing medallion
 structurally doesn't give you.
 
-**It is not a data contract.** [Contracts](/essays/data-contracts-are-a-cultural-problem/)
+**It is not a [data contract](/glossary/data-contract/).** [Contracts](/essays/data-contracts-are-a-cultural-problem/)
 govern the promises between a *producer* and a *consumer* of a dataset. A semantic
 layer governs the *meaning of metrics* consumed downstream. Related, complementary,
 not the same.

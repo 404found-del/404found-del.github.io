@@ -24,7 +24,7 @@ deletes — as they happen in the source, and deliver them downstream.
 ## The problem it solves
 
 Recall [why transactional and analytical systems are kept
-separate](/essays/oltp-vs-olap/): the OLTP database serves the application; analytics
+separate](/essays/oltp-vs-olap/): the [OLTP](/glossary/oltp/) database serves the application; analytics
 lives elsewhere; data must move between them. Full-table extracts move that data by
 brute force — re-reading everything to find out what's new. CDC moves it
 surgically: only what changed, soon after it changed, with far less load on the

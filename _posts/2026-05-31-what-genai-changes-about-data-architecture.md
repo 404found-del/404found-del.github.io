@@ -20,7 +20,7 @@ Three things are real, and worth taking seriously.
 **A new storage primitive: the vector.** To retrieve data by *meaning* rather than by
 exact match, you store numerical representations — embeddings — and search them by
 similarity. That's a genuinely new access pattern, and it's brought vector indexes
-into the stack, whether as dedicated vector databases or as vector capabilities
+into the stack, whether as dedicated [vector databases](/glossary/vector-database/) or as vector capabilities
 bolted onto databases you already run. If your applications need semantic search or
 retrieval-augmented generation, this is a real addition to your architecture, not
 hype.

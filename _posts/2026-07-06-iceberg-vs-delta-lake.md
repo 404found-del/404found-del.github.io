@@ -15,8 +15,8 @@ faq:
     a: "The catalog — the component that holds each table's pointer and decides who may commit to it. Formats have converged; catalogs (Unity, Polaris, Glue, Horizon, Nessie) are where governance and the remaining lock-in now live. Choose the catalog as carefully as you once chose the format."
 ---
 
-For years, choosing between **Apache Iceberg** and **Delta Lake** was the defining
-architecture decision of a lakehouse. In 2026, it mostly isn't. The two
+For years, choosing between **[Apache Iceberg](/glossary/apache-iceberg/)** and **Delta Lake** was the defining
+architecture decision of a [lakehouse](/glossary/data-lakehouse/). In 2026, it mostly isn't. The two
 [open table formats](/essays/what-is-an-open-table-format/) have converged on
 capabilities — ACID commits, schema evolution, time travel, row-level deletes via
 deletion vectors — and interop layers can present one format as the other. The

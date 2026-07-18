@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-06
 title: "Slowly Changing Dimension (SCD)"
 description: "A slowly changing dimension is a dimension whose attributes change over time; SCD types define whether to overwrite history (Type 1) or preserve it (Type 2)."
 essay: slowly-changing-dimensions-explained

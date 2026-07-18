@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-08
 title: "Data Vault"
 description: "Data vault is a warehouse modeling method splitting entities into hubs (keys), links (relationships), and satellites (history) to absorb change and support audit."
 essay: data-vault-vs-dimensional-modeling

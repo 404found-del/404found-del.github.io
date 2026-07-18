@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-08
 title: "Open Table Format"
 description: "An open table format is a published metadata spec — Iceberg, Delta Lake, Hudi — that turns files in object storage into tables with ACID transactions and time travel."
 essay: what-is-an-open-table-format

@@ -55,7 +55,7 @@ lets it rot.
 The lakehouse fixes this without giving up cheap storage. It keeps your data as files
 in object storage and adds a **metadata layer on top** — an
 [*open table format*](/essays/what-is-an-open-table-format/) such as
-Apache Iceberg, Delta Lake, or Apache Hudi. That layer tracks which files make up a
+[Apache Iceberg](/glossary/apache-iceberg/), [Delta Lake](/glossary/delta-lake/), or Apache Hudi. That layer tracks which files make up a
 table, in what version, under what schema, and in doing so retrofits the guarantees a
 lake never had.
 
@@ -142,7 +142,7 @@ quietly changed mid-query.
 ## The bottom line
 
 A data lake gives you cheap, flexible storage and no guarantees. A lakehouse keeps the
-cheap, flexible storage and adds the guarantees, through an open table format layered
+cheap, flexible storage and adds the guarantees, through an [open table format](/glossary/open-table-format/) layered
 over the same files. For most teams doing serious analytics on large data, the
 lakehouse is now the default, because it removes the lake's biggest liability — trust —
 at almost no extra storage cost. Keep a raw zone for landing and exploration; put a

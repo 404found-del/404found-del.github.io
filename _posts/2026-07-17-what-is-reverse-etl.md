@@ -55,7 +55,7 @@ ship the governed "churn risk," not a copy-paste variant of it.
 
 ## Where it sits among the pipelines
 
-| | ETL / ELT | CDC | Reverse ETL |
+| | ETL / [ELT](/glossary/elt/) | CDC | Reverse ETL |
 |---|---|---|---|
 | **Direction** | Sources → warehouse | Database → warehouse | Warehouse → SaaS tools |
 | **Payload** | Raw operational data | Row-level changes | Modelled, finished data |

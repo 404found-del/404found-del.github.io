@@ -112,8 +112,8 @@ which makes reliable, concurrent analytics hard.
 
 The lakehouse keeps your data in cheap object storage as files — the lake part — but
 adds a **metadata and table layer** on top that brings the structure and guarantees a
-warehouse has. That layer is delivered by **[open table formats](/essays/what-is-an-open-table-format/)** — Apache Iceberg,
-Delta Lake, Apache Hudi — which provide what raw lakes lacked: ACID transactions,
+warehouse has. That layer is delivered by **[open table formats](/essays/what-is-an-open-table-format/)** — [Apache Iceberg](/glossary/apache-iceberg/),
+[Delta Lake](/glossary/delta-lake/), Apache Hudi — which provide what raw lakes lacked: ACID transactions,
 schema enforcement and evolution, and time travel. The result is one system that runs
 both flexible ML-style workloads *and* reliable structured BI, without maintaining a
 separate lake and warehouse with a brittle pipeline copying between them. The

@@ -91,7 +91,7 @@ from.
 If you understand [why dimensional models split measurements from
 context](/essays/a-field-guide-to-dimensional-modeling/), you already understand both —
 snowflaking is just [normalization](/essays/normalization-vs-denormalization/) applied
-to the dimension tables.
+to the [dimension tables](/glossary/dimension-table/).
 
 ## A worked example
 

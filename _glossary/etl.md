@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-06
 title: "ETL (Extract, Transform, Load)"
 description: "ETL extracts data from sources, transforms it before loading, and loads the finished result into the warehouse — transformation happens outside the destination."
 essay: etl-vs-elt

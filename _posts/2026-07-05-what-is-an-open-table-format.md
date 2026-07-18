@@ -23,7 +23,7 @@ table format is a small tree of metadata files alongside them that records, for 
 version of the table, exactly which data files belong to it and under what schema.
 "Open" means the spec is published and engine-neutral: Spark, Trino, Flink, Snowflake,
 and BigQuery can all read and write the *same* table without a proprietary gatekeeper.
-The three names that matter are **Apache Iceberg**, **Delta Lake**, and **Apache
+The three names that matter are **[Apache Iceberg](/glossary/apache-iceberg/)**, **[Delta Lake](/glossary/delta-lake/)**, and **Apache
 Hudi** — and as of 2026, the industry has largely converged on Iceberg as the neutral
 standard.
 
@@ -33,7 +33,7 @@ depends on it.
 
 ## What problem does a table format solve?
 
-A bare data lake is just files. Nothing says which files form the "orders" table,
+A bare [data lake](/glossary/data-lake/) is just files. Nothing says which files form the "orders" table,
 whether a half-finished write should be visible, or what the table contained
 yesterday. Two jobs writing at once can corrupt each other; a schema change means
 hoping every reader notices. A table format fixes all four failures at once:

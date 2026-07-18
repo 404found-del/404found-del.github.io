@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-08
 title: "Zero-ETL"
 description: "Zero-ETL is a cloud-vendor pattern where operational data replicates automatically into the analytical store — no pipeline to build, within one vendor's ecosystem."
 related_terms:

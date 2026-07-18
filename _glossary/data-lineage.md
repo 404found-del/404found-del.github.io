@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-06
 title: "Data Lineage"
 description: "Data lineage is the traced path of data through systems — where each field came from, what transformed it, and what depends on it downstream."
 essay: what-is-data-lineage

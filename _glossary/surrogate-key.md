@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-06
 title: "Surrogate Key"
 description: "A surrogate key is a meaningless, system-generated identifier used as a dimension table's primary key instead of the source system's natural key."
 essay: surrogate-keys-vs-natural-keys

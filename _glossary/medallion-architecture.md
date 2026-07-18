@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-06
 title: "Medallion Architecture"
 description: "The medallion architecture organises a lakehouse into bronze (raw), silver (cleaned), and gold (consumable) layers of increasing refinement and trust."
 essay: the-medallion-architecture-reconsidered

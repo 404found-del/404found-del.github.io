@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-06
 title: "Data Lakehouse"
 description: "A lakehouse is a data lake with an open table format layered on top — one copy of data on object storage, with warehouse-grade guarantees, queryable by any engine."
 essay: data-lake-vs-lakehouse

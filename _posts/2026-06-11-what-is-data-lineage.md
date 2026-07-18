@@ -4,6 +4,14 @@ kicker: "Field Notes"
 topic: "Governance"
 description: "Data lineage is the record of where data comes from, how it's transformed, and where it goes. Here's what it's genuinely for — impact analysis, root cause, audit — and the limits the tool demos skip."
 date: 2026-06-11
+last_modified_at: 2026-07-18
+faq:
+  - q: "What is data lineage in simple terms?"
+    a: "The traced path of data through your systems: where each field came from, what transformed it along the way, and which tables, dashboards, and models depend on it downstream. It answers 'can I trust this number?' backward and 'what breaks if I change this?' forward."
+  - q: "How is data lineage captured?"
+    a: "Mostly automatically: parsing SQL from transformation code, reading orchestrator metadata, and mining warehouse query logs. Column-level lineage — which specific fields feed which — is the useful granularity, and it's typically surfaced in a data catalog rather than as a standalone tool."
+  - q: "What is data lineage actually used for?"
+    a: "Three things earn its keep: impact analysis before schema changes (what breaks downstream), root-cause during incidents (what fed this wrong number), and audit evidence (prove where a regulated figure came from). If none of those are live problems, lineage tooling can wait; the problems usually arrive with scale."
 ---
 
 Data lineage is the family tree of your data: a record of where each dataset comes

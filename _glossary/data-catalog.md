@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-07-08
 title: "Data Catalog"
 description: "A data catalog is a searchable inventory of an organisation's data assets — tables, owners, definitions, lineage — the layer that makes data findable."
 essay: what-is-a-data-catalog

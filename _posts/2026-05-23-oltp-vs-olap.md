@@ -4,6 +4,14 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "OLTP systems handle many small transactions fast. OLAP systems scan huge volumes for analysis. They're optimized for opposite things — which is why querying your production database for analytics is a trap."
 date: 2026-05-23
+last_modified_at: 2026-07-18
+faq:
+  - q: "What is the difference between OLTP and OLAP?"
+    a: "OLTP (online transaction processing) runs the business: many small, concurrent reads and writes of individual records, on normalized schemas built for integrity. OLAP (online analytical processing) analyses the business: few large queries scanning millions of rows, on denormalized models built for reads. The two shapes conflict in one engine."
+  - q: "Why shouldn't I run analytics on my production database?"
+    a: "Because analytical scans lock resources transactions need, and the normalized schema that keeps writes safe makes analytical queries slow and join-heavy. Past trivial scale, analytics moves to a replica at minimum — properly, to a warehouse or lakehouse modelled for the purpose."
+  - q: "Can one database do both OLTP and OLAP?"
+    a: "Hybrid (HTAP) engines exist and keep improving, but the mainstream answer remains separation: an operational database plus an analytical store fed by CDC or batch loads. The bottleneck isn't technology so much as modelling — the same schema genuinely cannot be optimal for both access patterns."
 ---
 
 Every data architecture eventually runs into the difference between OLTP and OLAP,
@@ -69,7 +77,7 @@ Because one system can't serve both workloads well, the standard architecture is
 its OLTP database, optimised for transactions. On some cadence — batch jobs, or
 [change data capture](/essays/what-is-change-data-capture/) streaming
 changes continuously — that data is copied into a separate analytical store (a
-warehouse or lakehouse) optimised for OLAP, where it's reshaped into denormalized,
+warehouse or [lakehouse](/glossary/data-lakehouse/)) optimised for OLAP, where it's reshaped into denormalized,
 column-stored, analytics-friendly models.
 
 This separation is why the modern data stack looks the way it does. The warehouse
