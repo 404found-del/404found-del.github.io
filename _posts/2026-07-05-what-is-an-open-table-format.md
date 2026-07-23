@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "An open table format is a metadata spec that turns raw files in object storage into real tables — with ACID transactions, schema evolution, and time travel."
 date: 2026-07-05 09:00:00 +0530
-last_modified_at: 2026-07-06
+last_modified_at: 2026-07-23
 faq:
   - q: "What is an open table format in simple terms?"
     a: "It's a published specification for a metadata layer that sits on top of data files in object storage and makes them behave like a database table — tracking which files belong to the table, what schema they follow, and what the table looked like at any point in time. Apache Iceberg, Delta Lake, and Apache Hudi are the three main ones."
@@ -22,7 +22,9 @@ queryable history. The data stays as ordinary Parquet files in S3, ADLS, or GCS;
 table format is a small tree of metadata files alongside them that records, for every
 version of the table, exactly which data files belong to it and under what schema.
 "Open" means the spec is published and engine-neutral: Spark, Trino, Flink, Snowflake,
-and BigQuery can all read and write the *same* table without a proprietary gatekeeper.
+and BigQuery can all read and write the *same* table without a proprietary gatekeeper. (If you're unsure how a
+table format differs from the Parquet files underneath it, start with
+[Iceberg vs Parquet](/essays/apache-iceberg-vs-parquet/).)
 The three names that matter are **[Apache Iceberg](/glossary/apache-iceberg/)**, **[Delta Lake](/glossary/delta-lake/)**, and **Apache
 Hudi** — and as of 2026, the industry has largely converged on Iceberg as the neutral
 standard.
