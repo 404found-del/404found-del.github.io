@@ -4,6 +4,7 @@ kicker: "Field Notes"
 topic: "AI"
 description: "A vector database stores embeddings and finds items by meaning rather than exact match. Here's what that's actually for, how it relates to your existing stack, and when a dedicated one is worth it."
 date: 2026-06-08
+last_modified_at: 2026-07-24
 faq:
   - q: "What is a vector database used for?"
     a: "Searching by meaning rather than exact match. It stores embeddings — numerical representations of text, images, or other data — and finds the items closest in meaning to a query. Its most common use is powering retrieval-augmented generation (RAG), where relevant context is fetched to ground a language model's answer."
@@ -96,3 +97,7 @@ vector database is worth it. As with [every other piece of the
 stack](/essays/is-the-modern-data-stack-dead/), adopt the specialised tool for the
 problem you can actually demonstrate — not because it's the component the AI era told
 you to buy.
+
+*(Vector search finds what looks similar; when questions span many connected
+entities, explicit relationships do better — see
+[knowledge graph vs data warehouse](/essays/knowledge-graph-vs-data-warehouse/).)*

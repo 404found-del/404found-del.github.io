@@ -4,6 +4,7 @@ kicker: "Reconsidered"
 topic: "AI"
 description: "Cutting through the hype: GenAI adds vector storage and new retrieval patterns to the data stack, but the fundamentals — structure, quality, governance, ownership — matter more than ever, not less."
 date: 2026-05-31 08:30:00 +0530
+last_modified_at: 2026-07-24
 ---
 
 Every few years a technology arrives that vendors insist changes everything about
@@ -103,3 +104,7 @@ separates teams who get value from AI from teams who get a very fast nonsense ma
 defined meaning — these aren't a relic the new era renders quaint. They're the moat.
 AI just raised their value. The everything-changer, it turns out, mostly changed the
 stakes of getting the basics right.
+
+*(For the sharpest version of "defined meaning" in the AI era, see
+[ontology vs data model](/essays/ontology-vs-data-model/) — the discipline of
+declaring what concepts mean before a machine has to guess.)*

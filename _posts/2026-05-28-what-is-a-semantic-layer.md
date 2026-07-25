@@ -4,6 +4,7 @@ kicker: "Essay"
 topic: "Architecture"
 description: "A semantic layer is the single, governed place where business metrics are defined once — independent of any dashboard. Here's what it is, what it isn't, and why it fixes the 'three numbers for one metric' problem."
 date: 2026-05-28
+last_modified_at: 2026-07-24
 faq:
   - q: "Is a semantic layer the same as a data catalog?"
     a: "No. A catalog is an inventory — it documents what data exists, where it lives, and who owns it. A semantic layer defines what metrics mean and computes them consistently at query time. The catalog describes your data; the semantic layer enforces its definitions."
@@ -98,3 +99,7 @@ dashboards, there should be one governed place that says what each metric means,
 that every consumer asks the same question and gets the same answer. Build that, and
 the three-dashboards-three-numbers problem doesn't get patched. It stops being
 possible.
+
+*(A semantic layer is, in effect, a lightweight
+[ontology](/essays/ontology-vs-data-model/) — the same act of declaring meaning
+once, with less formalism and far less ceremony.)*
