@@ -2,7 +2,7 @@
 title: "Data Lake vs Lakehouse: What Changed and Which to Use"
 kicker: "Field Notes"
 topic: "Architecture"
-description: "A data lake stores raw files cheaply but offers no guarantees. A lakehouse adds a table layer over those same files to give them ACID transactions, schema, and reliability. Here's the real difference and when each fits."
+description: "A data lake stores raw files cheaply and guarantees nothing. A lakehouse adds a table layer over the same files for ACID, schema, and trust. When each fits."
 date: 2026-06-20 10:00:00 +0530
 last_modified_at: 2026-07-26
 faq:
@@ -17,7 +17,7 @@ faq:
 ---
 
 The most common version of the storage question today isn't warehouse-versus-anything
-— it's **data lake versus lakehouse.** The short answer: a data lake stores raw files
+: **data lake versus lakehouse.** The short answer: a data lake stores raw files
 cheaply but gives you no guarantees about them; a lakehouse keeps those *same* files
 and adds a table layer on top that brings transactions, schema, and reliability. The
 lakehouse is, almost literally, a data lake plus one missing ingredient. Here's what
@@ -35,10 +35,10 @@ that ingredient is, why it changed everything, and when a plain lake is still en
 | **Reliability for BI** | Low | High |
 | **Main risk** | Becoming a data swamp | Younger, more moving parts |
 
-## What a data lake is — and where it breaks
+## What a data lake is, and where it breaks
 
 A data lake is a large store of **raw files in cheap object storage**. You land data of
-any shape — tables, JSON, logs, images — as files, and apply structure later, on read.
+any shape (tables, JSON, logs, images) as files, and apply structure later, on read.
 This is genuinely useful: storage is cheap, so you keep enormous volumes affordably,
 and you don't have to model anything up front, which suits data science and ML.
 
@@ -46,14 +46,14 @@ The problem is everything a bare pile of files *doesn't* give you. There are **n
 transactions**, so two jobs writing at once can leave data half-updated and corrupt.
 There is **no enforced schema**, so a malformed file silently poisons downstream reads.
 There is **no reliable history**, so you can't cleanly reproduce yesterday's numbers.
-Absent quality checks and ownership, the lake drifts into a **data swamp** — a vast
+Absent quality checks and ownership, the lake drifts into a **data swamp**: a vast
 store nobody trusts. The very looseness that makes a lake cheap and flexible is what
 lets it rot.
 
 ## What a lakehouse adds: the table format
 
 The lakehouse fixes this without giving up cheap storage. It keeps your data as files
-in object storage and adds a **metadata layer on top** — an
+in object storage and adds a **metadata layer on top**: an
 [*open table format*](/essays/what-is-an-open-table-format/) such as
 [Apache Iceberg](/glossary/apache-iceberg/), [Delta Lake](/glossary/delta-lake/), or Apache Hudi. That layer tracks which files make up a
 table, in what version, under what schema, and in doing so retrofits the guarantees a
@@ -112,19 +112,19 @@ Concretely, the table format gives you **ACID transactions** (writes are all-or-
 so concurrent jobs can't corrupt a table), **schema enforcement and evolution** (bad
 data is rejected, and columns can change safely over time), and **time travel** (every
 change is versioned, so you can query the table as it was at any past point and
-reproduce old results exactly). None of that requires moving the data — it's
+reproduce old results exactly). None of that requires moving the data; it's
 *metadata over the files you already have.* That's the whole trick, and it's why the
 lakehouse arrived as an evolution of the lake rather than a replacement for it.
 
 ## A worked scenario
 
 Picture a nightly job rewriting an `orders` table while a dashboard queries it. **On a
-plain lake**, the dashboard can read a half-written state — some new files present,
-some old ones already deleted — and return numbers that never actually existed. There's
+plain lake**, the dashboard can read a half-written state (some new files present,
+some old ones already deleted) and return numbers that never actually existed. There's
 no concept of a transaction to hide the in-progress write. **On a lakehouse**, the table
 format makes the rewrite a single atomic commit: the dashboard sees either the
 complete old version or the complete new one, never a torn mixture. Same files, same
-storage cost — but now the read is trustworthy. That gap is the entire reason
+storage cost, but now the read is trustworthy. That gap is the entire reason
 lakehouses exist.
 
 ## When a plain lake is still enough
@@ -132,8 +132,8 @@ lakehouses exist.
 You don't always need the table layer. A bare lake is fine when you're **landing raw
 data** that will be processed downstream anyway, doing **exploratory data science**
 where occasional inconsistency is acceptable, or **archiving** large volumes cheaply.
-In fact, most lakehouses keep a raw, untabled landing zone — the immutable bottom of
-[the medallion architecture](/essays/the-medallion-architecture-reconsidered/) — and
+In fact, most lakehouses keep a raw, untabled landing zone, the immutable bottom of
+[the medallion architecture](/essays/the-medallion-architecture-reconsidered/), and
 promote data into managed tables only as it's cleaned and trusted.
 
 What you should *not* do is run reliable, concurrent **BI and analytics directly on a
@@ -152,9 +152,9 @@ put behind the claim.
 A data lake gives you cheap, flexible storage and no guarantees. A lakehouse keeps the
 cheap, flexible storage and adds the guarantees, through an [open table format](/glossary/open-table-format/) layered
 over the same files. For most teams doing serious analytics on large data, the
-lakehouse is now the default, because it removes the lake's biggest liability — trust —
+lakehouse is now the default, because it removes the lake's biggest liability, trust,
 at almost no extra storage cost. Keep a raw zone for landing and exploration; put a
 table format over anything you actually want to depend on. And remember that, like
 [every storage choice](/essays/data-warehouse-vs-data-lake-vs-lakehouse/), it decides
-where your data lives and how reliable it is — not what it *means*, which is still a
+where your data lives and how reliable it is, not what it *means*, which is still a
 [semantic-layer](/essays/what-is-a-semantic-layer/) problem sitting one level up.

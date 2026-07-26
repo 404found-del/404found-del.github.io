@@ -2,8 +2,18 @@
 title: "Your AI Is Only as Good as Your Data Architecture"
 kicker: "Essay"
 topic: "AI"
-description: "Retrieval-augmented generation, AI agents, and LLMs querying your warehouse are all only as reliable as the data beneath them. GenAI doesn't replace data architecture — it raises the price of getting it wrong."
+description: "RAG, AI agents, and LLMs querying your warehouse are only as reliable as the data beneath them. GenAI raises the price of getting the architecture wrong."
 date: 2026-05-31 09:30:00 +0530
+last_modified_at: 2026-07-26
+faq:
+  - q: "Why does AI depend on data architecture?"
+    a: "Because every route an AI system takes into your data — retrieval, text-to-SQL, agents calling tools — reads whatever structure already exists, more credulously and at far greater scale than a human would. A person notices that a number looks wrong. A model returns it fluently, with a citation, and no hesitation."
+  - q: "What makes RAG give wrong answers?"
+    a: "Almost always retrieval, not generation. Retrieval quality is data quality: embed duplicated, stale, or contradictory documents and similarity search faithfully returns duplicated, stale, contradictory context. The model then reasons impeccably over the wrong material. Fixing the prompt does nothing; fixing the corpus does."
+  - q: "Is it safe to let an LLM query the data warehouse directly?"
+    a: "Only as safe as the semantics underneath it. Given raw tables, a model guesses what a column means and produces plausible SQL against the wrong definition. Given a governed semantic layer with metrics defined once, it has far less to guess at. The exposure isn't the model's competence; it's how much meaning your schema leaves implicit."
+  - q: "Does AI make data governance more or less important?"
+    a: "More, and it changes its character. Governance stops being documentation nobody reads and becomes the machine-readable input that determines what a model can answer correctly and what it must be prevented from seeing. Access control, lineage, and definitions move from paperwork into the runtime path."
 ---
 
 There's a comforting story in which generative AI makes data architecture less

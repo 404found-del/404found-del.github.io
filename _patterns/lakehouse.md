@@ -59,6 +59,7 @@ a real concern.
   <text x="400" y="246" font-size="13" fill="#1c1a17" text-anchor="middle">object storage — one copy, Parquet files</text>
   <text x="400" y="290" font-size="12" fill="#8b857a" text-anchor="middle">every engine reads and writes the same tables; no replication between systems</text>
 </svg>
+<figcaption style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:#8b857a;margin-top:0.6rem;">One copy of the data, many engines: the table format and catalog are what remove the replication.</figcaption>
 </figure>
 
 The load-bearing component is the table format (Iceberg, Delta) plus the

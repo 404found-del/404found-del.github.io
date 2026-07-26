@@ -2,9 +2,9 @@
 title: "Fact Table Types: Transaction, Periodic Snapshot, and Accumulating"
 kicker: "Field Notes"
 topic: "Modeling"
-description: "There are three kinds of fact table, distinguished by what one row represents over time: transaction, periodic snapshot, and accumulating snapshot. Here's how each works and how to pick the right one."
+description: "Three kinds of fact table, distinguished by what one row represents over time: transaction, periodic snapshot, and accumulating snapshot. How to pick one."
 date: 2026-06-02
-last_modified_at: 2026-07-18
+last_modified_at: 2026-07-26
 faq:
   - q: "What are the three types of fact table?"
     a: "Transaction facts record individual events — one row per sale or click. Periodic snapshots record state at regular intervals — one row per account per month. Accumulating snapshots track a process's lifecycle — one row per order, updated as it hits each milestone. The type follows directly from what one row represents."

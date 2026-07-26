@@ -2,8 +2,18 @@
 title: "Most Data Quality Problems Are Org-Chart Problems"
 kicker: "Essay"
 topic: "Governance"
-description: "When data is wrong, teams buy a data-quality tool. But the durable causes are organizational — unclear ownership, misaligned incentives, no accountability — and no tool can fix an org-chart problem."
+description: "When data is wrong, teams buy a tool. But the durable causes are organizational: unclear ownership, misaligned incentives, no accountability. Tools miss those."
 date: 2026-06-04
+last_modified_at: 2026-07-26
+faq:
+  - q: "Why do data quality tools fail to fix data quality?"
+    a: "Because they detect symptoms rather than causes. A tool tells you a table went stale or a value drifted; it cannot tell you that nobody owns the table, that the producing team is measured on shipping features rather than on downstream correctness, or that two departments disagree about what the field means. Detection is not repair."
+  - q: "What actually causes most data quality problems?"
+    a: "Three organisational causes. Nobody owns the dataset, so no one is accountable when it breaks. Incentives point the wrong way, so the team that causes breakage bears none of its cost. And meaning is nobody's job, so definitions drift until every department is quietly right about a different number."
+  - q: "How do you fix data quality problems for good?"
+    a: "Name an owner for every dataset that matters, and make the cost of breakage land on the team that causes it rather than the team that discovers it. Then make definitions somebody's explicit, ongoing responsibility. Tooling helps enormously once those three are in place, and accomplishes very little before."
+  - q: "Is data quality a technical or organizational problem?"
+    a: "The failures are technical; the durable causes are organizational. That's why the same incidents recur after each new tool is installed. A monitoring layer over an unowned dataset produces faster notification of the same problem, which feels like progress for about a quarter."
 ---
 
 Here is the usual sequence. A dashboard shows a wrong number. It happens again. After

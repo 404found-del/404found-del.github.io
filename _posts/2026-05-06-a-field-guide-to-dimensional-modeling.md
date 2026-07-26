@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Modeling"
 date: 2026-05-06
 description: "Facts, dimensions, and grain — the three ideas that quietly run most analytics, explained without the dogma."
-last_modified_at: 2026-07-18
+last_modified_at: 2026-07-26
 faq:
   - q: "What is dimensional modeling in simple terms?"
     a: "A way of organizing analytical data around two kinds of table: fact tables holding the measurements of business events, and dimension tables holding the context you slice those measurements by. Declare what one fact row represents (the grain), keep measures true to it, and queries start reading like business questions."
@@ -101,6 +101,31 @@ between two behaviours:
 The right choice is a business question disguised as a technical one. "Do we want
 to attribute this customer's old orders to their old segment or their new one?"
 The model can't answer that. The business has to.
+
+<figure style="margin:2rem auto;text-align:center;">
+<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="dim-modeling-t dim-modeling-d">
+  <title id="dim-modeling-t">The three ideas dimensional modeling rests on</title>
+  <desc id="dim-modeling-d">Three sequential ideas. First, split the data into measurements and the context you measure them by — facts and dimensions. Second, declare the grain: state in one sentence what a single fact row represents, before choosing any column. Third, decide how each dimension handles change, using slowly changing dimension types to either overwrite history or preserve it. Everything else in dimensional modeling is a consequence of these three.</desc>
+  <rect x="30" y="60" width="220" height="94" rx="6" fill="#c8472b"/>
+  <text x="140" y="88" font-size="12" fill="#f6f3ec" text-anchor="middle" font-weight="700">1 · split</text>
+  <text x="140" y="110" font-size="10" fill="#f6f3ec" text-anchor="middle">measurements vs context</text>
+  <text x="140" y="130" font-size="10" fill="#f6f3ec" text-anchor="middle">facts and dimensions</text>
+  <text x="272" y="112" font-size="18" fill="#cabfac" text-anchor="middle">→</text>
+  <rect x="292" y="60" width="220" height="94" rx="6" fill="#c8472b"/>
+  <text x="402" y="88" font-size="12" fill="#f6f3ec" text-anchor="middle" font-weight="700">2 · declare the grain</text>
+  <text x="402" y="110" font-size="10" fill="#f6f3ec" text-anchor="middle">what does one row mean?</text>
+  <text x="402" y="130" font-size="10" fill="#f6f3ec" text-anchor="middle">say it before choosing columns</text>
+  <text x="534" y="112" font-size="18" fill="#cabfac" text-anchor="middle">→</text>
+  <rect x="554" y="60" width="220" height="94" rx="6" fill="#c8472b"/>
+  <text x="664" y="88" font-size="12" fill="#f6f3ec" text-anchor="middle" font-weight="700">3 · handle change</text>
+  <text x="664" y="110" font-size="10" fill="#f6f3ec" text-anchor="middle">overwrite or preserve history</text>
+  <text x="664" y="130" font-size="10" fill="#f6f3ec" text-anchor="middle">SCD type, per dimension</text>
+  <rect x="30" y="182" width="744" height="40" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
+  <text x="402" y="207" font-size="11" fill="#1c1a17" text-anchor="middle">everything else — surrogate keys, conformed dimensions, fact types — follows from these three</text>
+  <text x="402" y="258" font-size="12" fill="#8b857a" text-anchor="middle">the grain is the one you cannot add later: a table built without it has no fixed meaning to recover</text>
+</svg>
+<figcaption style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:#8b857a;margin-top:0.6rem;">Three decisions, in order. Skip the second and no amount of tooling recovers it later.</figcaption>
+</figure>
 
 ## When *not* to reach for it
 

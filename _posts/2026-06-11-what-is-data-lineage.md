@@ -2,7 +2,7 @@
 title: "What Is Data Lineage, and What Is It Actually For?"
 kicker: "Field Notes"
 topic: "Governance"
-description: "Data lineage is the record of where data comes from, how it's transformed, and where it goes. Here's what it's genuinely for — impact analysis, root cause, audit — and the limits the tool demos skip."
+description: "Data lineage records where data comes from, how it's transformed, and where it goes. What it's genuinely for, impact analysis and root cause, and its limits."
 date: 2026-06-11
 last_modified_at: 2026-07-26
 faq:

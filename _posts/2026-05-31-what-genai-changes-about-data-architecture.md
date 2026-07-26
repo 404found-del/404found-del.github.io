@@ -2,9 +2,18 @@
 title: "What GenAI Actually Changes About Data Architecture — and What It Doesn't"
 kicker: "Reconsidered"
 topic: "AI"
-description: "Cutting through the hype: GenAI adds vector storage and new retrieval patterns to the data stack, but the fundamentals — structure, quality, governance, ownership — matter more than ever, not less."
+description: "GenAI adds vector storage and new retrieval patterns to the data stack, but structure, quality, governance, and ownership matter more than ever, not less."
 date: 2026-05-31 08:30:00 +0530
-last_modified_at: 2026-07-24
+last_modified_at: 2026-07-26
+faq:
+  - q: "Does generative AI change data architecture?"
+    a: "It adds genuinely new components — vector storage, embedding pipelines, and retrieval as a first-class access pattern — and it adds a new class of consumer that reads your schema without tribal knowledge. What it does not do is remove the need for declared grain, agreed definitions, ownership, or quality. Those become more load-bearing, not less."
+  - q: "What does GenAI actually add to the data stack?"
+    a: "A vector index over unstructured content, a pipeline that produces and refreshes embeddings, retrieval as an access pattern alongside SQL, and evaluation for outputs that have no single correct answer. These sit beside the existing stack. None of them replace the warehouse, and none of them supply meaning the data never carried."
+  - q: "Do large language models make data modelling unnecessary?"
+    a: "No, and the reverse is closer to true. An analyst filled the gaps in a badly named schema with knowledge nobody wrote down. A model has no tribal knowledge; it has only what the schema says. Explicit grain, clear names, and governed definitions are precisely what a model needs and precisely what most schemas assume rather than state."
+  - q: "What GenAI pattern should data teams be sceptical of?"
+    a: "Pointing a model at an ungoverned warehouse and expecting it to resolve definitional disagreements the organisation never settled. The model will answer confidently either way, which converts a known ambiguity into an invisible one. Settle the meaning first; the model can only reflect what it is given."
 ---
 
 Every few years a technology arrives that vendors insist changes everything about

@@ -2,7 +2,7 @@
 title: "What Is a Vector Database, and Do You Need One?"
 kicker: "Field Notes"
 topic: "AI"
-description: "A vector database stores embeddings and finds items by meaning rather than exact match. Here's what that's actually for, how it relates to your existing stack, and when a dedicated one is worth it."
+description: "A vector database stores embeddings and finds items by meaning rather than exact match. What that's for, how it fits your stack, and when a dedicated one pays."
 date: 2026-06-08
 last_modified_at: 2026-07-26
 faq:
@@ -14,39 +14,72 @@ faq:
     a: "Often not. Many existing databases — Postgres with pgvector, and most major warehouses — now offer vector search built in, which is simpler if your volumes are modest. A dedicated vector database earns its place at large scale or when similarity search is a core, high-performance workload."
 ---
 
-A vector database stores **embeddings** — numerical representations of data — and
+A vector database stores **embeddings**, numerical representations of data, and
 retrieves items by *similarity in meaning* rather than by exact match. That one
 capability is why vector databases went from obscure to ubiquitous in the space of a
 couple of years: they're the storage layer underneath most retrieval-augmented
 generation. But "vector database" gets discussed with more mystique than it
-deserves, and the practical questions — what it's for, how it fits your existing
-stack, and whether you need a *dedicated* one — have clear answers.
+deserves, and the practical questions (what it's for, how it fits your existing
+stack, and whether you need a *dedicated* one) have clear answers.
 
 ## The problem it solves: search by meaning
 
 A normal database is brilliant at exact questions. *Find the customer with id 1077.*
 *Find orders where amount > 500.* It matches values precisely. What it can't do is
-answer *find documents that mean roughly the same thing as this question* — because
+answer *find documents that mean roughly the same thing as this question*, because
 meaning isn't an exact value.
 
 The trick that makes semantic search possible is the **embedding**: a model converts a
-piece of text (or an image, or audio) into a long list of numbers — a vector — such
+piece of text (or an image, or audio) into a long list of numbers, a vector, such
 that things with similar meaning end up close together in that numerical space.
 "How do I reset my password" and "I forgot my login credentials" land near each other,
 despite sharing almost no words.
 
 A vector database is the system built to store those vectors and, given a query
-vector, **find the nearest ones fast** — the items closest in meaning. At small scale
+vector, **find the nearest ones fast**: the items closest in meaning. At small scale
 you could compare against every stored vector by brute force; the database exists to
 do approximate nearest-neighbour search efficiently across millions of them.
 
 Almost every product in this category is, underneath, an implementation of the
-same handful of index structures — most commonly
+same handful of index structures, most commonly
 [HNSW](https://arxiv.org/abs/1603.09320), the hierarchical proximity-graph
 algorithm from Malkov and Yashunin's 2016 paper, which gets logarithmic search
 scaling by starting the walk in a sparse top layer and descending. Knowing that
 is useful when you evaluate vendors: the differentiator is rarely the search
 algorithm, because they are largely running the same one.
+
+<figure style="margin:2rem auto;text-align:center;">
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="vector-db-t vector-db-d">
+  <title id="vector-db-t">Search by meaning versus search by value</title>
+  <desc id="vector-db-d">On the left, an exact-match query in a normal database returns the row whose id equals 1077. On the right, two differently-worded questions about resetting a password are converted to embeddings and land close together in vector space, so a nearest-neighbour search returns them as similar despite sharing almost no words. Exact match answers what equals this; vector search answers what is near this in meaning.</desc>
+  <text x="190" y="28" font-size="13" fill="#1c1a17" text-anchor="middle" font-weight="700">Exact match</text>
+  <text x="590" y="28" font-size="13" fill="#1c1a17" text-anchor="middle" font-weight="700">Similarity in meaning</text>
+  <rect x="60" y="48" width="260" height="34" rx="4" fill="#1c1a17"/>
+  <text x="190" y="70" font-size="10" fill="#f6f3ec" text-anchor="middle">WHERE id = 1077</text>
+  <line x1="190" y1="82" x2="190" y2="112" stroke="#cabfac" stroke-width="2"/>
+  <rect x="100" y="112" width="180" height="26" rx="3" fill="#c8472b"/>
+  <text x="190" y="130" font-size="10" fill="#f6f3ec" text-anchor="middle">one row · exactly right</text>
+  <rect x="100" y="146" width="180" height="18" rx="3" fill="#f6f3ec" stroke="#ddd6c8"/>
+  <rect x="100" y="168" width="180" height="18" rx="3" fill="#f6f3ec" stroke="#ddd6c8"/>
+  <rect x="100" y="190" width="180" height="18" rx="3" fill="#f6f3ec" stroke="#ddd6c8"/>
+  <text x="190" y="238" font-size="10" fill="#56514a" text-anchor="middle">cannot answer "what means roughly this?"</text>
+  <rect x="440" y="48" width="300" height="180" rx="8" fill="#fdfcf9" stroke="#cabfac"/>
+  <circle cx="560" cy="112" r="7" fill="#c8472b"/>
+  <circle cx="588" cy="128" r="7" fill="#c8472b"/>
+  <text x="640" y="106" font-size="9" fill="#a4391f">"how do I reset my password"</text>
+  <text x="648" y="146" font-size="9" fill="#a4391f">"I forgot my login credentials"</text>
+  <circle cx="490" cy="196" r="6" fill="#cabfac"/>
+  <circle cx="700" cy="86" r="6" fill="#cabfac"/>
+  <circle cx="676" cy="200" r="6" fill="#cabfac"/>
+  <circle cx="512" cy="76" r="6" fill="#cabfac"/>
+  <circle cx="606" cy="186" r="6" fill="#cabfac"/>
+  <circle cx="574" cy="120" r="34" fill="none" stroke="#c8472b" stroke-width="1.4" stroke-dasharray="3 3"/>
+  <text x="590" y="252" font-size="10" fill="#56514a" text-anchor="middle">near in the embedding space, though they share almost no words</text>
+  <line x1="380" y1="44" x2="380" y2="256" stroke="#ddd6c8" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <text x="400" y="292" font-size="12" fill="#8b857a" text-anchor="middle">a serious system needs both: the vector store for retrieval, the structured store for truth</text>
+</svg>
+<figcaption style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:#8b857a;margin-top:0.6rem;">Exact match asks what equals this; vector search asks what sits nearest to it in meaning.</figcaption>
+</figure>
 
 ## What it's actually for
 
@@ -66,14 +99,14 @@ this?*, vectors are the tool.
 
 Here's the part that cuts through the hype. As I argued in [what GenAI actually
 changes about data architecture](/essays/what-genai-changes-about-data-architecture/),
-vector storage is a genuine *addition* to the stack — a new access pattern — but it
+vector storage is a genuine *addition* to the stack, a new access pattern, but it
 sits *alongside* your existing data, it doesn't replace it.
 
 > A vector database answers "what's similar in meaning?" Your warehouse answers "what
 > are the exact facts?" These are different questions, and a serious system usually
-> needs both — the vector store for retrieval, the structured store for truth.
+> needs both: the vector store for retrieval, the structured store for truth.
 
-In practice the embeddings often *derive* from data you already manage — product
+In practice the embeddings often *derive* from data you already manage: product
 descriptions, support articles, documents sitting in your [lake or
 lakehouse](/essays/data-warehouse-vs-data-lake-vs-lakehouse/). The vector database is a
 specialised index over meaning, not a new source of truth. And it inherits every
@@ -94,8 +127,8 @@ search to your existing database is far simpler than standing up, securing, and
 syncing a whole new system.
 
 A **dedicated** vector database earns its place when similarity search is a *core,
-high-scale workload* — many millions of vectors, high query throughput, demanding
-latency — where specialised indexing and operational tuning genuinely outperform a
+high-scale workload*: many millions of vectors, high query throughput, demanding
+latency, where specialised indexing and operational tuning genuinely outperform a
 bolt-on. That's a real need for some products and overkill for most.
 
 So the honest decision tree is short. Building RAG or semantic search? You need vector
@@ -103,9 +136,9 @@ search. Modest scale and an existing database with vector support? Use that. Mas
 scale with similarity search as a central, performance-critical function? A dedicated
 vector database is worth it. As with [every other piece of the
 stack](/essays/is-the-modern-data-stack-dead/), adopt the specialised tool for the
-problem you can actually demonstrate — not because it's the component the AI era told
+problem you can actually demonstrate, not because it's the component the AI era told
 you to buy.
 
 *(Vector search finds what looks similar; when questions span many connected
-entities, explicit relationships do better — see
+entities, explicit relationships do better; see
 [knowledge graph vs data warehouse](/essays/knowledge-graph-vs-data-warehouse/).)*

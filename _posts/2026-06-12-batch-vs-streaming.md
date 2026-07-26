@@ -2,8 +2,9 @@
 title: "Batch vs Streaming: How to Actually Decide"
 kicker: "Field Notes"
 topic: "Engineering"
-description: "Batch vs streaming isn't legacy vs modern. The real question: what latency does the decision consuming the data actually require? Default to batch; promote pipelines to streaming one named use case at a time."
+description: "Batch vs streaming isn't legacy vs modern. The real question is what latency the decision actually requires. Default to batch; promote one use case at a time."
 date: 2026-06-12
+last_modified_at: 2026-07-26
 faq:
   - q: "Is streaming replacing batch processing?"
     a: "No. They are complementary. Batch remains the right default for analytics consumed on human cadences — daily and weekly decisions — while streaming earns its complexity for operational decisions made by machines in seconds to minutes."

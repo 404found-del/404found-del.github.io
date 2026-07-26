@@ -2,7 +2,7 @@
 title: "Data Vault vs Dimensional Modeling: Which Belongs Where"
 kicker: "Field Notes"
 topic: "Modeling"
-description: "Data Vault and dimensional modeling aren't rivals — they solve different problems at different layers. Here's what Data Vault actually is, what it costs, and when its complexity is worth paying."
+description: "Data Vault and dimensional modeling aren't rivals; they solve different problems at different layers. What Data Vault costs, and when it's worth paying for."
 date: 2026-06-07
 last_modified_at: 2026-07-26
 faq:

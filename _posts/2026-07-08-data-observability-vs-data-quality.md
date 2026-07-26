@@ -96,6 +96,7 @@ and models downstream in its blast radius.
   <text x="580" y="186" font-size="11" fill="#a4391f" text-anchor="middle">misses: always-been-wrong data</text>
   <text x="400" y="275" font-size="12" fill="#8b857a" text-anchor="middle">each one's blind spot is the other one's job — that's why "vs" is the wrong word</text>
 </svg>
+<figcaption style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:#8b857a;margin-top:0.6rem;">Rules catch what you predicted; baselines catch what you didn't. Each one's blind spot is the other one's job.</figcaption>
 </figure>
 
 ## The part the vendors won't say

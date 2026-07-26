@@ -2,8 +2,9 @@
 title: "One Big Table vs the Star Schema: The Real Trade-off"
 kicker: "Field Notes"
 topic: "Modeling"
-description: "One Big Table (OBT) denormalizes everything into a single wide table; the star schema keeps facts and dimensions separate. Here's what each actually costs, and why the honest answer is usually 'both, at different layers.'"
+description: "One Big Table denormalizes everything into one wide table; the star schema keeps facts and dimensions apart. What each costs, and why the answer is usually both."
 date: 2026-06-13
+last_modified_at: 2026-07-26
 faq:
   - q: "What is One Big Table (OBT)?"
     a: "A modeling approach that flattens facts and all their related dimensions into a single wide, denormalized table — so a query needs no joins. It trades storage and some flexibility for query simplicity and speed, and is popular for feeding specific dashboards on columnar warehouses."

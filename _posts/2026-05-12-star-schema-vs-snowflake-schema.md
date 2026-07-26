@@ -2,7 +2,7 @@
 title: "Star Schema vs Snowflake Schema: Which to Use and When"
 kicker: "Field Notes"
 topic: "Modeling"
-description: "Star schema vs snowflake schema comes down to one decision — whether you normalize your dimensions. Here's the difference, a worked example, a diagram, and why the star usually wins on a modern warehouse."
+description: "Star schema vs snowflake schema comes down to one decision: whether you normalize your dimensions. The difference, a worked example, and why the star wins."
 date: 2026-05-12
 last_modified_at: 2026-07-26
 faq:
@@ -17,8 +17,8 @@ faq:
 ---
 
 The difference between a star schema and a snowflake schema is smaller than the
-debate around it suggests. Both are dimensional models — a central
-[fact table surrounded by dimensions](/essays/fact-table-vs-dimension-table/) — and the *entire* distinction is one decision: **do you
+debate around it suggests. Both are dimensional models, a central
+[fact table surrounded by dimensions](/essays/fact-table-vs-dimension-table/), and the *entire* distinction is one decision: **do you
 keep each dimension in a single flat table (star), or normalize it into related
 sub-tables (snowflake)?** For analytics on a modern cloud warehouse, the star is
 almost always the better default. Here's why, with a worked example and a diagram.
@@ -37,7 +37,7 @@ almost always the better default. Here's why, with a worked example and a diagra
 
 ## The one real difference
 
-In a **star schema**, each dimension is a single, wide, denormalized table — the
+In a **star schema**, each dimension is a single, wide, denormalized table: the
 product dimension holds the product, its category, its brand, and its supplier all in
 one place, even though "Electronics" repeats across many rows. In a **snowflake
 schema**, you normalize that dimension into a branching hierarchy: product points to a
@@ -91,7 +91,7 @@ from.
 </figure>
 
 If you understand [why dimensional models split measurements from
-context](/essays/a-field-guide-to-dimensional-modeling/), you already understand both —
+context](/essays/a-field-guide-to-dimensional-modeling/), you already understand both:
 snowflaking is just [normalization](/essays/normalization-vs-denormalization/) applied
 to the [dimension tables](/glossary/dimension-table/).
 
@@ -126,7 +126,7 @@ becomes a steady tax on every query.
 
 ## When to use a star schema
 
-For analytics on a columnar cloud warehouse — which is most analytics today —
+For analytics on a columnar cloud warehouse, which is most analytics today,
 **default to the star.** Denormalize your dimensions. The storage cost is negligible
 because columnar engines compress repeated values away to almost nothing, queries are
 dramatically simpler, and performance is typically *better* than the snowflake, not
@@ -145,14 +145,14 @@ that needs it:
 - A **compliance or governance** rule forces a single authoritative table for an
   entity.
 
-Mixing is fine — a mostly-star model with one snowflaked dimension is a perfectly
+Mixing is fine: a mostly-star model with one snowflaked dimension is a perfectly
 reasonable, pragmatic design. You don't owe the schema purity.
 
 ## The thing underneath the choice
 
 "Star vs snowflake" is really a proxy for an older question: normalize for
 write-efficiency, or denormalize for read-efficiency? A warehouse is overwhelmingly
-read-heavy — written by a few pipelines, queried by everyone — so it should optimize
+read-heavy (written by a few pipelines, queried by everyone), so it should optimize
 for reads, which means denormalizing, which means the star. (If you want the deeper
 version of that trade-off, see [normalization vs
 denormalization](/essays/normalization-vs-denormalization/); if you want the even more
@@ -167,5 +167,5 @@ as the default and files
 as the exception you justify.
 
 Pick the star by default. Snowflake a dimension only when you can name the specific
-problem it solves. And don't lose an afternoon to the debate — it was only ever one
+problem it solves. And don't lose an afternoon to the debate; it was only ever one
 decision wearing two names.

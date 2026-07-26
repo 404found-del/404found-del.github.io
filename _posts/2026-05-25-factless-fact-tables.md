@@ -2,8 +2,9 @@
 title: "Factless Fact Tables, Explained"
 kicker: "Field Notes"
 topic: "Modeling"
-description: "A factless fact table records that an event happened — or could have — without any numeric measure. Here's why a fact table with no facts is useful, the two types, and when to reach for one."
+description: "A factless fact table records that an event happened, or could have, without any numeric measure. Why a fact table with no facts is useful, and the two types."
 date: 2026-05-25
+last_modified_at: 2026-07-26
 faq:
   - q: "What is a factless fact table?"
     a: "A fact table that records the occurrence of an event but contains no numeric measures — just the foreign keys to the dimensions involved. The 'fact' is that the combination of dimensions happened, which you analyze by counting rows rather than summing a measure."

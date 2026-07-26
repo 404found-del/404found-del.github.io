@@ -5,6 +5,15 @@ topic: "Governance"
 date: 2026-05-19
 last_modified_at: 2026-07-26
 description: "A schema check is the easy 10% of a data contract. The other 90% is an organizational agreement that no YAML file can enforce for you."
+faq:
+  - q: "What is a data contract?"
+    a: "An agreement between the team that produces a dataset and the teams that consume it, covering what fields exist, what they mean, what guarantees hold, and how change will be communicated. The schema file people point to is the encoding of that agreement, not the agreement itself."
+  - q: "Why do data contracts fail?"
+    a: "Because teams adopt the artefact without the agreement. A schema check written by a consumer and imposed on a producer who never consented is a tripwire, not a contract; it fails the consumer's pipeline while the producer keeps shipping. The technology works fine. What is missing is that nobody negotiated."
+  - q: "What is the difference between a data contract and a schema?"
+    a: "A schema describes structure a machine can validate. A contract adds the parts a machine cannot supply: who owns the data, what they have committed to, what notice consumers get before a breaking change, and what happens when the commitment is broken. Every contract contains a schema; a schema on its own commits nobody to anything."
+  - q: "How do you start implementing data contracts?"
+    a: "Start with the relationship, not the tooling. Find the single upstream-downstream pair where breakage costs the most, get both teams together, and write down in plain language what the producer can commit to and what the consumer actually needs. Make the producer a co-author. Only then encode it and wire up a check that fails their pipeline, not just yours."
 ---
 
 The phrase "data contract" makes the hard thing sound easy. It conjures a tidy

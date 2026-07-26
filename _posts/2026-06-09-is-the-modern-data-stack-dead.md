@@ -2,8 +2,18 @@
 title: "Is the Modern Data Stack Dead?"
 kicker: "Reconsidered"
 topic: "Architecture"
-description: "The modern data stack isn't dead — but the era of bolting together a dozen best-of-breed SaaS tools as the default is ending. Here's what's actually happening, and what to keep from it."
+description: "The modern data stack isn't dead, but the era of bolting together a dozen best-of-breed SaaS tools is ending. What's actually happening, and what to keep."
 date: 2026-06-09
+last_modified_at: 2026-07-26
+faq:
+  - q: "Is the modern data stack dead?"
+    a: "Not dead — but the era it named is winding down. The default move of assembling a dozen best-of-breed SaaS tools into a stack is giving way to consolidation, as platforms absorb what used to be separate products. The practices the era established survived; the assembly-required buying pattern is what's fading."
+  - q: "Why is the modern data stack being consolidated?"
+    a: "Because the integration tax turned out to be real and recurring. A dozen vendors means a dozen contracts, security reviews, permission models, billing relationships, and upgrade paths — plus the seams between them, which is where failures live and where nobody is accountable. Platforms absorbing those categories remove the seams."
+  - q: "What replaced the modern data stack?"
+    a: "Nothing replaced it wholesale. The direction is toward fewer, broader platforms built over open storage — open table formats and a governed catalog — so the tools above can consolidate without the data becoming captive to whoever consolidates them. The storage layer is the part everyone has agreed to keep open."
+  - q: "What should teams keep from the modern data stack era?"
+    a: "Its actual contributions, which were practices rather than products: ELT as the default, transformation as version-controlled code, testing and CI applied to data, and analytics engineering as a discipline. Those outlast whichever vendors happen to be assembled around them."
 ---
 
 "Is the modern data stack dead?" has become a popular headline, usually written by

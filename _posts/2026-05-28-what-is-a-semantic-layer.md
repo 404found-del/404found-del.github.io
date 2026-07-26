@@ -2,7 +2,7 @@
 title: "What Is a Semantic Layer, and Why Does Your Data Stack Need One?"
 kicker: "Essay"
 topic: "Architecture"
-description: "A semantic layer is the single, governed place where business metrics are defined once — independent of any dashboard. Here's what it is, what it isn't, and why it fixes the 'three numbers for one metric' problem."
+description: "A semantic layer is the single governed place where business metrics are defined once, independent of any dashboard. What it is, and what it actually fixes."
 date: 2026-05-28
 last_modified_at: 2026-07-26
 faq:

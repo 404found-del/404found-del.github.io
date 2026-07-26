@@ -2,7 +2,7 @@
 title: "Fact Table vs Dimension Table: The Core Distinction"
 kicker: "Field Notes"
 topic: "Modeling"
-description: "A fact table stores the measurements — the numbers you analyze. A dimension table stores the context you analyze them by. Here's the distinction every dimensional model is built on, and how to tell which is which."
+description: "A fact table stores the measurements you analyze; a dimension table stores the context you analyze them by. The distinction every dimensional model rests on."
 date: 2026-05-09
 last_modified_at: 2026-07-26
 faq:
@@ -25,7 +25,7 @@ being obvious.
 ## The fact table: what you measure
 
 A fact table is a long, narrow log of measurements. Each row records something that
-happened — a sale, a shipment, a click — and carries two kinds of column: the numeric
+happened (a sale, a shipment, a click) and carries two kinds of column: the numeric
 **measures** you'll aggregate, and the **foreign keys** that point out to the context.
 
 ```
@@ -35,15 +35,15 @@ sale_id | date_key | customer_key | product_key | quantity | net_amount
  90112  | 20260509 |     4401     |     228     |    3     |   149.97
 ```
 
-`quantity` and `net_amount` are the measures — the numbers anyone will sum, average,
+`quantity` and `net_amount` are the measures: the numbers anyone will sum, average,
 or count. The `_key` columns don't describe anything themselves; they're pointers to
 dimension tables. Fact tables are typically **tall and skinny**: few columns, but
-millions or billions of rows, one per event. They grow forever, and that's correct —
+millions or billions of rows, one per event. They grow forever, and that's correct:
 a fact table is the historical record of what occurred.
 
 ## The dimension table: the context you measure by
 
-A dimension table is the opposite shape — **short and wide**. It holds the descriptive
+A dimension table is the opposite shape: **short and wide**. It holds the descriptive
 attributes you filter and group by, with relatively few rows but many columns.
 
 ```
@@ -55,7 +55,7 @@ product_key | product_name      | category     | brand     | is_active
 
 None of these columns are things you'd *sum*. They're things you'd *slice by*:
 "revenue by `category`," "units by `brand`." The dimension exists to give the bare
-numbers in the fact table their human meaning — to turn `product_key = 228` into "Acme
+numbers in the fact table their human meaning, turning `product_key = 228` into "Acme
 noise-cancelling earbuds in Electronics."
 
 > A fact answers *how much* and *how many*. A dimension answers *who, what, where,
@@ -77,21 +77,52 @@ WHERE d.year = 2026
 GROUP BY p.category;
 ```
 
-The shape of the model matches the shape of the question — measure, sliced by
+The shape of the model matches the shape of the question: measure, sliced by
 context, over a filter. That's the entire ergonomic payoff of dimensional modeling,
 and it falls directly out of putting facts and dimensions in different tables. This
 fact-in-the-middle, dimensions-around-it arrangement is what forms a
 [star schema](/essays/star-schema-vs-snowflake-schema/).
+
+<figure style="margin:2rem auto;text-align:center;">
+<svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="fact-vs-dim-t fact-vs-dim-d">
+  <title id="fact-vs-dim-t">How fact and dimension tables work together</title>
+  <desc id="fact-vs-dim-d">A central fact_sales table holding measures — quantity, amount, discount — and foreign keys, surrounded by four dimension tables: dim_date, dim_customer, dim_product and dim_store, each holding descriptive attributes. The measures are what you aggregate; the dimension attributes are what you filter and group by. Every arrow is one join from a measurement to its context.</desc>
+  <rect x="300" y="128" width="200" height="84" rx="6" fill="#c8472b"/>
+  <text x="400" y="156" font-size="14" fill="#f6f3ec" text-anchor="middle" font-weight="700">fact_sales</text>
+  <text x="400" y="176" font-size="10" fill="#f6f3ec" text-anchor="middle">quantity · amount · discount</text>
+  <text x="400" y="194" font-size="10" fill="#f6f3ec" text-anchor="middle">+ foreign keys</text>
+  <text x="400" y="234" font-size="10" fill="#a4391f" text-anchor="middle">MEASURES — the things you SUM</text>
+  <line x1="300" y1="150" x2="200" y2="92" stroke="#cabfac" stroke-width="2"/>
+  <line x1="500" y1="150" x2="600" y2="92" stroke="#cabfac" stroke-width="2"/>
+  <line x1="300" y1="190" x2="200" y2="248" stroke="#cabfac" stroke-width="2"/>
+  <line x1="500" y1="190" x2="600" y2="248" stroke="#cabfac" stroke-width="2"/>
+  <rect x="110" y="58" width="180" height="52" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
+  <text x="200" y="80" font-size="12" fill="#1c1a17" text-anchor="middle" font-weight="700">dim_date</text>
+  <text x="200" y="98" font-size="9" fill="#56514a" text-anchor="middle">day · month · quarter · holiday</text>
+  <rect x="510" y="58" width="180" height="52" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
+  <text x="600" y="80" font-size="12" fill="#1c1a17" text-anchor="middle" font-weight="700">dim_customer</text>
+  <text x="600" y="98" font-size="9" fill="#56514a" text-anchor="middle">name · segment · region</text>
+  <rect x="110" y="230" width="180" height="52" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
+  <text x="200" y="252" font-size="12" fill="#1c1a17" text-anchor="middle" font-weight="700">dim_product</text>
+  <text x="200" y="270" font-size="9" fill="#56514a" text-anchor="middle">sku · category · brand</text>
+  <rect x="510" y="230" width="180" height="52" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
+  <text x="600" y="252" font-size="12" fill="#1c1a17" text-anchor="middle" font-weight="700">dim_store</text>
+  <text x="600" y="270" font-size="9" fill="#56514a" text-anchor="middle">store · city · country</text>
+  <text x="400" y="30" font-size="11" fill="#8b857a" text-anchor="middle">ATTRIBUTES — the things you FILTER and GROUP BY</text>
+  <text x="400" y="316" font-size="12" fill="#8b857a" text-anchor="middle">would you SUM it? it's a measure. would you GROUP BY it? it's an attribute.</text>
+</svg>
+<figcaption style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:#8b857a;margin-top:0.6rem;">Measurements in the middle, context around the outside — and every question is a measure sliced by an attribute.</figcaption>
+</figure>
 
 ## Telling them apart
 
 When you're modeling a new source and unsure whether a column belongs in a fact or a
 dimension, two quick tests resolve almost every case:
 
-- **Would you aggregate it?** If you'd `SUM`, `AVG`, or `COUNT` it — revenue, quantity,
-  duration, balance — it's a **measure**, and it belongs in a fact table.
-- **Would you filter or group by it?** If you'd put it in a `WHERE` or `GROUP BY` —
-  region, category, status, month, customer name — it's an **attribute**, and it
+- **Would you aggregate it?** If you'd `SUM`, `AVG`, or `COUNT` it (revenue, quantity,
+  duration, balance), it's a **measure**, and it belongs in a fact table.
+- **Would you filter or group by it?** If you'd put it in a `WHERE` or `GROUP BY` (region,
+  category, status, month, customer name), it's an **attribute**, and it
   belongs in a **dimension**.
 
 A reliable secondary tell: measures are usually numeric and additive; dimension
@@ -103,10 +134,10 @@ edge case explicitly, under
 — when a number is genuinely both, the standard answer is to model it in both
 places rather than to pick.
 
-There's nuance underneath — facts come in [several
+There's nuance underneath: facts come in [several
 types](/essays/fact-table-types/), dimensions handle [change over
 time](/essays/slowly-changing-dimensions-explained/) and get [surrogate
-keys](/essays/surrogate-keys-vs-natural-keys/) — but all of that sits on top of this
+keys](/essays/surrogate-keys-vs-natural-keys/), but all of that sits on top of this
 one split. Measurements in facts; context in dimensions. Once that distinction is
 automatic, you can read, design, and reason about almost any dimensional model,
 because every one of them is just a variation on the same two-part idea.

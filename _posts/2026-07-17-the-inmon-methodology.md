@@ -4,6 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "Inmon's method builds one normalized enterprise warehouse first, then serves dimensional marts from it. How the CIF works, a worked example, and where it fits today."
 date: 2026-07-17 09:00:00 +0530
+last_modified_at: 2026-07-26
 faq:
   - q: "What is the Inmon methodology in simple terms?"
     a: "Build the enterprise data warehouse first, as a normalized (3NF) integration of all source systems — the single version of the truth — and only then derive department-facing data marts from it, usually as star schemas. Top-down: integrate once, serve many. Kimball inverts this, building dimensional marts first."
@@ -62,6 +63,7 @@ don't. Here it is, with an example.
   <text x="400" y="280" font-size="12" fill="#8b857a" text-anchor="middle">the CIF: integrate everything into a normalized EDW first; marts are derived, dependent views</text>
   <text x="400" y="302" font-size="12" fill="#8b857a" text-anchor="middle">★ = dimensional star schemas — Inmon and Kimball agree on the serving layer's shape</text>
 </svg>
+<figcaption style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:#8b857a;margin-top:0.6rem;">The Corporate Information Factory: integrate everything into a normalized EDW first; marts are derived, dependent views.</figcaption>
 </figure>
 
 Four properties define the EDW at the centre, in Inmon's own terms: it is

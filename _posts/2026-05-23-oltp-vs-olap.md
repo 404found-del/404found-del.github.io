@@ -2,9 +2,9 @@
 title: "OLTP vs OLAP: Why You Shouldn't Run Analytics on Your App Database"
 kicker: "Field Notes"
 topic: "Architecture"
-description: "OLTP systems handle many small transactions fast. OLAP systems scan huge volumes for analysis. They're optimized for opposite things — which is why querying your production database for analytics is a trap."
+description: "OLTP handles many small transactions fast; OLAP scans huge volumes for analysis. Opposite optimizations, which is why analytics on production is a trap."
 date: 2026-05-23
-last_modified_at: 2026-07-18
+last_modified_at: 2026-07-26
 faq:
   - q: "What is the difference between OLTP and OLAP?"
     a: "OLTP (online transaction processing) runs the business: many small, concurrent reads and writes of individual records, on normalized schemas built for integrity. OLAP (online analytical processing) analyses the business: few large queries scanning millions of rows, on denormalized models built for reads. The two shapes conflict in one engine."

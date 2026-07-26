@@ -2,7 +2,7 @@
 title: "Data Warehouse vs Data Lake vs Lakehouse: A Clear Comparison"
 kicker: "Field Notes"
 topic: "Architecture"
-description: "A data warehouse stores structured, modeled data. A data lake stores raw data of any shape, cheaply. A lakehouse tries to be both. Here's a side-by-side comparison, a diagram, and how to choose."
+description: "A data warehouse stores structured, modeled data. A data lake stores raw data cheaply. A lakehouse tries to be both. A side-by-side, and how to choose."
 date: 2026-05-30
 last_modified_at: 2026-07-26
 faq:
@@ -20,7 +20,7 @@ Three terms get used almost interchangeably and mean genuinely different things.
 one sentence: a **data warehouse** stores structured, modeled data for analytics; a
 **data lake** stores raw data of any shape, cheaply; and a **lakehouse** adds a table
 layer over cheap lake storage to get warehouse-like reliability on lake economics.
-They make opposite bets about structure, cost, and trust — here's the comparison, a
+They make opposite bets about structure, cost, and trust. Here's the comparison, a
 diagram, and how to choose.
 
 ## At a glance
@@ -90,43 +90,43 @@ diagram, and how to choose.
 ## Data warehouse: structure first
 
 A data warehouse stores **structured, modeled data**, cleaned and fitted to a schema
-*before* it lands — an approach called schema-on-write. This is the world of
+*before* it lands, an approach called schema-on-write. This is the world of
 [dimensional models](/essays/a-field-guide-to-dimensional-modeling/) and
 [star schemas](/essays/star-schema-vs-snowflake-schema/). Its value is **trust and
 speed for analytics**: because everything is modeled and typed up front, queries are
 fast, results are consistent, and a BI tool gets reliable answers without thinking
-about plumbing. The costs are upfront modeling effort, rigidity afterward, and — for
-traditional designs — expensive coupled storage and compute that suit structured data
+about plumbing. The costs are upfront modeling effort, rigidity afterward, and, in
+traditional designs, expensive coupled storage and compute that suit structured data
 far better than huge volumes of raw logs, text, or images.
 
 ## Data lake: flexibility first
 
-A data lake makes the opposite bet: store **raw data of any shape** — structured,
-semi-structured, unstructured — as files in cheap object storage, with structure
+A data lake makes the opposite bet: store **raw data of any shape** (structured,
+semi-structured, unstructured) as files in cheap object storage, with structure
 applied later, on read. This buys **cost** (object storage is cheap, so you keep
 enormous volumes affordably) and **flexibility** (dump data in now, decide what to do
 with it later), which suits data science and ML. But with no enforced schema, no
 guaranteed quality, and often no clear ownership, a lake can rot into a **data
-swamp** — a vast pile of files nobody trusts. It also lacks transactional guarantees,
+swamp**: a vast pile of files nobody trusts. It also lacks transactional guarantees,
 which makes reliable, concurrent analytics hard.
 
 ## Lakehouse: both
 
-The lakehouse keeps your data in cheap object storage as files — the lake part — but
+The lakehouse keeps your data in cheap object storage as files, the lake part, but
 adds a **metadata and table layer** on top that brings the structure and guarantees a
-warehouse has. That layer is delivered by **[open table formats](/essays/what-is-an-open-table-format/)** — [Apache Iceberg](/glossary/apache-iceberg/),
-[Delta Lake](/glossary/delta-lake/), Apache Hudi — which provide what raw lakes lacked: ACID transactions,
+warehouse has. That layer is delivered by **[open table formats](/essays/what-is-an-open-table-format/)**: [Apache Iceberg](/glossary/apache-iceberg/),
+[Delta Lake](/glossary/delta-lake/), Apache Hudi, which provide what raw lakes lacked: ACID transactions,
 schema enforcement and evolution, and time travel. The result is one system that runs
 both flexible ML-style workloads *and* reliable structured BI, without maintaining a
 separate lake and warehouse with a brittle pipeline copying between them. The
-trade-off is **maturity and complexity** — a younger stack with more moving parts than
+trade-off is **maturity and complexity**, a younger stack with more moving parts than
 a turnkey warehouse.
 
 The argument was made formally before it was made in marketing: the 2021 CIDR
 paper
 [*Lakehouse: A New Generation of Open Platforms*](https://www.cidrdb.org/cidr2021/papers/cidr2021_paper17.pdf)
-sets out the case — open direct-access formats, first-class ML support, and
-warehouse-competitive TPC-DS performance — and is worth reading precisely
+sets out the case for open direct-access formats, first-class ML support, and
+warehouse-competitive TPC-DS performance, and is worth reading precisely
 because it is an interested party arguing in public, with numbers you can
 challenge.
 
@@ -135,26 +135,26 @@ challenge.
 - **Choose a warehouse** when your work is overwhelmingly structured analytics and BI,
   you value simplicity and reliability over flexibility, and volumes are manageable.
   For a team that mostly builds dashboards, a warehouse is still the simplest, most
-  dependable answer — don't over-engineer past it.
+  dependable answer. Don't over-engineer past it.
 - **Choose a lake** when you have large volumes of raw, varied, or unstructured data,
   heavy ML needs, and the discipline to stop it becoming a swamp. Rarely the whole
   answer on its own anymore.
-- **Choose a lakehouse** when you genuinely need both — structured BI *and* raw/ML on
-  the same large datasets — and want to avoid running two systems with a sync pipeline
+- **Choose a lakehouse** when you genuinely need both structured BI *and* raw/ML on
+  the same large datasets, and want to avoid running two systems with a sync pipeline
   between them. This is where many teams are converging.
 
-If your decision is specifically between the lake and the lakehouse — the most common
-modern version of this question — that finer comparison has [its own
+If your decision is specifically between the lake and the lakehouse, the most common
+modern version of this question, that finer comparison has [its own
 deep-dive](/essays/data-lake-vs-lakehouse/).
 
 ## The part none of them solve
 
-Whichever you pick, it answers *where data is stored and how it's structured* — a
+Whichever you pick, it answers *where data is stored and how it's structured*, a
 physical question. None of the three tells you what your data *means*: which
 definition of "revenue" is canonical, who owns the customer table, how "active user"
 is defined. That's the job of a [semantic layer](/essays/what-is-a-semantic-layer/),
 which sits above all three. Teams often expect a shiny new lakehouse to fix their
 consistency problems and are surprised when the same three-different-numbers arguments
-continue — because storage was never what caused them. Choose the right store for your
+continue, because storage was never what caused them. Choose the right store for your
 workload; then govern the meaning on top of it. They're different problems, and you
 need answers to both.

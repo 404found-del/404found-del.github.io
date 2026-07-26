@@ -58,6 +58,7 @@ read-heavy: written by a few pipelines, queried by everyone.
   <text x="630" y="280" font-size="13" fill="#1c1a17" text-anchor="middle">dim_store</text>
   <text x="400" y="326" font-size="12" fill="#8b857a" text-anchor="middle">one hop from fact to any context — every query is the same simple join shape</text>
 </svg>
+<figcaption style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:#8b857a;margin-top:0.6rem;">One hop from fact to any context, which is why every query against a star is the same simple join shape.</figcaption>
 </figure>
 
 The fact table is long and narrow: one row per measurement event at a

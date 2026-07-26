@@ -57,6 +57,7 @@ read from arbitrary points and every incident becomes archaeology.
   <text x="650" y="144" font-size="12" fill="#f6f3ec" text-anchor="middle">consumer-facing</text>
   <text x="400" y="200" font-size="12" fill="#8b857a" text-anchor="middle">trust and refinement increase left to right; consumers read only gold</text>
 </svg>
+<figcaption style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:#8b857a;margin-top:0.6rem;">Trust and refinement increase left to right — and consumers read only gold.</figcaption>
 </figure>
 
 Bronze stores data exactly as ingested, append-only, so any downstream table can

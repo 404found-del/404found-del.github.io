@@ -2,8 +2,9 @@
 title: "Slowly Changing Dimensions, Explained Without the Jargon"
 kicker: "Field Notes"
 topic: "Modeling"
-description: "Slowly changing dimensions answer one question: when a dimension attribute changes, do you overwrite history or preserve it? Here are SCD Types 1, 2, and 3, and exactly when to use each."
+description: "Slowly changing dimensions answer one question: when an attribute changes, do you overwrite history or preserve it? SCD Types 1, 2, and 3, and when to use each."
 date: 2026-05-31
+last_modified_at: 2026-07-26
 faq:
   - q: "What is the difference between SCD Type 1 and Type 2?"
     a: "Type 1 overwrites the old value in place, keeping no history. Type 2 expires the old row and inserts a new versioned row with validity dates, preserving full history so facts can join to the version that was true when they happened."

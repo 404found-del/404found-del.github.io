@@ -58,6 +58,7 @@ problems — it *is* the ground truth of what changed.
   <text x="720" y="126" font-size="11" fill="#56514a" text-anchor="middle">lakehouse table</text>
   <text x="400" y="196" font-size="12" fill="#8b857a" text-anchor="middle">the log is ground truth: every change, in order, including deletes</text>
 </svg>
+<figcaption style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:#8b857a;margin-top:0.6rem;">The transaction log is ground truth: every change, in order, including the deletes a polling query would miss.</figcaption>
 </figure>
 
 A log reader emits each change as an ordered event into a durable stream; a sink

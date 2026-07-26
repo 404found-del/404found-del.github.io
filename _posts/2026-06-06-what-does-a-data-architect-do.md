@@ -2,9 +2,18 @@
 title: "What Does a Data Architect Actually Do?"
 kicker: "Essay"
 topic: "Craft"
-description: "A data architect's job isn't drawing diagrams or picking tools. It's making the deliberate decisions about how data is shaped, defined, owned, and trusted — and defending them against entropy."
+description: "A data architect's job isn't drawing diagrams or picking tools. It's deciding how data is shaped, defined, owned, and trusted, then defending those decisions."
 date: 2026-06-06
-last_modified_at: 2026-07-05
+last_modified_at: 2026-07-26
+faq:
+  - q: "What does a data architect actually do?"
+    a: "Makes a long sequence of deliberate decisions about how an organization's data is shaped, defined, owned, and trusted — what the grain of a table is, what a term means, who is accountable for a dataset, what a contract commits to — and then defends those decisions against the entropy of everyday delivery pressure."
+  - q: "Is a data architect the same as a data engineer?"
+    a: "No. A data engineer builds and operates the pipelines and platforms. A data architect decides what should be built and why, and holds the line on structure and meaning across teams. The roles overlap heavily in small organisations, where one person often does both, and separate as the number of teams grows."
+  - q: "What skills does a data architect need?"
+    a: "Deep technical judgement is the entry ticket, not the differentiator. The work is mostly persuasion and refusal: getting teams who disagree to converge on one definition, and declining structural shortcuts that would be cheaper this sprint and expensive for years. Most of the decisions are made in conversations, not in tools."
+  - q: "Do data architects just draw diagrams?"
+    a: "The diagram is the residue of the work, not the work. Boxes and arrows record decisions that were already made and agreed; producing them is often the quickest part. An architect who is mainly producing diagrams is usually documenting an architecture that nobody has actually decided."
 ---
 
 Ask ten people what a data architect does and you'll get two common answers, both

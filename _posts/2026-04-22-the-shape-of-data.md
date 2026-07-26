@@ -3,7 +3,17 @@ title: "The Shape of Data"
 kicker: "Manifesto"
 topic: "Architecture"
 date: 2026-04-22
+last_modified_at: 2026-07-26
 description: "Every dataset has a shape. The only question is whether you chose it, or whether it happened to you."
+faq:
+  - q: "What is meant by the shape of data?"
+    a: "The set of structural decisions a dataset embodies: which columns it carries, what grain each row is recorded at, which relationships it permits and forbids, and what its fields are called across teams. Every dataset has a shape. The only question is whether someone chose it deliberately or whether it accreted through a series of small, unreviewed decisions."
+  - q: "Why does data structure matter more than tooling?"
+    a: "Because structure is what every downstream tool inherits. A warehouse, a dashboard, and a language model all read whatever shape the data already has; none of them can recover a grain that was never declared or a definition that was never agreed. Tools change every few years, and the structural decisions underneath them outlive several generations of tooling."
+  - q: "What is accidental data structure?"
+    a: "Structure that nobody decided on. A column added in a hurry to ship a feature, a status field that grew a seventh undocumented value, two teams independently defining the same entity. Nothing about it was wrong at the time, and the accumulated result is a schema whose logic no living person can reconstruct."
+  - q: "How do you fix a dataset with accidental shape?"
+    a: "Not by refactoring the tables first. Start by making the implicit decisions explicit: declare the grain, name the owner, write down what each contested field actually means, and get the disagreeing teams to agree in words before anything is encoded. The structural change is the easy part; it's the agreement that was missing."
 ---
 
 Every dataset has a shape. The columns it carries, the grain it's recorded at, the

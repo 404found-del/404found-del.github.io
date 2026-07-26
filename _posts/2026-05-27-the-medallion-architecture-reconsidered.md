@@ -3,8 +3,17 @@ title: "The Medallion Architecture, Reconsidered"
 kicker: "Reconsidered"
 topic: "Architecture"
 date: 2026-05-27
-last_modified_at: 2026-07-05
+last_modified_at: 2026-07-26
 description: "Bronze, silver, gold is a useful default and a dangerous dogma. A second look at what the layers get right, and where they quietly fall apart."
+faq:
+  - q: "What is the medallion architecture?"
+    a: "A layered way of organising a lakehouse into bronze, silver, and gold: bronze holds raw, immutable, replayable source data; silver holds cleaned, conformed, deduplicated data; gold holds modelled, aggregated, consumer-facing tables. Trust and refinement increase across the layers, and consumers are expected to read only gold."
+  - q: "What are the drawbacks of the medallion architecture?"
+    a: "Three recur. The layer names describe refinement but not the modelling decisions that actually matter, so teams ship a gold layer with no declared grain. The metaphor implies exactly three layers regardless of the domain. And silver becomes a dumping ground for whatever doesn't obviously belong in bronze or gold, which is where most medallion implementations quietly rot."
+  - q: "Is the medallion architecture still a good default?"
+    a: "As a communication device, yes: it gives a sprawling lakehouse a shared sense of direction and it is genuinely memorable. As a design method, no. It tells you nothing about grain, conformed dimensions, or ownership, and a bronze-silver-gold diagram is often used as evidence that modelling has happened when it hasn't."
+  - q: "What is the alternative to bronze, silver, and gold?"
+    a: "Not a different set of names. Keep the layering, drop the belief that naming the layers is the design work. Declare the grain of every table in the serving layer, conform the dimensions that cross domains, and name an owner per layer. The medallion vocabulary then describes an architecture that already exists, rather than substituting for one."
 ---
 
 The medallion architecture — bronze, silver, gold — has become the default mental

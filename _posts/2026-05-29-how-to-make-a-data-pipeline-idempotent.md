@@ -2,9 +2,9 @@
 title: "How to Make a Data Pipeline Idempotent"
 kicker: "Field Notes"
 topic: "Engineering"
-description: "An idempotent data pipeline produces the same result whether it runs once or five times. Here are the concrete patterns — partition overwrite, merge on keys, delete-insert — that make retries and backfills safe."
+description: "An idempotent pipeline gives the same result whether it runs once or five times. The concrete patterns: partition overwrite, merge on keys, delete-insert."
 date: 2026-05-29
-last_modified_at: 2026-07-18
+last_modified_at: 2026-07-26
 faq:
   - q: "What does idempotent mean for a data pipeline?"
     a: "Running it once or five times over the same input produces the same correct end state. Rerunning yesterday's load doesn't duplicate yesterday's rows; replaying a failed week converges to the same tables as an incident-free week. It's the property that makes retries and backfills safe."

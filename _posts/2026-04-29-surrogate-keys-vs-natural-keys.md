@@ -2,9 +2,9 @@
 title: "Surrogate Keys vs Natural Keys: A Practical Rule"
 kicker: "Field Notes"
 topic: "Modeling"
-description: "Surrogate key vs natural key is a decision every data model faces. The practical rule: use surrogate keys for dimensions, keep the natural key as an attribute, and here's exactly why."
+description: "Surrogate key vs natural key is a decision every data model faces. The practical rule: surrogate keys for dimensions, natural key kept as an attribute."
 date: 2026-04-29
-last_modified_at: 2026-07-18
+last_modified_at: 2026-07-26
 faq:
   - q: "What is the difference between a surrogate key and a natural key?"
     a: "A natural key comes from the business itself — an email, SKU, or account number. A surrogate key is a meaningless, system-generated identifier the warehouse assigns. The practical rule: use surrogates as dimension primary keys, and keep the natural key as an ordinary attribute for matching back to source systems."

@@ -2,8 +2,9 @@
 title: "What Are Conformed Dimensions, and Why Do They Matter?"
 kicker: "Field Notes"
 topic: "Modeling"
-description: "A conformed dimension is a single dimension shared identically across multiple fact tables, so different business processes can be compared on the same terms. Here's why they're the key to a coherent warehouse."
+description: "A conformed dimension is one dimension shared identically across several fact tables, so different business processes can be compared on the same terms."
 date: 2026-05-21
+last_modified_at: 2026-07-26
 faq:
   - q: "What is a conformed dimension?"
     a: "A conformed dimension is a dimension table used identically across multiple fact tables or data marts — the same keys, same attributes, same meaning. Because every process references the same customer or date dimension, you can compare and combine metrics from different processes consistently."

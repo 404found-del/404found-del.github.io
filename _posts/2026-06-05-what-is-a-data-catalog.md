@@ -2,7 +2,7 @@
 title: "What Is a Data Catalog, and Do You Need One?"
 kicker: "Field Notes"
 topic: "Governance"
-description: "A data catalog is a searchable inventory of an organization's data — what exists, where it lives, what it means, and who owns it. Here's what it's for, what it isn't, and when you actually need one."
+description: "A data catalog is a searchable inventory of your data: what exists, where it lives, what it means, who owns it. What it's for, and when you actually need one."
 date: 2026-06-05
 last_modified_at: 2026-07-26
 faq:
@@ -18,7 +18,7 @@ A data catalog is, at its simplest, a searchable inventory of an organization's
 data: a single place that answers *what data do we have, where does it live, what
 does it mean, and who owns it?* As a company's data sprawls across hundreds or
 thousands of tables, that question stops being answerable from memory, and the
-catalog is the tool that answers it. Useful idea — and, like most governance tools,
+catalog is the tool that answers it. Useful idea, and, like most governance tools,
 one that's oversold in ways worth pulling apart before you buy.
 
 ## What a catalog actually holds
@@ -36,6 +36,28 @@ three weeks reconstructing, by archaeology, what every table means can instead s
 the catalog, read the description, see the owner, and get to work. The catalog is the
 institutional memory that a sprawling data estate otherwise loses.
 
+<figure style="margin:2rem auto;text-align:center;">
+<svg viewBox="0 0 800 330" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="data-catalog-t data-catalog-d">
+  <title id="data-catalog-t">What a data catalog holds, and what rots</title>
+  <desc id="data-catalog-d">Three bands of metadata in a catalog. Technical metadata — schema, types, size, last updated — is harvested automatically and stays current on its own. Operational metadata such as usage, freshness and lineage is also machine-extractable. Business metadata — descriptions, meaning, ownership — is the valuable band and the only one humans must maintain, which is why it is filled in once during rollout and then rots.</desc>
+  <rect x="140" y="30" width="520" height="62" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
+  <text x="400" y="56" font-size="12" fill="#1c1a17" text-anchor="middle" font-weight="700">technical metadata</text>
+  <text x="400" y="78" font-size="10" fill="#56514a" text-anchor="middle">schema · types · size · last updated</text>
+  <text x="700" y="66" font-size="9" fill="#8b857a">auto ✓</text>
+  <rect x="140" y="104" width="520" height="62" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
+  <text x="400" y="130" font-size="12" fill="#1c1a17" text-anchor="middle" font-weight="700">operational metadata</text>
+  <text x="400" y="152" font-size="10" fill="#56514a" text-anchor="middle">usage · freshness · lineage</text>
+  <text x="700" y="140" font-size="9" fill="#8b857a">auto ✓</text>
+  <rect x="140" y="178" width="520" height="62" rx="6" fill="#c8472b"/>
+  <text x="400" y="204" font-size="12" fill="#f6f3ec" text-anchor="middle" font-weight="700">business metadata</text>
+  <text x="400" y="226" font-size="10" fill="#f6f3ec" text-anchor="middle">descriptions · meaning · ownership</text>
+  <text x="686" y="214" font-size="9" fill="#a4391f">humans</text>
+  <text x="400" y="272" font-size="12" fill="#8b857a" text-anchor="middle">the top two bands stay current by themselves; the bottom one is the reason people</text>
+  <text x="400" y="294" font-size="12" fill="#8b857a" text-anchor="middle">bought the catalog — and the only one that needs a named, ongoing owner</text>
+</svg>
+<figcaption style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:#8b857a;margin-top:0.6rem;">The machine-maintained bands stay current on their own. The valuable band is the one that rots.</figcaption>
+</figure>
+
 ## What it is *not*
 
 Two confusions cause most disappointed catalog rollouts.
@@ -48,7 +70,7 @@ A catalog full of beautiful descriptions of three conflicting `revenue` columns 
 documented your inconsistency, not resolved it.
 
 > A catalog tells you what data exists and what it's supposed to mean. It does not
-> make the data correct, consistent, or trustworthy — it describes the estate, it
+> make the data correct, consistent, or trustworthy; it describes the estate, it
 > doesn't govern it.
 
 **It is not a quality tool.** The catalog can display a freshness or quality score,
@@ -59,12 +81,12 @@ catalog projects.
 
 A catalog is only as good as the metadata in it, and metadata rots. The classic
 project buys a catalog, runs a crawler to auto-populate technical schema, and then
-asks humans to fill in the descriptions and ownership — the *valuable* part. Those
+asks humans to fill in the descriptions and ownership, the *valuable* part. Those
 fields are filled in once, during the rollout, and never again. Six months later the
 catalog is a confident, comprehensive, and badly out-of-date map: descriptions for
 columns that changed, owners who left, terms nobody uses anymore.
 
-This is, underneath, the same thing that sinks data quality programs — [an org-chart
+This is, underneath, the same thing that sinks data quality programs, [an org-chart
 problem](/essays/data-quality-problems-are-org-chart-problems/) wearing a tooling
 costume. A catalog with no one accountable for keeping entries current is a
 documentation graveyard, exactly as unowned datasets become orphaned tables. The tool
@@ -82,8 +104,8 @@ memory.** Concretely —
 - **Compliance.** You must demonstrate what sensitive data you hold and where it flows
   — a catalog with lineage is often the system of record for that.
 
-Below that threshold — a focused team with a few dozen well-named tables in one
-warehouse — a catalog is machinery without a mission. A tidy schema, consistent
+Below that threshold (a focused team with a few dozen well-named tables in one
+warehouse) a catalog is machinery without a mission. A tidy schema, consistent
 naming, and a maintained README in the repo *are* your catalog, and they won't rot
 the way an under-loved tool will.
 
@@ -91,11 +113,11 @@ the way an under-loved tool will.
 
 The sequencing matters more than the tool choice, and it has its own field note:
 [how to build a data catalog](/essays/how-to-build-a-data-catalog/) walks the
-order that works — automate first, assign ownership second, buy last.
+order that works: automate first, assign ownership second, buy last.
 Make it work by attacking the failure mode directly. **Auto-populate everything that
-can be** — schema, lineage, usage stats, freshness — straight from your systems, so the
+can be** (schema, lineage, usage stats, freshness) straight from your systems, so the
 machine-maintainable metadata stays current on its own. Then make the human
-metadata — descriptions, ownership — *someone's explicit, ongoing job*, ideally tied to
+metadata, descriptions and ownership, *someone's explicit, ongoing job*, ideally tied to
 the same [ownership and contracts](/essays/data-contracts-are-a-cultural-problem/) that
 make the underlying data trustworthy in the first place. A catalog isn't a substitute
 for governance; it's a place to *see* the governance you've already done. Get the
@@ -108,4 +130,4 @@ vendor's account of it. [OpenLineage](https://openlineage.io/docs/) defines the
 event model that pipelines emit, and the open-source
 [DataHub](https://docs.datahub.com/) and
 [OpenMetadata](https://docs.open-metadata.org/) projects publish their metadata
-models in full — useful as an evaluation yardstick even if you end up buying.
+models in full, useful as an evaluation yardstick even if you end up buying.

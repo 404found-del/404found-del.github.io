@@ -2,8 +2,9 @@
 title: "The Date Dimension: How to Build One and Why You Need It"
 kicker: "Field Notes"
 topic: "Modeling"
-description: "A date dimension is a table with one row per calendar day, pre-loaded with every attribute of that day. Here's why every warehouse needs one, what columns to include, and how to build it."
+description: "A date dimension is a table with one row per calendar day, pre-loaded with every attribute of that day. Why every warehouse needs one, and how to build it."
 date: 2026-05-15
+last_modified_at: 2026-07-26
 faq:
   - q: "What is a date dimension?"
     a: "A date dimension is a dedicated table with one row per calendar day, where each row stores precomputed attributes of that day — year, quarter, month name, day of week, weekend flag, fiscal period, holiday flag, and so on. Fact tables join to it by a date key so reports can group and filter by any calendar attribute without computing it on the fly."

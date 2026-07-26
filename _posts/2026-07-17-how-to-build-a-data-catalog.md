@@ -4,6 +4,7 @@ kicker: "Field Notes"
 topic: "Governance"
 description: "A tool-neutral guide to building a data catalog: start from query logs, document the fifty tables that matter, assign owners, automate the rest — in that order."
 date: 2026-07-17 10:30:00 +0530
+last_modified_at: 2026-07-26
 faq:
   - q: "How do I start building a data catalog?"
     a: "Not with a tool. Mine your warehouse query logs for the fifty most-queried tables, write honest descriptions and assign a named owner for each, and publish that anywhere searchable — even a wiki page. That's a working catalog covering the majority of real usage, built in about two weeks, and it tells you exactly what to automate next."
@@ -108,6 +109,7 @@ production without an owner and description, ideally enforced the same way
   <text x="712" y="110" font-size="10" fill="#f6f3ec" text-anchor="middle">curator + change hooks</text>
   <text x="400" y="200" font-size="12" fill="#8b857a" text-anchor="middle">the order is the method: humans and trust first, tooling second — reverse it and you build the empty shelf</text>
 </svg>
+<figcaption style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:#8b857a;margin-top:0.6rem;">The order is the method: find the tables people actually use, assign trust, and only then buy tooling.</figcaption>
 </figure>
 
 ## The honest summary

@@ -62,6 +62,7 @@ built on top).
   <line x1="655" y1="180" x2="655" y2="220" stroke="#ddd6c8" stroke-width="2"/>
   <text x="400" y="60" font-size="12" fill="#8b857a" text-anchor="middle">hubs = keys · links = relationships · satellites = descriptive history</text>
 </svg>
+<figcaption style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:#8b857a;margin-top:0.6rem;">Hubs hold keys, links hold relationships, satellites hold descriptive history — so sources can change shape without breaking the model.</figcaption>
 </figure>
 
 New sources or attributes mean *adding* tables — a new satellite, a new link —

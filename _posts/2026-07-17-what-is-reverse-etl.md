@@ -4,6 +4,7 @@ kicker: "Field Notes"
 topic: "Engineering"
 description: "Reverse ETL syncs modelled warehouse data back into CRMs, ad platforms, and support tools — so business teams act on it where they work. How it works, and its risks."
 date: 2026-07-17 12:00:00 +0530
+last_modified_at: 2026-07-26
 faq:
   - q: "What is reverse ETL in simple terms?"
     a: "Pipelines that move data out of the warehouse and into the operational tools where business teams work — customer segments into the CRM, churn scores into the support desk, audiences into ad platforms. Every other pipeline feeds the warehouse; reverse ETL makes the warehouse feed everything else."
@@ -87,6 +88,7 @@ ship the governed "churn risk," not a copy-paste variant of it.
   <line x1="610" y1="190" x2="530" y2="160" stroke="#ddd6c8" stroke-width="1.5"/>
   <text x="400" y="240" font-size="12" fill="#8b857a" text-anchor="middle">everything else flows in; reverse ETL is the one pipeline that flows out — carrying your best data to where it acts</text>
 </svg>
+<figcaption style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:#8b857a;margin-top:0.6rem;">Everything else flows into the warehouse; reverse ETL is the one pipeline that flows out.</figcaption>
 </figure>
 
 ## The part the category name hides
