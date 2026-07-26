@@ -50,10 +50,10 @@ table.** Everything else follows from that.
 Parquet is a **columnar file format**: instead of storing row 1, then row 2, it
 stores all of column A, then all of column B. That single decision is why it's the
 backbone of analytics — a query that needs two columns out of fifty reads only
-those two, and columns of like values compress far better than mixed rows. A
-Parquet file is typically 5–10× smaller than the equivalent CSV and dramatically
-faster to scan for the columnar, aggregate-heavy queries of an
-[OLAP](/glossary/olap/) workload.
+those two, and columns of like values compress far better than mixed rows. On a
+[benchmark run for this site](/essays/parquet-vs-orc-vs-avro-benchmark/), that
+came to 6.1× smaller than the equivalent CSV and a filtered aggregation 13.8×
+faster — the shape of every [OLAP](/glossary/olap/) query there is.
 
 But a Parquet file knows nothing beyond itself. It cannot tell you which *other*
 files belong to the same table, whether a write finished, or what the data looked

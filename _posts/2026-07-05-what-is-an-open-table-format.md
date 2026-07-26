@@ -25,7 +25,9 @@ version of the table, exactly which data files belong to it and under what schem
 and BigQuery can all read and write the *same* table without a proprietary gatekeeper. (If you're unsure how a
 table format differs from the Parquet files underneath it, start with
 [Iceberg vs Parquet](/essays/apache-iceberg-vs-parquet/); for the file layer
-itself, [Parquet vs ORC vs Avro](/essays/parquet-vs-orc-vs-avro/).)
+itself, [Parquet vs ORC vs Avro](/essays/parquet-vs-orc-vs-avro/), and for the
+measured version of that comparison,
+[the benchmark](/essays/parquet-vs-orc-vs-avro-benchmark/).)
 The three names that matter are **[Apache Iceberg](/glossary/apache-iceberg/)**, **[Delta Lake](/glossary/delta-lake/)**, and **Apache
 Hudi** — and as of 2026, the industry has largely converged on Iceberg as the neutral
 standard.

@@ -1,0 +1,90 @@
+{
+  "config": {
+    "rows": 3000000,
+    "avro_rows": 300000,
+    "trials": 1,
+    "seed": 20260726,
+    "pyarrow": "25.0.0",
+    "python": "3.10.12",
+    "columns": 11,
+    "in_memory_mb": 322.0,
+    "trials_note": "3 trials for parquet snappy/zstd and orc; 2 for csv and parquet/gzip reads; 1 for avro and parquet/gzip write. Medians reported.",
+    "hardware": "Intel Core i5-10210U @1.60GHz, 2 vCPU, 3 GB RAM, Linux, warm page cache"
+  },
+  "size_mb": {
+    "parquet/snappy": 72.30984783172607,
+    "parquet/zstd": 56.55327606201172,
+    "orc/zlib": 68.12076568603516,
+    "orc/snappy": 96.18952465057373,
+    "csv/none": 342.56400775909424,
+    "csv/gzip": 92.12284851074219
+  },
+  "write_s": {
+    "parquet/snappy": 1.3489882000012585,
+    "parquet/zstd": 1.3243544999986625,
+    "orc/zlib": 4.672976900001231,
+    "orc/snappy": 1.8411192000003211,
+    "csv/none": 1.8037567999999737,
+    "csv/gzip": 13.404835500001354
+  },
+  "read_full_s": {
+    "parquet/snappy": 0.41984950000005483,
+    "parquet/zstd": 0.3767716999991535,
+    "orc/zlib": 1.2893346000000747,
+    "orc/snappy": 0.6762694000008196,
+    "csv/none": 1.3976420499993765
+  },
+  "read_2col_s": {
+    "parquet/snappy": 0.05517339999823889,
+    "parquet/zstd": 0.054376699999920675,
+    "orc/zlib": 0.26170749999982945,
+    "orc/snappy": 0.10928450000028533,
+    "csv/none": 0.49909554999885586
+  },
+  "duckdb_agg_s": {
+    "parquet/zstd": 0.06376049999926181,
+    "csv/none": 0.8788068999983807
+  },
+  "avro_subset": {
+    "rows": 300000,
+    "size_mb": {
+      "null": 24.208152770996094,
+      "parquet/zstd (same subset)": 6.4675703048706055,
+      "orc/zlib (same subset)": 6.8104963302612305,
+      "deflate": 10.553257942199707,
+      "snappy": 13.703038215637207
+    },
+    "write_s": {
+      "null": 3.907387400000516,
+      "deflate": 4.9490420000001905,
+      "snappy": 3.81017840000095
+    },
+    "read_full_s": {
+      "null": 1.2305280000000494,
+      "deflate": 1.3533511999994516,
+      "snappy": 1.3065833000000566
+    },
+    "read_2col_s": {
+      "null": 1.2753205000008165,
+      "deflate": 1.414569599999595,
+      "snappy": 1.4266485000007378
+    }
+  },
+  "matched_codec_1m_rows": {
+    "rows": 1000000,
+    "size_mb": {
+      "parquet/snappy": 24.292988777160645,
+      "parquet/zstd": 19.282214164733887,
+      "orc/snappy": 32.89957809448242,
+      "orc/zlib": 23.125226974487305,
+      "parquet/gzip": 17.83131217956543
+    },
+    "write_s": {
+      "parquet/snappy": 0.43831649999992806,
+      "parquet/zstd": 0.5418391999992309,
+      "orc/snappy": 0.6115812999996706,
+      "orc/zlib": 1.3181801000009727,
+      "parquet/gzip": 16.00091000000066
+    }
+  }
+}

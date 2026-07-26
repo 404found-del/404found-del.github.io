@@ -4,11 +4,12 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "Parquet and ORC are columnar formats for analytics; Avro is row-based for streaming and schema evolution. A clear comparison and a decision rule that holds."
 date: 2026-07-23 11:00:00 +0530
+last_modified_at: 2026-07-26
 faq:
   - q: "What is the difference between Parquet, ORC, and Avro?"
     a: "Parquet and ORC are columnar formats — they store all of one column together, which makes analytical queries that read a few columns fast and highly compressible. Avro is row-based — it stores whole records together, which makes it fast to write and ideal for streaming and data exchange. Columnar wins for reads and analytics; row-based wins for writes, streaming, and schema evolution."
   - q: "Which is better, Parquet or ORC?"
-    a: "Both are columnar and both are excellent; the difference is ecosystem more than capability. Parquet is the de facto default across Spark, the cloud warehouses, and most of the modern data stack, and it's what open table formats reach for. ORC often achieves slightly higher compression and has deep roots in the Hive/Hadoop world, including ACID support there. For a new lakehouse, Parquet is the safe default; ORC pays off mainly where a Hive-centric stack or its compression edge specifically matters."
+    a: "Both are columnar and both are excellent; the difference is ecosystem more than capability. Parquet is the de facto default across Spark, the cloud warehouses, and most of the modern data stack, and it's what open table formats reach for. ORC has deep roots in the Hive/Hadoop world, including ACID support there. ORC is often said to compress better, but a benchmark on this site found Parquet 23-26% smaller at matched codecs, so treat that claim as something to measure rather than assume. For a new lakehouse, Parquet is the safe default."
   - q: "When should I use Avro instead of Parquet?"
     a: "Use Avro when writes dominate reads: streaming pipelines (it's the standard in the Kafka ecosystem), event logs, and any place records are written whole and often, or where schema evolution across systems matters. Avro's row-based layout and rich schema-evolution support make it ideal for moving data; its weakness is analytical queries, where columnar Parquet or ORC is far faster."
   - q: "Do open table formats like Iceberg use Parquet, ORC, or Avro?"
@@ -29,7 +30,7 @@ apply without re-reading it.
 |---|---|---|---|
 | **Layout** | Columnar | Columnar | Row-based |
 | **Best for** | Analytics / reads | Analytics / reads (Hive-centric) | Streaming / writes / exchange |
-| **Compression** | Excellent | Excellent (often highest) | Moderate |
+| **Compression** | Excellent ([measured smallest](/essays/parquet-vs-orc-vs-avro-benchmark/)) | Excellent | Moderate |
 | **Column-pruning reads** | Yes — fast | Yes — fast | No (reads whole rows) |
 | **Write speed** | Slower (columnar encode) | Slower (columnar encode) | Fast |
 | **Schema evolution** | Good | Good | Excellent — its signature strength |
@@ -42,7 +43,9 @@ apply without re-reading it.
 The split is physical. A **columnar** format (Parquet, ORC) stores all of column A
 together, then all of column B. A query touching two of fifty columns reads only
 those two, and columns of like values — all timestamps, all country codes —
-compress hard. That's exactly the shape of an [OLAP](/glossary/olap/) analytical
+compress hard. That pruning effect is not a small one: measured on 3 million
+rows, [reading 2 of 11 columns was 6.9× faster](/essays/parquet-vs-orc-vs-avro-benchmark/)
+than reading all of them. That's exactly the shape of an [OLAP](/glossary/olap/) analytical
 scan, and it's why both dominate the warehouse and lakehouse world.
 
 A **row-based** format (Avro) stores each record whole: all of row 1's fields
@@ -89,10 +92,17 @@ using embedded statistics, both compress excellently. The practical differences:
   warehouses, dbt, and every [open table format](/essays/what-is-an-open-table-format/)
   reach for it first. If you want the path of least resistance and maximum
   interoperability, it's Parquet.
-- **ORC** grew up in the **Hive/Hadoop** world, often edges Parquet on compression
-  ratio, and has mature ACID support *within Hive*. It remains the natural choice
-  where a Hive- or Trino-centric stack already favours it, or where its compression
-  advantage is worth optimizing for at scale.
+- **ORC** grew up in the **Hive/Hadoop** world and has mature ACID support
+  *within Hive*. It remains the natural choice where a Hive- or Trino-centric
+  stack already favours it.
+
+**A correction.** An earlier version of this essay said ORC "often edges Parquet
+on compression ratio," which is the conventional claim. I then
+[benchmarked it](/essays/parquet-vs-orc-vs-avro-benchmark/) and got the opposite
+result: at matched codecs on a realistic table, Parquet was 23–26% *smaller*.
+That was one dataset and pyarrow's ORC writer at defaults, so it doesn't settle
+the question everywhere — but it's enough that I no longer state the compression
+advantage as fact. Measure it on your data before it decides anything.
 
 For a greenfield [lakehouse](/glossary/data-lakehouse/), Parquet is the safe
 default and ORC is a deliberate, situational choice — not a mistake, just one you

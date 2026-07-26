@@ -10,3 +10,7 @@ Gemfile.lock
 tools/
 distribution/
 submit-indexnow.ps1
+
+# python bytecode
+__pycache__/
+*.pyc
