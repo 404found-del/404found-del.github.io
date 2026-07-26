@@ -4,11 +4,12 @@ kicker: "Field Notes"
 topic: "Modeling"
 description: "A data model shapes data for one system; an ontology defines what concepts mean, independent of any system — and machines now read your schema."
 date: 2026-07-24 09:00:00 +0530
+last_modified_at: 2026-07-26
 faq:
   - q: "What is the difference between an ontology and a data model?"
     a: "A data model defines how data is structured for a particular system — tables, columns, keys, constraints, optimized for storing and querying. An ontology formally defines what concepts mean and how they relate, independent of any system that stores them. The data model answers 'how do I store and query this here'; the ontology answers 'what is a customer, in this business, everywhere.'"
   - q: "Is an ontology just a conceptual data model?"
-    a: "It's the closest classical analogue, but two things differ. An ontology is deliberately application-independent — it's meant to be reused across systems rather than implemented once — and it carries formal semantics: machine-readable axioms about class hierarchy, properties, and constraints that support automated reasoning. A conceptual model usually stops at a diagram; an ontology keeps going until a machine can act on it."
+    a: "It's the closest classical analogue, but two things differ. An ontology is deliberately application-independent — it's meant to be reused across systems rather than implemented once — and it carries formal semantics: machine-readable axioms about class hierarchy and properties from which a reasoner can derive new facts. A conceptual model usually stops at a diagram; an ontology keeps going until a machine can act on it. Note that deriving facts (OWL) and validating data (SHACL) are separate jobs — conflating them is the most common first mistake."
   - q: "Do I need an ontology if I already have a semantic layer?"
     a: "Often no. A semantic layer already does the essential job — defining business concepts once, in one governed place, so every consumer gets the same answer. An ontology is the heavier, more formal version, and it earns its cost when meaning must be shared across many systems and organisations, when relationships matter as much as measures, or when machines need to reason over the model rather than just query it."
   - q: "Why are ontologies suddenly relevant again in the AI era?"
@@ -39,6 +40,7 @@ asking them to interpret meaning they were never given.
 | **Change driver** | New query patterns, new sources | New understanding of the domain |
 | **Reused across apps** | Rarely — it's built for one | By design — that's the point |
 | **Machine can infer from it** | No (it can only execute queries) | Yes (that's what the axioms are for) |
+| **Validates data by** | Constraints, in the database | A separate shape language (SHACL) |
 | **Fails by** | Being wrong for new questions | Being too abstract to implement |
 
 ## The same problem, two altitudes
@@ -68,25 +70,59 @@ it tells you what the concepts *are* and how they relate, so any system can
 implement it consistently:
 
 ```text
-Ontology (informally rendered):
+Ontology (informally rendered, OWL-flavoured):
 
-Class: Customer
-  ⊑ Party                                  -- a Customer is a kind of Party
-  disjointWith: Prospect                   -- these cannot be the same thing
-Property: hasAccount   Customer → Account  (functional per billing system)
-Property: hasContact   Customer → Person
-Axiom: every Customer has ≥1 Account       -- the rule, stated once
-Axiom: a Party with ≥1 completed Order is a Customer, not a Prospect
+Class:    Party
+Class:    CompletedOrder ⊑ Order
+Property: placedOrder  Party → Order
+Property: hasAccount   Party → Account
+
+-- Defined classes: membership is DERIVED, not asserted
+Customer ≡ Party ⊓ ∃ placedOrder.CompletedOrder
+Prospect ≡ Party ⊓ ¬∃ placedOrder.CompletedOrder
+-- note: disjointness now follows from the definitions.
+-- It doesn't need declaring, and declaring it separately is how
+-- people accidentally make their ontology inconsistent.
 ```
 
-That last axiom is the tell. It isn't a column or a constraint on a table — it's
-a statement about the world from which a machine can *derive* that a given Party
-is a Customer, in any system, without anyone writing that logic again. A data
-model can enforce a rule inside one database; an ontology states the rule once,
-for everywhere.
+Those two `≡` lines are the tell. They aren't columns, and they aren't
+constraints on a table — they're *definitions*, and a reasoner given a Party with
+one completed order will classify it as a Customer on its own. Nobody writes that
+logic again in the next system. A data model can enforce a rule inside one
+database; an ontology states what a thing *is*, once, for everywhere.
+
+The subtlety that trips up most first ontologies is worth stating plainly,
+because it's the difference between a model that works and one that quietly
+does nothing. **OWL derives; it does not validate.** It is *monotonic* — new
+facts can only add conclusions, never retract them — so if you assert
+`Customer disjointWith Prospect` and then hand the reasoner a Prospect who has
+placed an order, you don't get a helpful reclassification. You get a logical
+inconsistency, and the reasoner stops being useful. And because OWL is
+*open-world*, an axiom like "every Customer has at least one Account" does not
+flag a Customer whose Account is missing from your data; it cheerfully infers
+that one exists somewhere. If what you wanted was a check that fails, that's a
+different tool:
+
+```text
+Shape (SHACL — validation, closed over your data):
+
+CustomerShape
+  targetClass:  Customer
+  property hasAccount  { minCount: 1 }   -- FAILS if the data omits it
+  property hasContact  { minCount: 1; class: Person }
+```
+
+Same vocabulary, opposite jobs: OWL says what follows, SHACL says what must be
+present. Reach for the first when you want a machine to conclude something, the
+second when you want it to complain — and the
+[OWL 2 primer](https://www.w3.org/TR/owl2-primer/) and
+[SHACL specification](https://www.w3.org/TR/shacl/) are the authoritative
+references when a vendor's "semantic layer" blurs the two.
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;">
+<svg viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="ontology-vs-data-model-t ontology-vs-data-model-d">
+  <title id="ontology-vs-data-model-t">One ontology above many data models</title>
+  <desc id="ontology-vs-data-model-d">A single ontology at the top defines Customer as a kind of Party, disjoint from Prospect, with a hasAccount property. Below it sit three separate implementations of that same meaning: a warehouse star schema with dim_customer, a CRM object model with Lead and Account, and an application's third-normal-form users table.</desc>
   <rect x="230" y="16" width="340" height="64" rx="6" fill="#c8472b"/>
   <text x="400" y="42" font-size="14" fill="#f6f3ec" text-anchor="middle" font-weight="700">Ontology — meaning</text>
   <text x="400" y="63" font-size="11" fill="#f6f3ec" text-anchor="middle">Customer ⊑ Party · hasAccount · disjointWith Prospect</text>
@@ -136,10 +172,13 @@ hard to keep in sync with reality, and mostly consumed by other ontologists. Wha
 changed is the reader. When the consumer of your schema was an analyst, tribal
 knowledge filled the gaps — everyone knew that `cust_flg_2` meant enterprise
 tier. When the consumer is a language model generating SQL, there is no tribal
-knowledge; there is only what the model can read. Benchmarks now show that
-supplying explicit semantic definitions lifts text-to-SQL accuracy by double
-digits, and that accuracy degrades sharply on questions that span several
-entities and relationships — exactly where a data model is silent and an
+knowledge; there is only what the model can read. This is measurable, not
+rhetorical: the [BIRD text-to-SQL benchmark](https://bird-bench.github.io/) was
+built specifically to test queries over messy real-world schemas, and its
+headline finding is that supplying external knowledge — the human explanation of
+what a column actually means — moves execution accuracy substantially, while
+accuracy still degrades sharply on questions spanning several entities and
+relationships. That is exactly the territory where a data model is silent and an
 ontology speaks.
 
 That's the real thesis, and it's older than the technology: **the discipline of

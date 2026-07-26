@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "The table format war is settled; the catalog decides governance and lock-in now. How Iceberg catalogs work, compared honestly — and a decision rule that holds."
 date: 2026-07-08 19:00:00 +0530
-last_modified_at: 2026-07-16
+last_modified_at: 2026-07-26
 faq:
   - q: "What does an Iceberg catalog actually do?"
     a: "It holds the authoritative pointer to each table's current metadata file and swaps that pointer atomically on every commit — which is what makes transactions work. On top of that mechanical job, catalogs layer the governance: who may read, write, or commit to which table, from which engine, with what audit trail."
@@ -45,7 +45,7 @@ commit goes through it. (Don't confuse it with a
 word, different layer: one is transaction infrastructure, the other is
 documentation for humans.)
 
-## The comparison, honestly
+## Unity vs Polaris vs Glue vs Nessie, compared
 
 | | Unity Catalog | Apache Polaris | AWS Glue | Nessie |
 |---|---|---|---|---|
@@ -68,25 +68,53 @@ comfortable depending on.
 The catalog is one config block per engine — which is also the honest preview of
 a future migration:
 
-```sql
--- Spark: attach a REST catalog (Polaris, Unity's endpoint, Glue — same shape)
-SET spark.sql.catalog.lake = org.apache.iceberg.spark.SparkCatalog;
-SET spark.sql.catalog.lake.type = rest;
-SET spark.sql.catalog.lake.uri = https://catalog.example.com/api/catalog;
-SET spark.sql.catalog.lake.credential = <client-id>:<client-secret>;
+```properties
+# Spark: attach a REST catalog (Polaris, Unity's endpoint, Glue — same shape).
+# Set at session start, not in SQL: catalog config is Spark configuration, and
+# anything passed through SET lands in the Spark UI, event logs, and query history.
+spark.sql.extensions = org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions
+spark.sql.catalog.lake = org.apache.iceberg.spark.SparkCatalog
+spark.sql.catalog.lake.type = rest
+spark.sql.catalog.lake.uri = https://catalog.example.com/api/catalog
+spark.sql.catalog.lake.warehouse = my_warehouse          # which warehouse this catalog serves
+spark.sql.catalog.lake.rest.auth.type = oauth2           # token exchange, not a static secret
+spark.sql.catalog.lake.oauth2-server-uri = https://idp.example.com/oauth/token
+# The client secret is injected from a secret manager at submit time —
+# it never appears in a notebook cell, a repo, or a log line.
+spark.sql.catalog.lake.token = ${ICEBERG_CATALOG_TOKEN}
+```
 
--- After that, tables behave identically regardless of catalog vendor:
+The `spark.sql.extensions` line is the one people omit and then spend an
+afternoon on: without it, `MERGE`, `CALL`, and time-travel syntax simply don't
+parse. Note also where the credential *isn't* — a catalog that is your security
+boundary is a poor place to start by leaking its own credential into query
+history.
+
+With that config in place, the SQL is vendor-neutral:
+
+```sql
+-- Identical against any spec-faithful catalog answering that URI:
 CREATE TABLE lake.sales.orders (
   order_id BIGINT, order_ts TIMESTAMP, amount DECIMAL(12,2)
-) PARTITIONED BY (days(order_ts));
+) USING iceberg
+PARTITIONED BY (days(order_ts));
 ```
 
 Identical SQL, whichever catalog answers that URI. The switching pain is never
 the tables — it's re-plumbing every engine's config and rebuilding every access
 policy and audit trail that accumulated in the old catalog.
 
+The Iceberg REST catalog spec defines both this wire protocol and the OAuth2
+token exchange above; the
+[open specification](https://iceberg.apache.org/spec/) and the
+[REST catalog OpenAPI definition](https://github.com/apache/iceberg/blob/main/open-api/rest-catalog-open-api.yaml)
+are the authoritative reference when a vendor's docs and your engine's behaviour
+disagree.
+
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;">
+<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="how-to-choose-an-iceberg-catalog-t how-to-choose-an-iceberg-catalog-d">
+  <title id="how-to-choose-an-iceberg-catalog-t">Choosing an Iceberg catalog by platform gravity</title>
+  <desc id="how-to-choose-an-iceberg-catalog-d">A decision tree from the question of where your platform gravity sits. Databricks estates lead to Unity Catalog, deep-AWS estates to Glue, and mixed or deliberately neutral estates to Apache Polaris. A separate box covers the special case: teams needing git-like branching of the catalog choose Nessie.</desc>
   <rect x="250" y="16" width="300" height="52" rx="6" fill="#1c1a17"/>
   <text x="400" y="38" font-size="13" fill="#f6f3ec" text-anchor="middle">Where is your platform gravity?</text>
   <text x="400" y="56" font-size="11" fill="#8b857a" text-anchor="middle">(engines, identity, people)</text>

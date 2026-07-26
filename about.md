@@ -14,16 +14,15 @@ how information is shaped, stored, moved, and trusted inside an organisation.
 ## Who writes this
 
 A practicing data architect, writing here under the studio's name rather than a
-personal one. The short version of the credentials: close to two decades of
-hands-on work in data — operational databases, enterprise warehouses, dimensional
-models that survived contact with real organisations, and the cloud and lakehouse
-migrations that followed. The essays are written from the scar tissue of that
-work, not from vendor decks.
+personal one. The subjects covered are ones I work in: operational databases,
+enterprise warehouses, dimensional models, and cloud and lakehouse migrations.
 
-The site publishes as *dataarchitect.studio* deliberately. Arguments should stand
-on their reasoning and their accuracy, not on a byline — and the writing stays
-more honest when it can describe failure modes candidly, including the author's
-own.
+Publishing anonymously has an obvious cost, and it's worth naming rather than
+glossing over: you can't check my record, so nothing here should be taken on
+authority. Read it as an argument to be tested, not a credential to be trusted.
+What I can offer instead is that the reasoning is shown rather than asserted, the
+comparisons commit to a recommendation you can disagree with, and errors get
+corrected in public. Judge the essays on whether they hold up.
 
 ## What you'll find here
 
@@ -44,12 +43,19 @@ I write for practitioners. The goal is not to be comprehensive but to be *useful
 
 ## How the essays are made
 
-Every technical claim is one the author has either implemented, broken, or
-audited. Worked SQL examples are real patterns, not pseudocode. Comparison pieces
-state a recommendation rather than hiding behind "it depends" — and state the
-trade-offs that would reverse it. When an essay's subject changes materially (a
-spec version, a market shift), the essay is updated in place and its modification
-date is set honestly.
+Worked SQL and configuration examples are written to run, not to illustrate —
+if a snippet here would throw against a real engine, that's a bug and I want to
+know about it. Where a claim depends on a specification or a release, the essay
+links to the primary source rather than paraphrasing it. Comparison pieces state
+a recommendation instead of hiding behind "it depends," and state the trade-offs
+that would reverse it. When a subject changes materially — a spec version, a
+market shift — the essay is updated in place and its modification date is set
+honestly.
+
+What you won't find here is a case study: these essays argue from how the
+mechanisms work, not from a war story I can't corroborate under a pseudonym.
+Where a piece walks through a scenario with numbers, it says plainly that the
+scenario is constructed.
 
 Spotted an error? Open an issue on
 [GitHub](https://github.com/404found-del) — corrections are taken seriously and

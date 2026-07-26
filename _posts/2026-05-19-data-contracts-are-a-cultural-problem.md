@@ -3,6 +3,7 @@ title: "Data Contracts Are a Cultural Problem"
 kicker: "Essay"
 topic: "Governance"
 date: 2026-05-19
+last_modified_at: 2026-07-26
 description: "A schema check is the easy 10% of a data contract. The other 90% is an organizational agreement that no YAML file can enforce for you."
 ---
 
@@ -90,6 +91,12 @@ wire up a check that fails *their* pipeline, not just yours.
 The file you produce at the end will look like every "data contract" example on the
 internet. But it will work, because underneath it sits the thing those examples
 never show: two teams who actually agreed.
+
+The same confusion between artefact and outcome shows up one layer over, in the
+difference between
+[data observability and data quality](/essays/data-observability-vs-data-quality/):
+one is a set of instruments, the other is a property of the data, and buying the
+first does not produce the second.
 
 The schema is the artefact. The agreement is the contract. Don't mistake one for
 the other.

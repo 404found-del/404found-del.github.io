@@ -54,7 +54,9 @@ and cross-system exchange, where records are written whole and schema evolution
 across producers and consumers is a first-class concern.
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;">
+<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="parquet-vs-orc-vs-avro-t parquet-vs-orc-vs-avro-d">
+  <title id="parquet-vs-orc-vs-avro-t">Columnar versus row-based file layout</title>
+  <desc id="parquet-vs-orc-vs-avro-d">Two panels. Columnar formats Parquet and ORC store all values of one column together, so reading one column touches one stripe and like values compress hard, giving fast reads for analytics. Row-based Avro stores each record whole, so writing is one append and the schema travels with the data, giving fast writes for streaming and exchange.</desc>
   <text x="210" y="34" font-size="13" fill="#1c1a17" text-anchor="middle" font-weight="700">Columnar — Parquet / ORC</text>
   <rect x="70" y="50" width="280" height="34" rx="4" fill="#c8472b"/>
   <text x="210" y="72" font-size="11" fill="#f6f3ec" text-anchor="middle">all order_id ┃ all amount ┃ all ts</text>

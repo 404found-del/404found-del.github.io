@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Modeling"
 description: "Data Vault and dimensional modeling aren't rivals — they solve different problems at different layers. Here's what Data Vault actually is, what it costs, and when its complexity is worth paying."
 date: 2026-06-07
-last_modified_at: 2026-07-18
+last_modified_at: 2026-07-26
 faq:
   - q: "Should I use data vault or dimensional modeling?"
     a: "They solve different problems at different layers. Data vault is an integration-layer method for absorbing many volatile sources with full audit history; dimensional modeling is a presentation-layer method for making data queryable. Large regulated estates often use both — vault underneath, star schemas on top. Smaller shops usually need only dimensional."
@@ -107,6 +107,11 @@ and whose joins, naming conventions, and loading discipline they'll pay for dail
 simpler path — staging the sources, keeping [raw history you can replay
 from](/essays/the-medallion-architecture-reconsidered/), and modeling straight into
 dimensional facts and dims — covers them completely.
+
+If that description of the integration layer sounds familiar, it should — it is
+[Inmon's Corporate Information Factory](/essays/the-inmon-methodology/)
+rebuilt for sources that change shape more often than 3NF comfortably tolerates.
+Data Vault is less a rival to that tradition than its volatile-source successor.
 
 So resolve the "versus" the boring, correct way: dimensional modeling for the
 consumption layer, always. Data Vault underneath it *only* if you genuinely carry the

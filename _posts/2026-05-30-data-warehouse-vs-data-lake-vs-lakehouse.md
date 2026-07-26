@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "A data warehouse stores structured, modeled data. A data lake stores raw data of any shape, cheaply. A lakehouse tries to be both. Here's a side-by-side comparison, a diagram, and how to choose."
 date: 2026-05-30
-last_modified_at: 2026-07-05
+last_modified_at: 2026-07-26
 faq:
   - q: "What is the difference between a data warehouse, a data lake, and a lakehouse?"
     a: "A data warehouse stores structured, modeled data with schema enforced on write, optimized for reliable analytics. A data lake stores raw data of any shape cheaply, with schema applied on read. A lakehouse adds a metadata and table layer over cheap lake storage to deliver warehouse-like reliability on lake economics."
@@ -35,7 +35,9 @@ diagram, and how to choose.
 | **Main risk** | Cost & rigidity at scale | Becoming a "data swamp" | Younger, more moving parts |
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;">
+<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="data-warehouse-vs-data-lake-vs-lakehouse-t data-warehouse-vs-data-lake-vs-lakehouse-d">
+  <title id="data-warehouse-vs-data-lake-vs-lakehouse-t">Warehouse, data lake, and lakehouse compared</title>
+  <desc id="data-warehouse-vs-data-lake-vs-lakehouse-d">Three architectures in sequence: the warehouse with structured, governed tables; the data lake with cheap raw files and no guarantees; and the lakehouse, which keeps lake storage and adds a table-format layer to supply the warehouse's structure and guarantees.</desc>
   <!-- Panel 1: Warehouse -->
   <rect x="20" y="54" width="236" height="226" rx="8" fill="#fdfcf9" stroke="#cabfac"/>
   <text x="138" y="44" text-anchor="middle" font-size="13" fill="#c8472b" font-weight="600" letter-spacing="1">WAREHOUSE</text>
@@ -119,6 +121,14 @@ both flexible ML-style workloads *and* reliable structured BI, without maintaini
 separate lake and warehouse with a brittle pipeline copying between them. The
 trade-off is **maturity and complexity** — a younger stack with more moving parts than
 a turnkey warehouse.
+
+The argument was made formally before it was made in marketing: the 2021 CIDR
+paper
+[*Lakehouse: A New Generation of Open Platforms*](https://www.cidrdb.org/cidr2021/papers/cidr2021_paper17.pdf)
+sets out the case — open direct-access formats, first-class ML support, and
+warehouse-competitive TPC-DS performance — and is worth reading precisely
+because it is an interested party arguing in public, with numbers you can
+challenge.
 
 ## When to choose each
 

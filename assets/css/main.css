@@ -216,6 +216,9 @@ a {
   color: var(--ink-faint);
   padding-top: 0.45rem;
 }
+/* Most-read block: curated, sits above the recency list */
+.essays--featured { padding-bottom: clamp(1.5rem, 4vw, 3rem); }
+.essays--featured .essay-row__no { color: var(--accent); font-size: 0.9rem; }
 .essay-row__body { min-width: 0; }
 .essay-row__kicker {
   font-family: var(--mono);
@@ -297,6 +300,7 @@ a {
   border-top: 1px solid var(--line);
 }
 .article__meta .dot { color: var(--accent); }
+.article__updated { color: var(--accent-deep); font-weight: 600; }
 
 /* prose */
 .prose {
@@ -384,6 +388,48 @@ a {
 .prose pre code {
   background: none; border: 0; padding: 0; font-size: inherit; color: inherit;
 }
+
+/* ---- Comparison tables ---------------------------------------------------
+   Kramdown emits bare <table> with no wrapper, so the scroll container has to
+   live on the table itself at narrow widths (see the media query below). */
+.prose table {
+  width: 100%;
+  margin: 2.2rem 0;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  text-align: left;
+}
+.prose thead th {
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--paper-deep);
+  border-bottom: 2px solid var(--line-strong);
+  padding: 0.7rem 0.8rem;
+  vertical-align: bottom;
+}
+.prose tbody th {
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.prose tbody td,
+.prose tbody th {
+  padding: 0.7rem 0.8rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  color: var(--ink-soft);
+}
+.prose tbody tr:last-child td,
+.prose tbody tr:last-child th { border-bottom: 1px solid var(--line-strong); }
+.prose tbody tr:hover td,
+.prose tbody tr:hover th { background: var(--paper-deep); }
+/* first column carries the row label in every comparison table on the site */
+.prose tbody td:first-child { color: var(--ink); font-weight: 600; }
+.prose table strong { font-weight: 600; color: var(--ink); }
+.prose table code { font-size: 0.95em; }
+.prose table a { text-decoration-thickness: 1px; }
 
 /* article footer / colophon */
 .article__foot {
@@ -488,6 +534,22 @@ a {
   .essay-row__meta { text-align: left; padding-top: 0.6rem; }
   .hero::after { display: none; }
   .prose { font-size: 1.1rem; }
+  /* Comparison tables: scroll horizontally rather than crushing or overflowing.
+     display:block is what makes the table itself the scroll container, since
+     Kramdown gives us no wrapper element to hang it on. */
+  .prose table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+  .prose thead th,
+  .prose tbody td,
+  .prose tbody th { padding: 0.55rem 0.7rem; }
+  /* the row-label column stays put while the comparison columns scroll */
+  .prose tbody td:first-child { white-space: normal; min-width: 8.5rem; }
 }
 
 /* ---- Related posts ------------------------------------------------------- */

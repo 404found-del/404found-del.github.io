@@ -4,6 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "Iceberg and Parquet aren't rivals — Parquet is a file format, Iceberg is a table format that manages Parquet files. Here's the difference, and why it matters."
 date: 2026-07-23 09:00:00 +0530
+last_modified_at: 2026-07-26
 faq:
   - q: "What is the difference between Apache Iceberg and Parquet?"
     a: "Parquet is a file format — it defines how the bytes of a single file are laid out on disk, column by column, compressed. Apache Iceberg is a table format — it defines how many files together form one logical table, tracking which files are current, what schema applies, and how changes commit atomically. Iceberg tables are almost always made of Parquet files, so it's not a choice between them; it's two layers of the same stack."
@@ -70,7 +71,9 @@ data files. Committing a change writes new files and swaps one pointer — atomi
 even on eventually-consistent object storage.
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;">
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="apache-iceberg-vs-parquet-t apache-iceberg-vs-parquet-d">
+  <title id="apache-iceberg-vs-parquet-t">Iceberg and Parquet occupy different layers</title>
+  <desc id="apache-iceberg-vs-parquet-d">Apache Iceberg as a table format on top, chaining catalog to metadata to snapshot to file list and supplying ACID, schema evolution and time travel. Beneath it, three self-contained columnar Parquet files holding the actual bytes. The files store the data; Iceberg decides which of them are the table right now.</desc>
   <rect x="250" y="16" width="300" height="60" rx="6" fill="#c8472b"/>
   <text x="400" y="42" font-size="14" fill="#f6f3ec" text-anchor="middle" font-weight="700">Iceberg — table format</text>
   <text x="400" y="62" font-size="11" fill="#f6f3ec" text-anchor="middle">catalog → metadata → snapshot → file list</text>
@@ -104,14 +107,18 @@ CREATE TABLE lake.sales.orders (
 ) USING iceberg
 TBLPROPERTIES ('write.format.default' = 'parquet');   -- the file layer, chosen here
 
--- Time travel — impossible on bare Parquet, trivial with Iceberg's snapshots:
+-- Time travel — impossible on bare Parquet, trivial with Iceberg's snapshots.
+-- The timestamp must be a literal; Spark rejects non-deterministic expressions here.
 SELECT sum(amount) FROM lake.sales.orders
-FOR TIMESTAMP AS OF current_timestamp - INTERVAL '1' DAY;
+FOR TIMESTAMP AS OF '2026-07-22 00:00:00';
 ```
 
 Note the `write.format.default` line: the file format is a *table property*.
 Iceberg can sit on ORC or Avro instead — Parquet is simply the near-universal
-default for analytics.
+default for analytics. The same properties mechanism carries a more consequential
+setting: because those Parquet files are immutable, Iceberg has to decide whether
+an update rewrites them or annotates them, which is
+[merge-on-read vs copy-on-write](/essays/merge-on-read-vs-copy-on-write/).
 
 ## So when does the comparison even come up?
 
@@ -130,7 +137,8 @@ as parallel. They aren't. The honest decision tree:
 
 If your next question is "then which table format" — that's
 [Iceberg vs Delta Lake](/essays/iceberg-vs-delta-lake/), a real same-layer choice.
-And if it's "which file format underneath" — that's Parquet vs ORC vs Avro, a real
-same-layer choice one rung down. But *Iceberg vs Parquet* isn't a choice at all.
+And if it's "which file format underneath" — that's
+[Parquet vs ORC vs Avro](/essays/parquet-vs-orc-vs-avro/), a real same-layer
+choice one rung down. But *Iceberg vs Parquet* isn't a choice at all.
 It's two layers of one stack, and the moment you see them stacked instead of
 side-by-side, the confusion dissolves.

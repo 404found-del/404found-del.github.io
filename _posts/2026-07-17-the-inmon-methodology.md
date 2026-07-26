@@ -30,7 +30,9 @@ don't. Here it is, with an example.
 ## The architecture: what the CIF actually is
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 330" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;">
+<svg viewBox="0 0 800 330" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="the-inmon-methodology-t the-inmon-methodology-d">
+  <title id="the-inmon-methodology-t">The Corporate Information Factory</title>
+  <desc id="the-inmon-methodology-d">Three source systems, an orders app, a CRM and billing, feed a staging and integration layer. That feeds a normalized third-normal-form enterprise data warehouse holding integrated, historical, single-version-of-truth data. The warehouse in turn feeds dependent sales, finance and marketing marts, each built as a dimensional star schema.</desc>
   <rect x="30" y="40" width="130" height="44" rx="6" fill="#1c1a17"/>
   <text x="95" y="67" font-size="12" fill="#f6f3ec" text-anchor="middle">orders app</text>
   <rect x="30" y="104" width="130" height="44" rx="6" fill="#1c1a17"/>

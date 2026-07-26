@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "AI"
 description: "A vector database stores embeddings and finds items by meaning rather than exact match. Here's what that's actually for, how it relates to your existing stack, and when a dedicated one is worth it."
 date: 2026-06-08
-last_modified_at: 2026-07-24
+last_modified_at: 2026-07-26
 faq:
   - q: "What is a vector database used for?"
     a: "Searching by meaning rather than exact match. It stores embeddings — numerical representations of text, images, or other data — and finds the items closest in meaning to a query. Its most common use is powering retrieval-augmented generation (RAG), where relevant context is fetched to ground a language model's answer."
@@ -39,6 +39,14 @@ A vector database is the system built to store those vectors and, given a query
 vector, **find the nearest ones fast** — the items closest in meaning. At small scale
 you could compare against every stored vector by brute force; the database exists to
 do approximate nearest-neighbour search efficiently across millions of them.
+
+Almost every product in this category is, underneath, an implementation of the
+same handful of index structures — most commonly
+[HNSW](https://arxiv.org/abs/1603.09320), the hierarchical proximity-graph
+algorithm from Malkov and Yashunin's 2016 paper, which gets logarithmic search
+scaling by starting the walk in a sparse top layer and descending. Knowing that
+is useful when you evaluate vendors: the differentiator is rarely the search
+algorithm, because they are largely running the same one.
 
 ## What it's actually for
 

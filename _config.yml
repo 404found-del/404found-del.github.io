@@ -59,6 +59,19 @@ defaults:
     values:
       image: /assets/og-default.png
 
+# --- Most-read: curated, not automatic ---------------------------------------
+# The homepage lists essays by recency, which spends the site's strongest
+# internal links on the newest (least proven) work. This list overrides that for
+# the top block. Order is deliberate. Review against GSC Pages.csv quarterly.
+# Source: GSC Performance-on-Search 2026-07-22, ranked by impressions and clicks.
+most_read:
+  - /essays/kimball-vs-inmon/
+  - /essays/star-schema-vs-snowflake-schema/
+  - /essays/data-lake-vs-lakehouse/
+  - /essays/how-to-choose-an-iceberg-catalog/
+  - /essays/one-big-table-vs-star-schema/
+  - /essays/what-is-a-data-catalog/
+
 # --- Plugins (all whitelisted on GitHub Pages) -------------------------------
 plugins:
   - jekyll-feed

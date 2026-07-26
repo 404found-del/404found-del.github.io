@@ -4,6 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "Kimball and Inmon are the two foundational approaches to building a data warehouse. The difference is one decision: build dimensional marts bottom-up, or a normalized enterprise warehouse top-down. Here's the real trade-off."
 date: 2026-06-14
+last_modified_at: 2026-07-26
 faq:
   - q: "What is the main difference between Kimball and Inmon?"
     a: "Direction. Inmon is top-down: build one normalized, integrated enterprise data warehouse first, then derive dimensional data marts from it. Kimball is bottom-up: build dimensional data marts for individual business processes directly, and integrate them through conformed dimensions. Inmon front-loads integration; Kimball front-loads delivery."
@@ -37,6 +38,14 @@ they're connected through shared, [conformed dimensions](/glossary/conformed-dim
 That's the whole fork. Integrate first and deliver later (Inmon), or deliver first
 and integrate as you go (Kimball). Everything else — the schemas, the methodologies,
 the famous diagrams — follows from this single choice about sequence.
+
+Both positions are still available in the authors' own words, which is worth
+reading before accepting anyone's summary of them — including this one. The
+Kimball Group publishes its
+[official dimensional modeling techniques](https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/)
+in full and for free; Inmon's case is set out in *Building the Data Warehouse*
+and the *Corporate Information Factory* books. Most of the heat in this debate
+comes from summaries, not from sources.
 
 ## Inmon: the integrated core, built first
 
@@ -108,7 +117,11 @@ marts on top (Kimball's instinct for business-friendly consumption). The
 [medallion architecture](/essays/the-medallion-architecture-reconsidered/) and the
 modern [lakehouse](/essays/data-warehouse-vs-data-lake-vs-lakehouse/) are, in effect,
 this blend wearing new names — and [Data Vault](/essays/data-vault-vs-dimensional-modeling/)
-is a third method aimed squarely at that integration layer.
+is a third method aimed squarely at that integration layer. (Inmon's side of the
+argument is worth reading on its own terms rather than through Kimball's summary
+of it — [the Corporate Information Factory, with a worked
+example](/essays/the-inmon-methodology/), is what the top-down method actually
+builds.)
 
 So the honest answer to "Kimball or Inmon?" in 2026 is usually *both, at different
 layers* — an integrated foundation for trust, dimensional marts for use. And when you

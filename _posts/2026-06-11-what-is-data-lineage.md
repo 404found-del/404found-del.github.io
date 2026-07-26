@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Governance"
 description: "Data lineage is the record of where data comes from, how it's transformed, and where it goes. Here's what it's genuinely for — impact analysis, root cause, audit — and the limits the tool demos skip."
 date: 2026-06-11
-last_modified_at: 2026-07-18
+last_modified_at: 2026-07-26
 faq:
   - q: "What is data lineage in simple terms?"
     a: "The traced path of data through your systems: where each field came from, what transformed it along the way, and which tables, dashboards, and models depend on it downstream. It answers 'can I trust this number?' backward and 'what breaks if I change this?' forward."
@@ -95,3 +95,8 @@ ownership and architecture decisions rather than an outcome in itself. Lineage i
 map. The map is genuinely useful. But nobody ever fixed a city by mapping it — and the
 teams that get value from lineage are the ones who treat the map as the beginning of
 the work, not the deliverable.
+
+Lineage is also the first thing worth automating if you're
+[building a data catalog](/essays/how-to-build-a-data-catalog/) — it's the
+metadata that stays current without anyone remembering to update it, which is
+precisely why hand-maintained catalogs rot and extracted ones don't.

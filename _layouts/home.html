@@ -32,6 +32,37 @@ layout: default
   </aside>
 </div>
 
+{%- if site.most_read -%}
+<div class="wrap">
+  <p class="section-label reveal d3">
+    <span>Most read</span>
+    <span class="count">start with these</span>
+  </p>
+</div>
+
+<section class="wrap essays essays--featured">
+  {%- for url in site.most_read -%}
+  {%- assign featured = site.posts | where: "url", url | first -%}
+  {%- if featured -%}
+  {%- assign words = featured.content | number_of_words -%}
+  {%- assign minutes = words | divided_by: 200 | plus: 1 -%}
+  <a class="essay-row reveal" href="{{ featured.url | relative_url }}">
+    <span class="essay-row__no">★</span>
+    <span class="essay-row__body">
+      {%- if featured.kicker -%}<p class="essay-row__kicker">{{ featured.kicker }}</p>{%- endif -%}
+      <h2 class="essay-row__title">{{ featured.title }}</h2>
+      <p class="essay-row__excerpt">{{ featured.description | default: featured.excerpt | strip_html | truncate: 168 }}</p>
+    </span>
+    <span class="essay-row__meta">
+      {{ featured.date | date: "%b %d, %Y" }}
+      <span class="read">{{ minutes }} min</span>
+    </span>
+  </a>
+  {%- endif -%}
+  {%- endfor -%}
+</section>
+{%- endif -%}
+
 <div class="wrap">
   <p class="section-label reveal d3">
     <span>Essays &amp; field notes</span>

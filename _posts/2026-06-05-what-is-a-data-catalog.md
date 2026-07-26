@@ -4,6 +4,7 @@ kicker: "Field Notes"
 topic: "Governance"
 description: "A data catalog is a searchable inventory of an organization's data — what exists, where it lives, what it means, and who owns it. Here's what it's for, what it isn't, and when you actually need one."
 date: 2026-06-05
+last_modified_at: 2026-07-26
 faq:
   - q: "What is the difference between a data catalog and a semantic layer?"
     a: "A catalog is an inventory — it documents what data exists, where it lives, and who owns it. A semantic layer defines what metrics mean and computes them consistently at query time. The catalog helps you find and understand data; the semantic layer governs and serves the definitions."
@@ -88,6 +89,9 @@ the way an under-loved tool will.
 
 ## If you do adopt one
 
+The sequencing matters more than the tool choice, and it has its own field note:
+[how to build a data catalog](/essays/how-to-build-a-data-catalog/) walks the
+order that works — automate first, assign ownership second, buy last.
 Make it work by attacking the failure mode directly. **Auto-populate everything that
 can be** — schema, lineage, usage stats, freshness — straight from your systems, so the
 machine-maintainable metadata stays current on its own. Then make the human
@@ -97,3 +101,11 @@ make the underlying data trustworthy in the first place. A catalog isn't a subst
 for governance; it's a place to *see* the governance you've already done. Get the
 ownership right and the catalog becomes genuinely valuable. Skip it, and you've bought
 a very searchable record of how your data used to be organized.
+
+One practical note on the "auto-populate" half: the harvesting problem is now
+largely standardised, and you can read the standard rather than trusting a
+vendor's account of it. [OpenLineage](https://openlineage.io/docs/) defines the
+event model that pipelines emit, and the open-source
+[DataHub](https://docs.datahub.com/) and
+[OpenMetadata](https://docs.open-metadata.org/) projects publish their metadata
+models in full — useful as an evaluation yardstick even if you end up buying.

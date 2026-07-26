@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "A data lake stores raw files cheaply but offers no guarantees. A lakehouse adds a table layer over those same files to give them ACID transactions, schema, and reliability. Here's the real difference and when each fits."
 date: 2026-06-20 10:00:00 +0530
-last_modified_at: 2026-07-05
+last_modified_at: 2026-07-26
 faq:
   - q: "What is the difference between a data lake and a lakehouse?"
     a: "A data lake is raw files in cheap object storage with no transactions, no enforced schema, and no guarantees. A lakehouse keeps those same files but adds an open table format on top — Iceberg, Delta Lake, or Hudi — that provides ACID transactions, schema enforcement, and time travel. The lakehouse is a data lake plus a table layer."
@@ -60,7 +60,9 @@ table, in what version, under what schema, and in doing so retrofits the guarant
 lake never had.
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;">
+<svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="data-lake-vs-lakehouse-t data-lake-vs-lakehouse-d">
+  <title id="data-lake-vs-lakehouse-t">Data lake versus lakehouse</title>
+  <desc id="data-lake-vs-lakehouse-d">The same object-storage files shown twice: as a bare lake of files, and with an open table format layered on top that turns the pile into reliable, versioned, transactional tables.</desc>
   <text x="180" y="34" text-anchor="middle" font-size="13" fill="#c8472b" font-weight="600" letter-spacing="1">DATA LAKE</text>
   <text x="565" y="34" text-anchor="middle" font-size="13" fill="#c8472b" font-weight="600" letter-spacing="1">LAKEHOUSE</text>
   <!-- LAKE panel -->
@@ -140,6 +142,12 @@ format was invented for, and skipping it is how teams end up debugging numbers t
 quietly changed mid-query.
 
 ## The bottom line
+
+If you want the original argument rather than the marketing version of it, the
+2021 CIDR paper
+[*Lakehouse: A New Generation of Open Platforms*](https://www.cidrdb.org/cidr2021/papers/cidr2021_paper17.pdf)
+is where the term was formalised, complete with the TPC-DS numbers its authors
+put behind the claim.
 
 A data lake gives you cheap, flexible storage and no guarantees. A lakehouse keeps the
 cheap, flexible storage and adds the guarantees, through an [open table format](/glossary/open-table-format/) layered

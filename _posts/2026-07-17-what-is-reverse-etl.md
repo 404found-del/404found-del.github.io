@@ -64,7 +64,9 @@ ship the governed "churn risk," not a copy-paste variant of it.
 | **Failure hurts** | A dashboard | A dashboard | Ten thousand customers |
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;">
+<svg viewBox="0 0 800 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="what-is-reverse-etl-t what-is-reverse-etl-d">
+  <title id="what-is-reverse-etl-t">Where reverse ETL sits among the pipelines</title>
+  <desc id="what-is-reverse-etl-d">Source applications and databases flow into the warehouse through ELT and change data capture. The warehouse holds models, segments and scores. Reverse ETL is the single pipeline pointing outward, carrying that finished data to the CRM, ad platforms and support desk. Everything else flows in; this one flows out.</desc>
   <rect x="40" y="90" width="150" height="80" rx="6" fill="#1c1a17"/>
   <text x="115" y="125" font-size="12" fill="#f6f3ec" text-anchor="middle">source systems</text>
   <text x="115" y="145" font-size="10" fill="#8b857a" text-anchor="middle">apps · databases</text>

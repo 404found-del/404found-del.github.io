@@ -4,6 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "A warehouse answers how much; a knowledge graph answers how things connect. They're different query shapes, not rivals — and most serious estates end up with both."
 date: 2026-07-24 11:00:00 +0530
+last_modified_at: 2026-07-26
 faq:
   - q: "What is the difference between a knowledge graph and a data warehouse?"
     a: "A data warehouse stores modelled, mostly tabular data optimized for aggregation — sum, group, filter across millions of rows. A knowledge graph stores entities and the relationships between them, optimized for traversal — following connections several hops out. The warehouse answers 'how much, by what'; the graph answers 'what connects to what, and how.'"
@@ -25,7 +26,7 @@ have. Most mature estates end up with both: the
 [warehouse](/glossary/data-warehouse/) as the system of record for metrics, the
 graph as the layer that understands how things connect.
 
-## The comparison, honestly
+## Data warehouse vs knowledge graph, side by side
 
 | | Data warehouse | Knowledge graph |
 |---|---|---|
@@ -74,7 +75,9 @@ by hype rather than by query shape is how teams end up with an expensive graph
 serving dashboards, or a warehouse full of self-joins nobody can maintain.
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 330" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;">
+<svg viewBox="0 0 800 330" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="knowledge-graph-vs-data-warehouse-t knowledge-graph-vs-data-warehouse-d">
+  <title id="knowledge-graph-vs-data-warehouse-t">Aggregation versus traversal</title>
+  <desc id="knowledge-graph-vs-data-warehouse-d">On the left, a warehouse: stacked rows collapsing into a single aggregated number via SUM and GROUP BY. On the right, a knowledge graph: a starting node with edges followed outward through intermediate nodes to entities three hops away. Choose by the shape of your hardest question.</desc>
   <text x="200" y="30" font-size="13" fill="#1c1a17" text-anchor="middle" font-weight="700">Warehouse — aggregation</text>
   <rect x="70" y="46" width="260" height="22" rx="3" fill="#c8472b"/>
   <rect x="70" y="72" width="260" height="14" rx="3" fill="#f6f3ec" stroke="#ddd6c8" stroke-width="1.2"/>
@@ -130,9 +133,11 @@ Graphs re-entered the conversation through retrieval. Vector search finds
 passages that *look* semantically similar, which works well for
 "find documents about the refund policy" and degrades badly on questions that
 span several connected entities — the retriever has no way to know that these
-five facts belong to one chain of reasoning. GraphRAG approaches supply that
-structure explicitly, which is why they hold up on multi-entity questions where
-pure vector retrieval falls apart.
+five facts belong to one chain of reasoning.
+[GraphRAG](https://www.microsoft.com/en-us/research/blog/graphrag-unlocking-llm-discovery-on-narrative-private-data/)
+approaches supply that structure explicitly, building an entity graph from the
+corpus first and traversing it at query time — which is why they hold up on
+multi-entity and whole-corpus questions where pure vector retrieval falls apart.
 
 But notice what's actually doing the work: not the graph database — the
 *explicit relationships*. That's the same asset an

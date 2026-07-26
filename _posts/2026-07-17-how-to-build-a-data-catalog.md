@@ -84,7 +84,9 @@ production without an owner and description, ideally enforced the same way
 [data contracts](/essays/data-contracts-are-a-cultural-problem/) are.
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;">
+<svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="how-to-build-a-data-catalog-t how-to-build-a-data-catalog-d">
+  <title id="how-to-build-a-data-catalog-t">The five-step order for building a data catalog</title>
+  <desc id="how-to-build-a-data-catalog-d">Five sequential steps: mine query logs to find the tables people actually use; assign owners and descriptions; add certification tiers of certified, internal and deprecated; automate harvesting, lineage and search; then keep it alive with a curator and change hooks. The order is the method — humans and trust first, tooling second.</desc>
   <rect x="20" y="60" width="136" height="70" rx="6" fill="#c8472b"/>
   <text x="88" y="90" font-size="12" fill="#f6f3ec" text-anchor="middle" font-weight="700">1 query logs</text>
   <text x="88" y="110" font-size="10" fill="#f6f3ec" text-anchor="middle">find the real 50</text>

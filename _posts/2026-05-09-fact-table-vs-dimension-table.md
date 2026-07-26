@@ -4,6 +4,7 @@ kicker: "Field Notes"
 topic: "Modeling"
 description: "A fact table stores the measurements — the numbers you analyze. A dimension table stores the context you analyze them by. Here's the distinction every dimensional model is built on, and how to tell which is which."
 date: 2026-05-09
+last_modified_at: 2026-07-26
 faq:
   - q: "What is the difference between a fact table and a dimension table?"
     a: "A fact table stores measurements — the numeric events you analyze, like sales amounts or quantities — at a defined grain, along with foreign keys. A dimension table stores descriptive context you filter and group by, like customer, product, or date. Facts are what you measure; dimensions are how you slice those measurements."
@@ -95,7 +96,12 @@ dimension, two quick tests resolve almost every case:
 
 A reliable secondary tell: measures are usually numeric and additive; dimension
 attributes are usually descriptive text (and the numbers that *do* live in dimensions,
-like a product's list price, are ones you'd group by, not sum across rows).
+like a product's list price, are ones you'd group by, not sum across rows). The
+Kimball Group's own catalogue draws the line the same way and worries at the
+edge case explicitly, under
+[numeric values as attributes or facts](https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/numeric%20-attribute-fact)
+— when a number is genuinely both, the standard answer is to model it in both
+places rather than to pick.
 
 There's nuance underneath — facts come in [several
 types](/essays/fact-table-types/), dimensions handle [change over

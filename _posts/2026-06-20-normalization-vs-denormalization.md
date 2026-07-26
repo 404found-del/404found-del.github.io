@@ -57,7 +57,9 @@ simplicity.** A query that would have joined five normalized tables now reads on
 is faster and far easier to write.
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;">
+<svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="normalization-vs-denormalization-t normalization-vs-denormalization-d">
+  <title id="normalization-vs-denormalization-t">Normalized versus denormalized storage</title>
+  <desc id="normalization-vs-denormalization-d">Normalized data stored once across several linked tables, contrasted with denormalized data that repeats values in one wide table so queries avoid joins.</desc>
   <text x="180" y="32" text-anchor="middle" font-size="13" fill="#c8472b" font-weight="600" letter-spacing="1">NORMALIZED</text>
   <text x="560" y="32" text-anchor="middle" font-size="13" fill="#c8472b" font-weight="600" letter-spacing="1">DENORMALIZED</text>
   <line x1="380" y1="48" x2="380" y2="300" stroke="#ddd6c8" stroke-width="1" stroke-dasharray="4 5"/>

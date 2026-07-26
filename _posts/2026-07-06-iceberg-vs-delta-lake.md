@@ -4,15 +4,16 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "Iceberg and Delta Lake have converged on capabilities — ACID, time travel, deletion vectors. The real decision is your platform and catalog, not the format."
 date: 2026-07-06 09:00:00 +0530
+last_modified_at: 2026-07-26
 faq:
   - q: "Which is better, Apache Iceberg or Delta Lake?"
-    a: "Neither, on raw capabilities — with Iceberg v3 and Delta Lake 4.0 both provide ACID transactions, schema evolution, time travel, and deletion vectors. The practical answer is platform fit: Delta is the frictionless choice inside Databricks and Fabric; Iceberg is the safer default for open, multi-engine lakehouses because every major platform reads and writes it."
+    a: "Neither, on raw capabilities — both provide ACID transactions, schema evolution, time travel, and deletion vectors. Delta introduced deletion vectors incrementally from 2.3.0 in 2023, with full MERGE support and on-by-default behaviour landing in 3.1.0; Iceberg standardised them in the v3 spec. The practical answer is platform fit: Delta is the frictionless choice inside Databricks and Fabric; Iceberg is the safer default for open, multi-engine lakehouses because every major platform reads and writes it."
   - q: "What is Delta UniForm?"
     a: "A Delta Lake feature that writes Iceberg (and Hudi) metadata alongside Delta's own, so one physical table can be read by engines expecting any of the three formats. It's Databricks' answer to Iceberg's rise as the neutral standard — write Delta, present Iceberg."
   - q: "Is the Iceberg vs Delta decision permanent?"
     a: "Much less than it used to be. UniForm and Apache XTable can translate metadata between formats over the same Parquet files, so a migration no longer means rewriting data. Optimize for your dominant platform today and let interoperability cover the rest."
   - q: "What matters more than the table format?"
-    a: "The catalog — the component that holds each table's pointer and decides who may commit to it. Formats have converged; catalogs (Unity, Polaris, Glue, Horizon, Nessie) are where governance and the remaining lock-in now live. Choose the catalog as carefully as you once chose the format."
+    a: "The catalog — the component that holds each table's pointer and decides who may commit to it. Formats have converged; catalogs (Unity, Polaris, Snowflake Open Catalog, Glue, Nessie) are where governance and the remaining lock-in now live. Choose the catalog as carefully as you once chose the format."
 ---
 
 For years, choosing between **[Apache Iceberg](/glossary/apache-iceberg/)** and **Delta Lake** was the defining
@@ -28,7 +29,7 @@ the neutral standard that every major platform reads and writes.**
 Here's the reasoning, and the one decision that still deserves your attention
 more than the format.
 
-## The comparison, honestly
+## Iceberg vs Delta Lake, feature by feature
 
 | | Apache Iceberg | Delta Lake |
 |---|---|---|
@@ -42,10 +43,14 @@ more than the format.
 | **Choose it when** | Open, multi-engine, vendor-neutral | Databricks/Fabric-centred platform |
 
 The capability rows are the point: they're nearly identical. Both store data as
-Parquet; both added deletion vectors and a variant type in their 2025–2026 spec
-cycles (Iceberg v3, Delta 4.0). Performance differences are workload- and
-engine-specific, not categorical. Anyone selling you a decisive feature gap is
-reading from an old slide.
+Parquet. The convergence took different routes and is older than most comparison
+posts admit: Delta added deletion vectors
+[incrementally from 2.3.0 in 2023](https://docs.delta.io/latest/delta-deletion-vectors.html),
+reaching full `MERGE` support and on-by-default behaviour in 3.1.0, while Iceberg
+standardised them alongside the variant type in
+[the v3 spec](https://iceberg.apache.org/spec/). Performance differences are
+workload- and engine-specific, not categorical. Anyone selling you a decisive
+feature gap is reading from an old slide.
 
 ## What actually differs: gravity
 
@@ -61,7 +66,9 @@ Even Databricks now writes Iceberg through Unity Catalog. When the whole industr
 needs one table language to interoperate, it picked Iceberg.
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;">
+<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="iceberg-vs-delta-lake-t iceberg-vs-delta-lake-d">
+  <title id="iceberg-vs-delta-lake-t">Choosing between Apache Iceberg and Delta Lake</title>
+  <desc id="iceberg-vs-delta-lake-d">A decision tree beginning with where compute lives now and in three years. Mostly Databricks or Fabric branches to Delta Lake, with UniForm for outside readers. Mixed, multi-engine or uncertain branches to Apache Iceberg as the neutral default. Both branches converge on a final box: choose the catalog deliberately, because that is where lock-in now lives.</desc>
   <rect x="250" y="20" width="300" height="54" rx="6" fill="#1c1a17"/>
   <text x="400" y="43" font-size="13" fill="#f6f3ec" text-anchor="middle">Where does your compute live,</text>
   <text x="400" y="62" font-size="13" fill="#f6f3ec" text-anchor="middle">today and in 3 years?</text>
@@ -95,26 +102,35 @@ CREATE TABLE lake.sales.orders (
   order_id BIGINT, order_ts TIMESTAMP, amount DECIMAL(12,2)
 ) USING iceberg PARTITIONED BY (days(order_ts));
 
+-- Time-travel predicates take literals, not computed expressions:
 SELECT * FROM lake.sales.orders
-FOR TIMESTAMP AS OF current_timestamp - INTERVAL '1' DAY;
+FOR TIMESTAMP AS OF '2026-07-05 00:00:00';
 
 -- Delta (Spark SQL)
 CREATE TABLE lake.sales.orders (
   order_id BIGINT, order_ts TIMESTAMP, amount DECIMAL(12,2)
 ) USING delta;
 
-SELECT * FROM lake.sales.orders TIMESTAMP AS OF date_sub(current_date(), 1);
+SELECT * FROM lake.sales.orders TIMESTAMP AS OF '2026-07-05 00:00:00';
 ```
 
 Same guarantees, slightly different spellings. Your engineers will not care
 which one they're on within a month.
 
+What they *will* care about is a setting both formats share and neither makes
+prominent: whether updates rewrite whole files or annotate them. That's
+[merge-on-read vs copy-on-write](/essays/merge-on-read-vs-copy-on-write/), and it
+will affect your compute bill more than the format choice on this page.
+
 ## The decision that still matters: the catalog
 
 Because the formats converged, the strategic weight moved up a layer — to the
 **catalog** that holds each table's atomic pointer and governs who may commit:
-Unity (Databricks), Polaris and Horizon (Snowflake's open-source and managed),
-Glue (AWS), Nessie, and others. The catalog is where access control, auditing,
+Unity (Databricks), Apache Polaris and Snowflake Open Catalog (the same
+codebase, self-hosted and managed), Glue (AWS), Nessie, and others. Snowflake
+Horizon, often listed alongside these, is the governance suite rather than the
+catalog itself — a distinction worth keeping straight when you compare
+offerings. The catalog is where access control, auditing,
 and cross-engine governance actually happen, and switching catalogs is far more
 painful than translating table metadata. If you're building a
 [lakehouse](/essays/data-lake-vs-lakehouse/) in 2026, spend your evaluation

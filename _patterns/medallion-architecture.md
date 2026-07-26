@@ -38,7 +38,9 @@ read from arbitrary points and every incident becomes archaeology.
 ## Structure
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 220" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;">
+<svg viewBox="0 0 800 220" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="medallion-architecture-t medallion-architecture-d">
+  <title id="medallion-architecture-t">The medallion architecture's three layers</title>
+  <desc id="medallion-architecture-d">Three layers left to right. Bronze holds raw, immutable, replayable history. Silver holds cleaned, conformed, deduplicated data. Gold holds modelled, aggregated, consumer-facing tables. Trust and refinement increase left to right, and consumers read only gold.</desc>
   <rect x="30" y="60" width="200" height="100" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
   <text x="130" y="100" font-size="16" fill="#1c1a17" text-anchor="middle" font-weight="700">Bronze</text>
   <text x="130" y="126" font-size="12" fill="#56514a" text-anchor="middle">raw, immutable,</text>

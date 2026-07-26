@@ -4,6 +4,7 @@ kicker: "Field Notes"
 topic: "Engineering"
 description: "Change data capture identifies inserts, updates, and deletes in a source database and delivers them downstream. Here's how log-based, trigger-based, and query-based CDC compare — and when a nightly batch is still fine."
 date: 2026-06-10
+last_modified_at: 2026-07-26
 faq:
   - q: "What is the best CDC method?"
     a: "Log-based CDC, where available. Reading the database's transaction log captures every change including deletes, in commit order, with minimal load on the source and no application changes. Triggers and timestamp polling are compromises for when log access isn't possible."
@@ -52,7 +53,10 @@ CDC is implemented three broad ways, and they are not equally good.
 the engine already keeps for durability. Every committed change appears there, so a
 log reader captures *everything*: inserts, updates, and crucially **deletes**, in
 commit order, with essentially no extra load on the source and no application
-changes. This is the gold standard, and it's what serious CDC tooling does.
+changes. This is the gold standard, and it's what serious CDC tooling does —
+[Debezium's architecture docs](https://debezium.io/documentation/reference/stable/architecture.html)
+are the clearest free description of the mechanics, down to which log each engine
+exposes (MySQL's binlog, Postgres's logical replication stream).
 
 **Trigger-based CDC** attaches database triggers that copy every change into audit
 tables, which you then read. It works on engines where log access is awkward, but the
@@ -83,6 +87,13 @@ interface anyone promised to keep stable. This is precisely the territory of
 [data contracts](/essays/data-contracts-are-a-cultural-problem/): plugging CDC into a
 database whose owners haven't agreed to treat its schema as a contract is building on
 land you don't own. The technique is sound; the agreement still has to exist.
+
+And one downstream consequence worth knowing before you turn CDC on: scattered
+small updates are the worst possible input to a lakehouse table configured for
+copy-on-write, because the rewrite cost scales with *files touched* rather than
+rows changed. If your CDC target is an Iceberg or Delta table, read
+[merge-on-read vs copy-on-write](/essays/merge-on-read-vs-copy-on-write/) before
+the first backfill, not after the compute bill.
 
 Two more practicalities. First, CDC pipelines typically deliver **at-least-once** —
 events can repeat after retries and recoveries — so the consumer must be

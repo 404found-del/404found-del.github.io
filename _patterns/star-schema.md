@@ -38,7 +38,9 @@ read-heavy: written by a few pipelines, queried by everyone.
 ## Structure
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;">
+<svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="star-schema-t star-schema-d">
+  <title id="star-schema-t">Star schema structure</title>
+  <desc id="star-schema-d">A central fact_sales table holding measures and foreign keys, surrounded by four dimension tables: dim_date, dim_customer, dim_product and dim_store. Every dimension is one hop from the fact, so every query is the same simple join shape.</desc>
   <rect x="310" y="130" width="180" height="80" rx="6" fill="#c8472b"/>
   <text x="400" y="165" font-size="15" fill="#f6f3ec" text-anchor="middle" font-weight="700">fact_sales</text>
   <text x="400" y="188" font-size="11" fill="#f6f3ec" text-anchor="middle">measures + foreign keys</text>

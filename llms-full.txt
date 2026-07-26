@@ -8,36 +8,52 @@ sitemap: false
 > {{ site.description }}
 
 Source: {{ '/' | absolute_url }}
-This file contains the complete text of every essay published on the site, for
-retrieval and long-context use by AI systems. Each essay is delimited and includes
-its canonical source URL for attribution.
+This file contains the complete text of every essay, pattern, and glossary entry
+published on the site, for retrieval and long-context use by AI systems. Each
+entry is delimited and includes its canonical source URL for attribution.
+Diagram markup is removed; each diagram's caption is retained in place of it.
+Question-and-answer sections are included in full.
 {% for post in site.posts %}
-
 ================================================================================
 # {{ post.title }}
 Source: {{ post.url | absolute_url }}
-Published: {{ post.date | date: "%Y-%m-%d" }}
+Published: {{ post.date | date: "%Y-%m-%d" }}{% if post.last_modified_at %}
+Updated: {{ post.last_modified_at | date: "%Y-%m-%d" }}{% endif %}
 Topic: {{ post.topic }}
+Summary: {{ post.description }}
 ================================================================================
 
-{{ post.content | strip_html | strip }}
-{% endfor %}
+{% capture post_body %}{% assign svg_chunks = post.content | split: '<svg' %}{% for chunk in svg_chunks %}{% if forloop.first %}{{ chunk }}{% else %}{{ chunk | split: '</svg>' | last }}{% endif %}{% endfor %}{% endcapture %}{{ post_body | strip_html | strip }}
+{% if post.faq %}
+## Questions and answers
+{% for item in post.faq %}
+Q: {{ item.q }}
+A: {{ item.a }}
+{% endfor %}{% endif %}{% endfor %}
 {% for pattern in site.patterns %}
-
 ================================================================================
 # Pattern: {{ pattern.title }}
 Source: {{ pattern.url | absolute_url }}
 Intent: {{ pattern.intent }}
 ================================================================================
 
-{{ pattern.content | strip_html | strip }}
-{% endfor %}
+{% capture pattern_body %}{% assign svg_chunks = pattern.content | split: '<svg' %}{% for chunk in svg_chunks %}{% if forloop.first %}{{ chunk }}{% else %}{{ chunk | split: '</svg>' | last }}{% endif %}{% endfor %}{% endcapture %}{{ pattern_body | strip_html | strip }}
+{% if pattern.faq %}
+## Questions and answers
+{% for item in pattern.faq %}
+Q: {{ item.q }}
+A: {{ item.a }}
+{% endfor %}{% endif %}{% endfor %}
 {% assign sorted_terms = site.glossary | sort: "title" %}{% for term in sorted_terms %}
-
 ================================================================================
 # Glossary: {{ term.title }}
 Source: {{ term.url | absolute_url }}
 ================================================================================
 
-{{ term.content | strip_html | strip }}
-{% endfor %}
+{% capture term_body %}{% assign svg_chunks = term.content | split: '<svg' %}{% for chunk in svg_chunks %}{% if forloop.first %}{{ chunk }}{% else %}{{ chunk | split: '</svg>' | last }}{% endif %}{% endfor %}{% endcapture %}{{ term_body | strip_html | strip }}
+{% if term.faq %}
+## Questions and answers
+{% for item in term.faq %}
+Q: {{ item.q }}
+A: {{ item.a }}
+{% endfor %}{% endif %}{% endfor %}

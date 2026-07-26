@@ -72,7 +72,9 @@ FROM fact_order_line;
 The fix is never "remember not to sum that column." It's one of two structural moves:
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;">
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="fact-table-grain-t fact-table-grain-d">
+  <title id="fact-table-grain-t">Two fixes for a fact table at the wrong grain</title>
+  <desc id="fact-table-grain-d">A measure recorded at a coarser grain than the fact table it sits in, with two honest resolutions shown: allocate the measure down to the finer grain, or move it to a separate fact table declared at its own grain.</desc>
   <rect x="250" y="16" width="300" height="52" rx="6" fill="#c8472b"/>
   <text x="400" y="41" font-size="14" fill="#f6f3ec" text-anchor="middle">order-level fact arrives</text>
   <text x="400" y="59" font-size="12" fill="#f6f3ec" text-anchor="middle">(shipping fee, at the wrong grain)</text>

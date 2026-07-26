@@ -38,7 +38,9 @@ built on top).
 ## Structure
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;">
+<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="data-vault-t data-vault-d">
+  <title id="data-vault-t">Data Vault structure: hubs, links, and satellites</title>
+  <desc id="data-vault-d">Two hub tables holding only business keys, hub_customer and hub_order, joined by a link table representing the relationship between them. Satellite tables hang off each hub carrying descriptive attributes and their history. Hubs are keys, links are relationships, satellites are descriptive history.</desc>
   <rect x="60" y="110" width="170" height="70" rx="6" fill="#c8472b"/>
   <text x="145" y="140" font-size="14" fill="#f6f3ec" text-anchor="middle" font-weight="700">hub_customer</text>
   <text x="145" y="162" font-size="11" fill="#f6f3ec" text-anchor="middle">business key only</text>

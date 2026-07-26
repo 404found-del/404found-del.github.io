@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Modeling"
 description: "Star schema vs snowflake schema comes down to one decision — whether you normalize your dimensions. Here's the difference, a worked example, a diagram, and why the star usually wins on a modern warehouse."
 date: 2026-05-12
-last_modified_at: 2026-07-05
+last_modified_at: 2026-07-26
 faq:
   - q: "What is the difference between a star schema and a snowflake schema?"
     a: "A star schema keeps each dimension in a single flat, denormalized table. A snowflake schema normalizes those dimensions into multiple related sub-tables. That one choice — denormalized versus normalized dimensions — is the entire distinction; the fact table is the same in both."
@@ -46,7 +46,9 @@ dimension "snowflakes" out into smaller related tables, which is where the name 
 from.
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;">
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="star-schema-vs-snowflake-schema-t star-schema-vs-snowflake-schema-d">
+  <title id="star-schema-vs-snowflake-schema-t">Star schema versus snowflake schema</title>
+  <desc id="star-schema-vs-snowflake-schema-d">Two layouts side by side. In the star, dimension tables attach directly to the central fact table, one hop away. In the snowflake, the product dimension is normalized into further sub-tables, adding hops.</desc>
   <text x="195" y="28" text-anchor="middle" font-size="15" fill="#c8472b" font-weight="600" letter-spacing="2">STAR</text>
   <text x="600" y="28" text-anchor="middle" font-size="15" fill="#c8472b" font-weight="600" letter-spacing="2">SNOWFLAKE</text>
   <line x1="400" y1="44" x2="400" y2="340" stroke="#ddd6c8" stroke-width="1" stroke-dasharray="4 5"/>
@@ -156,6 +158,13 @@ version of that trade-off, see [normalization vs
 denormalization](/essays/normalization-vs-denormalization/); if you want the even more
 aggressive end of denormalization, see [one big table vs the star
 schema](/essays/one-big-table-vs-star-schema/).)
+
+Worth noting that this isn't a contested reading: the Kimball Group's own
+technique catalogue treats
+[denormalized flattened dimensions](https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/denormalized-flattened-dimension)
+as the default and files
+[snowflaked dimensions](https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/snowflake-dimension)
+as the exception you justify.
 
 Pick the star by default. Snowflake a dimension only when you can name the specific
 problem it solves. And don't lose an afternoon to the debate — it was only ever one

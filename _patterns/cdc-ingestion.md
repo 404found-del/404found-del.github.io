@@ -38,7 +38,9 @@ problems — it *is* the ground truth of what changed.
 ## Structure
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 220" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;">
+<svg viewBox="0 0 800 220" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="cdc-ingestion-t cdc-ingestion-d">
+  <title id="cdc-ingestion-t">Change data capture ingestion pattern</title>
+  <desc id="cdc-ingestion-d">An OLTP database's transaction log is read by a CDC reader such as Debezium, producing an ordered, replayable change stream, which is merged into a lakehouse table. The log is ground truth: every change, in order, including deletes.</desc>
   <rect x="30" y="70" width="160" height="80" rx="6" fill="#1c1a17"/>
   <text x="110" y="105" font-size="13" fill="#f6f3ec" text-anchor="middle">OLTP database</text>
   <text x="110" y="126" font-size="11" fill="#f6f3ec" text-anchor="middle">transaction log</text>

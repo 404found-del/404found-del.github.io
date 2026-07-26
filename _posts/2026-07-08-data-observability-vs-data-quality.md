@@ -4,6 +4,7 @@ kicker: "Field Notes"
 topic: "Governance"
 description: "Data quality checks the rules you wrote; data observability watches for the failures you didn't anticipate. Neither replaces the other — here's the honest split."
 date: 2026-07-08 20:00:00 +0530
+last_modified_at: 2026-07-26
 faq:
   - q: "What's the difference between data observability and data quality?"
     a: "Data quality is explicit rules you write about the data itself — this column is never null, amounts are positive, keys are unique. Data observability is automated monitoring of data health signals — freshness, volume, schema, distribution — that learns baselines from history and alerts on anomalies. Quality catches violations you anticipated; observability catches the incidents you didn't."
@@ -25,7 +26,7 @@ violations you anticipated. Observability is a smoke detector: it catches the
 fires you didn't. Neither replaces the other, because they fail in opposite
 ways.
 
-## The comparison, honestly
+## Data quality vs data observability, side by side
 
 | | Data quality | Data observability |
 |---|---|---|
@@ -76,7 +77,9 @@ can't: trace the anomaly upstream to its cause, and enumerate the dashboards
 and models downstream in its blast radius.
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;">
+<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="data-observability-vs-data-quality-t data-observability-vs-data-quality-d">
+  <title id="data-observability-vs-data-quality-t">Data quality and data observability catch different failures</title>
+  <desc id="data-observability-vs-data-quality-d">Two panels. Data quality applies rules you wrote: it catches anticipated failures and misses what nobody thought of. Data observability applies baselines learned from history: it catches unanticipated drift and misses data that has always been wrong. Each one's blind spot is the other one's job.</desc>
   <rect x="60" y="40" width="320" height="200" rx="8" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
   <text x="220" y="72" font-size="14" fill="#1c1a17" text-anchor="middle" font-weight="700">Data quality</text>
   <text x="220" y="100" font-size="12" fill="#56514a" text-anchor="middle">rules you wrote</text>

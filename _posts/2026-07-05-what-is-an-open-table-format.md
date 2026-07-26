@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "An open table format is a metadata spec that turns raw files in object storage into real tables — with ACID transactions, schema evolution, and time travel."
 date: 2026-07-05 09:00:00 +0530
-last_modified_at: 2026-07-23
+last_modified_at: 2026-07-26
 faq:
   - q: "What is an open table format in simple terms?"
     a: "It's a published specification for a metadata layer that sits on top of data files in object storage and makes them behave like a database table — tracking which files belong to the table, what schema they follow, and what the table looked like at any point in time. Apache Iceberg, Delta Lake, and Apache Hudi are the three main ones."
@@ -24,7 +24,8 @@ version of the table, exactly which data files belong to it and under what schem
 "Open" means the spec is published and engine-neutral: Spark, Trino, Flink, Snowflake,
 and BigQuery can all read and write the *same* table without a proprietary gatekeeper. (If you're unsure how a
 table format differs from the Parquet files underneath it, start with
-[Iceberg vs Parquet](/essays/apache-iceberg-vs-parquet/).)
+[Iceberg vs Parquet](/essays/apache-iceberg-vs-parquet/); for the file layer
+itself, [Parquet vs ORC vs Avro](/essays/parquet-vs-orc-vs-avro/).)
 The three names that matter are **[Apache Iceberg](/glossary/apache-iceberg/)**, **[Delta Lake](/glossary/delta-lake/)**, and **Apache
 Hudi** — and as of 2026, the industry has largely converged on Iceberg as the neutral
 standard.
@@ -57,7 +58,9 @@ Committing a change means writing new files and swapping one pointer — which i
 commit is atomic even on eventually-consistent object storage.
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;">
+<svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="what-is-an-open-table-format-t what-is-an-open-table-format-d">
+  <title id="what-is-an-open-table-format-t">The metadata tree shared by every open table format</title>
+  <desc id="what-is-an-open-table-format-d">A four-level chain: the catalog holds one atomic pointer per table; the pointer names a table metadata file holding schema, partitioning and snapshots; the metadata names a snapshot and its manifests; the snapshot lists the underlying Parquet data files and delete files. A commit writes new files and swaps one pointer.</desc>
   <rect x="290" y="16" width="220" height="48" rx="6" fill="#1c1a17"/>
   <text x="400" y="45" font-size="15" fill="#f6f3ec" text-anchor="middle">catalog</text>
   <text x="620" y="45" font-size="12" fill="#8a7f6d">one atomic pointer per table</text>
@@ -94,10 +97,15 @@ CREATE TABLE lake.sales.orders (
 ) USING iceberg
 PARTITIONED BY (days(order_ts));
 
--- yesterday's numbers, exactly as they were
+-- yesterday's numbers, exactly as they were.
+-- The timestamp must be a literal: Spark requires a deterministic, foldable
+-- expression here, so current_timestamp - INTERVAL '1' DAY is rejected.
 SELECT sum(amount)
 FROM lake.sales.orders
-FOR TIMESTAMP AS OF current_timestamp - INTERVAL '1' DAY;
+FOR TIMESTAMP AS OF '2026-07-04 00:00:00';
+
+-- Or pin the exact snapshot, which is what you want in a reproducible job:
+SELECT sum(amount) FROM lake.sales.orders FOR VERSION AS OF 3821550127947089000;
 
 -- row-level change, committed atomically
 MERGE INTO lake.sales.orders t
@@ -109,7 +117,10 @@ WHEN NOT MATCHED THEN INSERT *;
 That `MERGE` is the operation a bare lake never had — and it's what makes patterns
 like [change data capture](/essays/what-is-change-data-capture/) and an honest
 [medallion architecture](/essays/the-medallion-architecture-reconsidered/) practical
-on files.
+on files. It also raises the question every format has to answer: since the data
+files are immutable, does that `MERGE` rewrite them or annotate them? That's
+[merge-on-read vs copy-on-write](/essays/merge-on-read-vs-copy-on-write/), and
+it's the setting that decides what this convenience costs you.
 
 ## Iceberg vs Delta vs Hudi — where the war ended
 
@@ -128,8 +139,8 @@ gets its own field note.
 
 Which is why the real architectural decision has moved up a layer: not *which
 format*, but *which catalog* — the component that holds those atomic pointers and
-governs who may swap them. That fight (Polaris, Unity, Glue, Horizon, Nessie) is
-still live, and it's where lock-in now hides.
+governs who may swap them. That fight (Polaris, Unity, Glue, Snowflake Open
+Catalog, Nessie) is still live, and it's where lock-in now hides.
 
 ## When you don't need one
 

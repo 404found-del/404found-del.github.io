@@ -39,7 +39,9 @@ a real concern.
 ## Structure
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;">
+<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="lakehouse-t lakehouse-d">
+  <title id="lakehouse-t">Lakehouse architecture</title>
+  <desc id="lakehouse-d">SQL and BI, Spark and machine learning, and streaming engines all sit above a shared open table format and catalog layer providing ACID transactions, schema enforcement, time travel and governance. Beneath that, object storage holds one copy of the data as Parquet files. Every engine reads and writes the same tables, with no replication between systems.</desc>
   <rect x="80" y="30" width="150" height="50" rx="6" fill="#1c1a17"/>
   <text x="155" y="60" font-size="13" fill="#f6f3ec" text-anchor="middle">SQL / BI</text>
   <rect x="325" y="30" width="150" height="50" rx="6" fill="#1c1a17"/>
