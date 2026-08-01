@@ -63,14 +63,34 @@ defaults:
 # The homepage lists essays by recency, which spends the site's strongest
 # internal links on the newest (least proven) work. This list overrides that for
 # the top block. Order is deliberate. Review against GSC Pages.csv quarterly.
-# Source: GSC Performance-on-Search 2026-07-22, ranked by impressions and clicks.
+# Source: GSC Performance-on-Search 2026-08-01, ranked by clicks then impressions.
 most_read:
-  - /essays/kimball-vs-inmon/
-  - /essays/star-schema-vs-snowflake-schema/
-  - /essays/data-lake-vs-lakehouse/
-  - /essays/how-to-choose-an-iceberg-catalog/
-  - /essays/one-big-table-vs-star-schema/
-  - /essays/what-is-a-data-catalog/
+  - /essays/how-to-choose-an-iceberg-catalog/   # 8 clicks, pos 13.1 — best converter
+  - /essays/one-big-table-vs-star-schema/       # 5 clicks, page-one cluster
+  - /essays/kimball-vs-inmon/                   # 2,298 impressions — biggest page
+  - /essays/star-schema-vs-snowflake-schema/    # 2,060 impressions
+  - /essays/fact-table-types/                   # 4 clicks, pos 29.1
+  - /essays/apache-iceberg-vs-parquet/          # debuted pos 11.1 — fastest ever
+
+# --- llms-full.txt ordering ---------------------------------------------------
+# llms-full.txt is ~400 KB. Retrieval clients that cap their read get whatever is
+# at the TOP, and site.posts is reverse-chronological — which put the five most
+# AI-cited essays (all older) at the very bottom. These are emitted first.
+# Source: Bing AI Performance page report, 2026-08-01, ranked by citations.
+llms_priority:
+  - /essays/data-warehouse-vs-data-lake-vs-lakehouse/   # 962 citations
+  - /essays/fact-table-vs-dimension-table/              # 554
+  - /essays/kimball-vs-inmon/                           # 174
+  - /essays/star-schema-vs-snowflake-schema/            # 172
+  - /essays/conformed-dimensions/                       # 150
+  - /essays/data-lake-vs-lakehouse/                     # 39
+  - /essays/surrogate-keys-vs-natural-keys/             # 31
+  - /essays/factless-fact-tables/                       # 24
+  - /essays/one-big-table-vs-star-schema/               # 19
+  - /essays/date-dimension-table/                       # 18
+  - /essays/normalization-vs-denormalization/           # 17
+  - /essays/fact-table-types/                           # 15
+  - /essays/data-vault-vs-dimensional-modeling/         # 15
 
 # --- Plugins (all whitelisted on GitHub Pages) -------------------------------
 plugins:
