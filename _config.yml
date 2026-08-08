@@ -16,6 +16,26 @@ author: "dataarchitect.studio"
 permalink: /essays/:title/
 timezone: Asia/Kolkata
 
+# --- Markdown: pinned explicitly, and this matters -----------------------------
+# These were previously UNSET, which meant the renderer was inherited from
+# whichever pipeline happened to build the site:
+#   * GitHub Pages' legacy branch build (github-pages gem) FORCES input: GFM.
+#   * A standalone Jekyll 4 build defaults to input: kramdown, NOT GFM.
+# Same source, two different markdown parsers. Pinning them here makes the two
+# pipelines render identically, so switching Pages source is a safe operation
+# rather than a silent content change across 50 essays of fenced code and tables.
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: highlight
+    block:
+      line_numbers: false
+
 # --- Collections ---------------------------------------------------------------
 collections:
   patterns:

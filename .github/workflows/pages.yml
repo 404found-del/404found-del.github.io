@@ -81,6 +81,19 @@ jobs:
           echo "posts: $src   rendered: $out"
           [ "$out" -ge "$src" ] || note "only $out of $src essays rendered"
 
+          echo "--- markdown renderer parity ---"
+          # These assert the GFM + rouge pipeline pinned in _config.yml actually
+          # took effect. If Pages source is switched and the parser silently
+          # falls back to kramdown's default input, these fail instead of
+          # quietly re-rendering 50 essays of code blocks and tables.
+          bm=_site/essays/parquet-vs-orc/index.html
+          test -f "$bm" || note "canary page missing: $bm"
+          grep -q 'class="highlight"' "$bm" || note "rouge highlighting absent; highlighter/syntax_highlighter not applied"
+          grep -q '<table' "$bm" || note "GFM tables not rendering as <table>"
+          grep -q '<code' "$bm" || note "fenced code blocks not rendering"
+          # kramdown's default parser leaves GFM fenced-block info strings visible
+          grep -q '^```' "$bm" && note "raw fence markers in output; GFM input not active" || true
+
           echo "--- no unrendered Liquid in output ---"
           if grep -rIl '{%\|{{' _site --include='*.html' --include='*.txt' | head -1 | grep -q .; then
             grep -rIn '{%\|{{' _site --include='*.html' --include='*.txt' | head -5

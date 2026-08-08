@@ -42,11 +42,27 @@ bundle install
 bundle exec jekyll serve
 ```
 
-**Note on Jekyll versions.** `Gemfile` targets Jekyll 4.x. Confirm which
-pipeline is actually deploying before assuming local output matches production:
-GitHub Pages' legacy branch build pins Jekyll 3.x via the `github-pages` gem,
-while `.github/workflows/pages.yml` builds with the Gemfile's version. Check
-the `generator` meta tag on a live page to see which one is in force.
+### Which pipeline builds this site
+
+Two are possible, and they are not interchangeable:
+
+| Pages source setting | Builder | Jekyll |
+|---|---|---|
+| Deploy from a branch | GitHub's legacy `github-pages` gem | 3.x, Gemfile ignored |
+| GitHub Actions | `.github/workflows/pages.yml` | Whatever the Gemfile pins |
+
+Check the `generator` meta tag on any live page to see which is in force.
+
+The markdown configuration in `_config.yml` is pinned explicitly
+(`kramdown.input: GFM`, `highlighter: rouge`) precisely so the two produce the
+same HTML. Without that, the legacy build forces GFM while a standalone Jekyll 4
+build defaults to kramdown's own parser — the same source rendered by two
+different markdown parsers. Don't remove those settings.
+
+The Actions workflow validates the built output before deploying: FAQ answers
+present in `llms-full.txt`, no SVG markup leaked into it, priority essays inside
+the first 128 KB, every essay rendered, no unrendered Liquid, and the markdown
+parser behaving as pinned. It runs on pull requests too, without deploying.
 
 ## Contributing
 
