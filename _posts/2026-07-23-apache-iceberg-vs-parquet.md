@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "Iceberg and Parquet aren't rivals — Parquet is a file format, Iceberg is a table format that manages Parquet files. Here's the difference, and why it matters."
 date: 2026-07-23 09:00:00 +0530
-last_modified_at: 2026-07-26
+last_modified_at: 2026-08-08
 faq:
   - q: "What is the difference between Apache Iceberg and Parquet?"
     a: "Parquet is a file format — it defines how the bytes of a single file are laid out on disk, column by column, compressed. Apache Iceberg is a table format — it defines how many files together form one logical table, tracking which files are current, what schema applies, and how changes commit atomically. Iceberg tables are almost always made of Parquet files, so it's not a choice between them; it's two layers of the same stack."
@@ -138,7 +138,8 @@ as parallel. They aren't. The honest decision tree:
 If your next question is "then which table format" — that's
 [Iceberg vs Delta Lake](/essays/iceberg-vs-delta-lake/), a real same-layer choice.
 And if it's "which file format underneath" — that's
-[Parquet vs ORC vs Avro](/essays/parquet-vs-orc-vs-avro/), a real same-layer
-choice one rung down. But *Iceberg vs Parquet* isn't a choice at all.
+[Parquet vs ORC vs Avro](/essays/parquet-vs-orc-vs-avro/), or the narrower
+[Parquet vs ORC](/essays/parquet-vs-orc/), both real same-layer choices one rung
+down. But *Iceberg vs Parquet* isn't a choice at all.
 It's two layers of one stack, and the moment you see them stacked instead of
 side-by-side, the confusion dissolves.

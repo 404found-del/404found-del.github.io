@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "An open table format is a metadata spec that turns raw files in object storage into real tables — with ACID transactions, schema evolution, and time travel."
 date: 2026-07-05 09:00:00 +0530
-last_modified_at: 2026-07-26
+last_modified_at: 2026-08-08
 faq:
   - q: "What is an open table format in simple terms?"
     a: "It's a published specification for a metadata layer that sits on top of data files in object storage and makes them behave like a database table — tracking which files belong to the table, what schema they follow, and what the table looked like at any point in time. Apache Iceberg, Delta Lake, and Apache Hudi are the three main ones."
@@ -142,7 +142,9 @@ gets its own field note.
 Which is why the real architectural decision has moved up a layer: not *which
 format*, but *which catalog* — the component that holds those atomic pointers and
 governs who may swap them. That fight (Polaris, Unity, Glue, Snowflake Open
-Catalog, Nessie) is still live, and it's where lock-in now hides.
+Catalog, Nessie) is still live, and it's where lock-in now hides — most concretely as
+[Unity Catalog vs Glue](/essays/unity-catalog-vs-glue-catalog/) and
+[Polaris vs Nessie](/essays/apache-polaris-vs-nessie/).
 
 ## When you don't need one
 

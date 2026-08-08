@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "Iceberg and Delta Lake have converged on capabilities — ACID, time travel, deletion vectors. The real decision is your platform and catalog, not the format."
 date: 2026-07-06 09:00:00 +0530
-last_modified_at: 2026-07-26
+last_modified_at: 2026-08-08
 faq:
   - q: "Which is better, Apache Iceberg or Delta Lake?"
     a: "Neither, on raw capabilities — both provide ACID transactions, schema evolution, time travel, and deletion vectors. Delta introduced deletion vectors incrementally from 2.3.0 in 2023, with full MERGE support and on-by-default behaviour landing in 3.1.0; Iceberg standardised them in the v3 spec. The practical answer is platform fit: Delta is the frictionless choice inside Databricks and Fabric; Iceberg is the safer default for open, multi-engine lakehouses because every major platform reads and writes it."
@@ -133,7 +133,10 @@ catalog itself — a distinction worth keeping straight when you compare
 offerings. The catalog is where access control, auditing,
 and cross-engine governance actually happen, and switching catalogs is far more
 painful than translating table metadata. If you're building a
-[lakehouse](/essays/data-lake-vs-lakehouse/) in 2026, spend your evaluation
+[lakehouse](/essays/data-lake-vs-lakehouse/) in 2026, and the two head-to-heads
+that come up most are
+[Unity Catalog vs Glue](/essays/unity-catalog-vs-glue-catalog/) and
+[Polaris vs Nessie](/essays/apache-polaris-vs-nessie/). Spend your evaluation
 weeks there — [choosing the catalog](/essays/how-to-choose-an-iceberg-catalog/)
 is its own decision, and the format choice, pleasantly, has become the easy
 part.

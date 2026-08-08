@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "The table format war is settled; the catalog decides governance and lock-in now. How Iceberg catalogs work, compared honestly — and a decision rule that holds."
 date: 2026-07-08 19:00:00 +0530
-last_modified_at: 2026-07-26
+last_modified_at: 2026-08-08
 faq:
   - q: "What does an Iceberg catalog actually do?"
     a: "It holds the authoritative pointer to each table's current metadata file and swaps that pointer atomically on every commit — which is what makes transactions work. On top of that mechanical job, catalogs layer the governance: who may read, write, or commit to which table, from which engine, with what audit trail."
@@ -147,6 +147,12 @@ younger, and you'll assemble more of the surrounding tooling yourself.
 **Nessie** gives you catalog-level branches and tags (test a whole pipeline
 against a branch of production data, then merge) — a genuinely distinctive
 capability that most teams don't need yet.
+
+Two of these pairings come up often enough to deserve their own treatment:
+[Unity Catalog vs AWS Glue](/essays/unity-catalog-vs-glue-catalog/), where the
+answer for Databricks-on-AWS estates is usually *both*, and
+[Apache Polaris vs Nessie](/essays/apache-polaris-vs-nessie/), where the merger
+announced in 2024 still has not happened despite most guidance assuming it did.
 
 Whichever you pick, pick it *deliberately*. In a
 [lakehouse](/essays/data-lake-vs-lakehouse/) built on open formats, the catalog

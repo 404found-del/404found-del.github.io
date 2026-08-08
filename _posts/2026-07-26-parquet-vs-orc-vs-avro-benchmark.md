@@ -239,6 +239,9 @@ write-heavy streaming and cross-system exchange want Avro. That split is
 structural, and the Avro pruning result is about as direct a confirmation as a
 measurement can give.
 
+*(The Parquet-vs-ORC half of this now has its own field note:
+[Parquet vs ORC](/essays/parquet-vs-orc/).)*
+
 **Corrected:** I previously wrote that ORC "often achieves slightly higher
 compression." I no longer think that should be stated as a general fact. On this
 data, at matched codecs, it was 23–26% larger. ORC remains the right call where

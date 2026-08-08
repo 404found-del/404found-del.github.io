@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "Parquet and ORC are columnar formats for analytics; Avro is row-based for streaming and schema evolution. A clear comparison and a decision rule that holds."
 date: 2026-07-23 11:00:00 +0530
-last_modified_at: 2026-07-26
+last_modified_at: 2026-08-08
 faq:
   - q: "What is the difference between Parquet, ORC, and Avro?"
     a: "Parquet and ORC are columnar formats — they store all of one column together, which makes analytical queries that read a few columns fast and highly compressible. Avro is row-based — it stores whole records together, which makes it fast to write and ideal for streaming and data exchange. Columnar wins for reads and analytics; row-based wins for writes, streaming, and schema evolution."
@@ -95,6 +95,9 @@ using embedded statistics, both compress excellently. The practical differences:
 - **ORC** grew up in the **Hive/Hadoop** world and has mature ACID support
   *within Hive*. It remains the natural choice where a Hive- or Trino-centric
   stack already favours it.
+
+The head-to-head gets its own field note:
+[Parquet vs ORC](/essays/parquet-vs-orc/), with the measured numbers.
 
 **A correction.** An earlier version of this essay said ORC "often edges Parquet
 on compression ratio," which is the conventional claim. I then
