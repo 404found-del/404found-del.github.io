@@ -29,6 +29,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Runs before bundler so a Gemfile/lock mismatch reports as a clear message
+      # rather than as bundler exit code 16 seven seconds into the build.
+      - name: Check Gemfile and Gemfile.lock agree
+        run: |
+          set -euo pipefail
+          gems=$(grep -oP '^\s*gem\s+"\K[^"]+' Gemfile | sort -u)
+          deps=$(sed -n '/^DEPENDENCIES/,/^$/p' Gemfile.lock | sed -n 's/^  \([a-z0-9_-]*\).*/\1/p' | sort -u)
+          if [ "$gems" != "$deps" ]; then
+            echo "::error::Gemfile and Gemfile.lock disagree. CI runs bundler in frozen mode."
+            echo "Gemfile:";      echo "$gems"
+            echo "Gemfile.lock:"; echo "$deps"
+            echo "Fix: run 'bundle lock' locally and commit Gemfile.lock."
+            exit 1
+          fi
+          echo "Gemfile and lock agree."
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:

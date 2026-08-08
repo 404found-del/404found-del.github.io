@@ -1,10 +1,11 @@
 source "https://rubygems.org"
 
 gem "jekyll", "~> 4.3"
-
-# Required by kramdown.input: GFM in _config.yml. It arrives as a Jekyll
-# transitive dependency, but the config depends on it directly, so declare it.
-gem "kramdown-parser-gfm", "~> 1.1"
+# NOTE: kramdown.input: GFM in _config.yml needs kramdown-parser-gfm. Do NOT add
+# it here: Jekyll 4 already depends on it directly, so it is always in the lock,
+# and declaring it changes the Gemfile without changing Gemfile.lock. CI runs
+# bundler in frozen mode (bundler-cache: true), which then fails with exit 16.
+# Any real Gemfile change must be followed by `bundle lock` and a lock commit.
 
 group :jekyll_plugins do
   gem "jekyll-feed"
