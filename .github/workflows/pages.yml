@@ -1,7 +1,15 @@
 name: Build and deploy Jekyll site to Pages
 
+# NOTE: this workflow only runs if Settings -> Pages -> Source is set to
+# "GitHub Actions". If Source is "Deploy from a branch", GitHub's legacy
+# pipeline builds the site instead, using the github-pages gem (Jekyll 3.x)
+# and ignoring this file and the Gemfile entirely. Check the `generator`
+# meta tag on a live page to see which pipeline is actually deploying.
+
 on:
   push:
+    branches: ["main"]
+  pull_request:
     branches: ["main"]
   workflow_dispatch:
 
@@ -20,22 +28,73 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
           bundler-cache: true
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+
       - name: Build with Jekyll
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
+
+      # Checks that run against the BUILT output. These exist because
+      # llms-full.txt once shipped silently broken for weeks: it rendered
+      # without error while omitting every FAQ answer. A green build is not
+      # evidence that the output is correct.
+      - name: Validate build output
+        run: |
+          set -euo pipefail
+          fail=0
+          note () { echo "::error::$1"; fail=1; }
+
+          echo "--- llms-full.txt integrity ---"
+          f=_site/llms-full.txt
+          test -f "$f" || note "llms-full.txt was not generated"
+          qa=$(grep -c '^Q: ' "$f" || true)
+          echo "Q/A pairs: $qa"
+          [ "$qa" -ge 150 ] || note "llms-full.txt has only $qa Q/A pairs; FAQ injection likely broken"
+          svg=$(grep -c '<svg' "$f" || true)
+          [ "$svg" -eq 0 ] || note "llms-full.txt leaked $svg <svg> tags; SVG stripping broken"
+          # the most-cited essays must appear early, or clients that cap their read miss them
+          head -c 131072 "$f" > /tmp/head.txt
+          for t in "Data Warehouse vs Data Lake vs Lakehouse" "Fact Table vs Dimension Table" "Kimball vs Inmon"; do
+            grep -qF "$t" /tmp/head.txt || note "llms_priority ordering broken: '$t' not in first 128 KB"
+          done
+
+          echo "--- core files present ---"
+          for p in _site/sitemap.xml _site/llms.txt _site/robots.txt _site/feed.xml \
+                   _site/benchmarks/index.html _site/benchmarks/file-format-benchmark.py \
+                   _site/benchmarks/results-2026-07-26.json; do
+            test -f "$p" || note "missing from build output: $p"
+          done
+
+          echo "--- every essay rendered ---"
+          src=$(ls _posts/*.md | wc -l)
+          out=$(find _site/essays -name index.html | wc -l)
+          echo "posts: $src   rendered: $out"
+          [ "$out" -ge "$src" ] || note "only $out of $src essays rendered"
+
+          echo "--- no unrendered Liquid in output ---"
+          if grep -rIl '{%\|{{' _site --include='*.html' --include='*.txt' | head -1 | grep -q .; then
+            grep -rIn '{%\|{{' _site --include='*.html' --include='*.txt' | head -5
+            note "unrendered Liquid found in build output"
+          fi
+
+          exit $fail
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
   deploy:
+    # Only deploy on push to main, never on pull requests.
+    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

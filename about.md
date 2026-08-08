@@ -58,7 +58,7 @@ Where a piece walks through a scenario with numbers, it says plainly that the
 scenario is constructed.
 
 Spotted an error? Open an issue on
-[GitHub](https://github.com/404found-del) — corrections are taken seriously and
+[GitHub](https://github.com/404found-del/404found-del.github.io/issues) — corrections are taken seriously and
 made visibly.
 
 ## The premise
@@ -74,4 +74,5 @@ That's the thread running through everything here.
 ---
 
 *Built with Jekyll, hosted on GitHub Pages, and set in Fraunces, Newsreader, and
-IBM Plex Mono. The source lives on [GitHub](https://github.com/404found-del).*
+IBM Plex Mono. The source lives on
+[GitHub](https://github.com/404found-del/404found-del.github.io).*

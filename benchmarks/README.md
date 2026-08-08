@@ -1,4 +1,10 @@
-# Benchmarks
+---
+layout: page
+title: "Benchmarks"
+kicker: "Reproducible measurements"
+description: "The benchmark scripts behind the numbers published on this site, with their raw results. Seeded datasets, so a rerun operates on identical bytes."
+permalink: /benchmarks/
+---
 
 Reproducible measurements backing essays on dataarchitect.studio. Every number
 published on the site that comes from a benchmark comes from a script in here,
@@ -61,4 +67,4 @@ laptop CPU. The ratios are the point, and the ratios are what the essay reports.
   group / stripe sizes. Every format here can be made to do better.
 
 If you rerun it and get materially different results, that's worth knowing —
-open an issue on [GitHub](https://github.com/404found-del).
+open an issue on [GitHub](https://github.com/404found-del/404found-del.github.io/issues).

@@ -4,7 +4,7 @@ _site/
 .jekyll-metadata
 vendor/
 .bundle/
-Gemfile.lock
+# Gemfile.lock is intentionally TRACKED: CI needs it for reproducible builds.
 
 # local tooling & drafts — never publish (API keys, distribution drafts)
 tools/
