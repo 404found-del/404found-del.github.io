@@ -1,9 +1,10 @@
 ---
-title: "Parquet vs ORC vs Avro: I Ran the Benchmark, and One Result Surprised Me"
+title: "Parquet vs ORC vs Avro Benchmark: Compression and Read Speed"
 kicker: "Measured"
 topic: "Engineering"
-description: "Real numbers on 3 million rows: compression, write time, and column-pruned reads across Parquet, ORC, Avro, and CSV. The script is published; rerun it."
+description: "Benchmarked on 3 million rows: Parquet was 23-26% smaller than ORC at matched codecs, contradicting the usual claim. Script published, rerun it yourself."
 date: 2026-07-26 14:00:00 +0530
+last_modified_at: 2026-08-08
 faq:
   - q: "Is Parquet or ORC better for compression?"
     a: "On the dataset measured here, Parquet was smaller at every matched compression codec: 26% smaller than ORC with Snappy, and 23% smaller with DEFLATE. That contradicts the widely repeated claim that ORC compresses better. The honest conclusion isn't that ORC is worse everywhere, but that 'ORC compresses better' is not a default you can assume, and is worth measuring on your own data before it drives a decision."
@@ -14,6 +15,10 @@ faq:
   - q: "Should I use gzip or zstd for Parquet?"
     a: "Zstd, in almost every case. Measured on identical data, gzip produced a file 8% smaller than zstd but took 30 times longer to write. That trade is rarely worth making for analytical tables that are written once and read many times, and never worth making for tables written continuously."
 ---
+
+**Parquet came out 23–26% smaller than ORC at matched compression codecs** — the
+opposite of the claim you'll find in most comparisons, including one I published
+on this site. That result is the reason this piece exists.
 
 Every comparison of file formats I have written, including
 [the one on this site](/essays/parquet-vs-orc-vs-avro/), asserts things about
