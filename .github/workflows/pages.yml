@@ -91,6 +91,19 @@ jobs:
             test -f "$p" || note "missing from build output: $p"
           done
 
+          echo "--- no future-dated posts ---"
+          # Jekyll's default future:false silently DROPS posts dated ahead of
+          # build time. That reads downstream as a missing page and a cascade of
+          # confusing grep failures, so name the real cause here.
+          now=$(date -u +%s)
+          while IFS= read -r post; do
+            d=$(sed -n 's/^date:[[:space:]]*//p' "$post" | head -1)
+            ts=$(date -u -d "$d" +%s 2>/dev/null) || continue
+            if [ "$ts" -gt "$now" ]; then
+              note "future-dated post will not be built: $post (date: $d)"
+            fi
+          done < <(ls _posts/*.md)
+
           echo "--- every essay rendered ---"
           src=$(ls _posts/*.md | wc -l)
           out=$(find _site/essays -name index.html | wc -l)
