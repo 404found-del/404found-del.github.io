@@ -153,9 +153,14 @@ exclude:
 # choose a code (e.g. "dataarchitect"), and put it here. Script renders only when set.
 goatcounter_code: "vmaheshwari"
 
-# Email list: create a free account at buttondown.com and put your username here.
-# The subscribe form renders only when set.
-buttondown_username: "maheshwari"
+# Email list. DISABLED 2026-08-15: the username was derived from the owner's real
+# name and appeared in the rendered HTML of every essay, which conflicts with the
+# site publishing pseudonymously. Newsletter is also not the objective function
+# (see handoff §11.1), so nothing of value is lost by leaving this off.
+# _includes/subscribe.html is guarded on this value, so an empty string removes
+# the form from the post, pattern, and home layouts. To re-enable, create an
+# account under a NEUTRAL handle and put that username here.
+buttondown_username: ""
 
 # Search engine verification: both GSC and Bing are DNS-verified, so no meta
 # tokens are needed (empty tokens previously shipped dead meta tags on every page).
