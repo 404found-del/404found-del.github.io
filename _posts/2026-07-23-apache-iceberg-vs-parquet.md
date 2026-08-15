@@ -2,9 +2,9 @@
 title: "Apache Iceberg vs Parquet: They're Not the Same Layer"
 kicker: "Field Notes"
 topic: "Architecture"
-description: "Iceberg and Parquet aren't rivals — Parquet is a file format, Iceberg is a table format that manages Parquet files. Here's the difference, and why it matters."
+description: "Parquet is a file format, Iceberg is a table format that manages Parquet files. The difference, what Iceberg costs, and how to migrate without rewriting."
 date: 2026-07-23 09:00:00 +0530
-last_modified_at: 2026-08-08
+last_modified_at: 2026-08-15
 faq:
   - q: "What is the difference between Apache Iceberg and Parquet?"
     a: "Parquet is a file format — it defines how the bytes of a single file are laid out on disk, column by column, compressed. Apache Iceberg is a table format — it defines how many files together form one logical table, tracking which files are current, what schema applies, and how changes commit atomically. Iceberg tables are almost always made of Parquet files, so it's not a choice between them; it's two layers of the same stack."
@@ -14,6 +14,10 @@ faq:
     a: "Yes. The Iceberg spec supports Parquet, ORC, and Avro as underlying data files, and the choice is configurable per table. Parquet is the overwhelmingly common default for analytical workloads, but Iceberg's design deliberately separates the table layer from the file layer, so the file format is a swappable implementation detail."
   - q: "Is Parquet being replaced by Iceberg?"
     a: "No — Iceberg makes Parquet more useful, not obsolete. Iceberg needs a file format underneath it to actually store the rows, and Parquet is the one it reaches for most. The trend isn't Parquet being replaced; it's bare folders of Parquet files being wrapped in a table format so they behave like databases."
+  - q: "How do I convert existing Parquet files to an Iceberg table?"
+    a: "Without rewriting the data, in most cases. Iceberg ships Spark procedures for exactly this: add_files registers existing Parquet files into an Iceberg table by reading their footers and writing metadata; migrate converts a registered Hive or Spark table in place; snapshot creates an Iceberg table that shares the original files, so you can test before committing. All three write metadata rather than data, so a terabyte of Parquet becomes an Iceberg table in minutes, not hours."
+  - q: "What does Apache Iceberg cost you?"
+    a: "Four things the vendor comparisons rarely mention. Metadata accumulates, so snapshots need expiring or planning slows down. Frequent small commits create small files that must be compacted. Failed writes leave orphan files that need collecting. And the catalog becomes a hard runtime dependency in the write path of every transaction, which is also where lock-in now lives. None is a reason to avoid Iceberg; all four are maintenance you must schedule rather than discover."
 ---
 
 The question "Apache Iceberg vs Parquet" contains a hidden mistake, and clearing
@@ -50,10 +54,24 @@ table.** Everything else follows from that.
 Parquet is a **columnar file format**: instead of storing row 1, then row 2, it
 stores all of column A, then all of column B. That single decision is why it's the
 backbone of analytics — a query that needs two columns out of fifty reads only
-those two, and columns of like values compress far better than mixed rows. On a
-[benchmark run for this site](/essays/parquet-vs-orc-vs-avro-benchmark/), that
-came to 6.1× smaller than the equivalent CSV and a filtered aggregation 13.8×
-faster — the shape of every [OLAP](/glossary/olap/) query there is.
+those two, and columns of like values compress far better than mixed rows.
+
+Those claims are usually asserted. Here they are measured, on 3 million rows and
+11 columns, from a [benchmark whose script is published](/essays/parquet-vs-orc-vs-avro-benchmark/):
+
+| | CSV | Parquet (zstd) | Difference |
+|---|---|---|---|
+| **On disk** | 342.6 MB | 56.6 MB | **6.1× smaller** |
+| **Full scan** | 1.398 s | 0.377 s | 3.7× faster |
+| **Read 2 of 11 columns** | 0.499 s | 0.054 s | **9.2× faster** |
+| **Filtered aggregation (DuckDB)** | 0.879 s | 0.064 s | **13.8× faster** |
+
+The row that matters most is the third. CSV's apparent "column pruning" saves
+only the conversion of columns you didn't ask for — it still parses every byte of
+every row, because the bytes of one column are physically interleaved with all
+the others. Parquet reads two column chunks and skips the rest of the file. That
+is the whole argument for columnar storage, and it is worth roughly an order of
+magnitude on the shape every [OLAP](/glossary/olap/) query has.
 
 But a Parquet file knows nothing beyond itself. It cannot tell you which *other*
 files belong to the same table, whether a write finished, or what the data looked
@@ -120,6 +138,74 @@ setting: because those Parquet files are immutable, Iceberg has to decide whethe
 an update rewrites them or annotates them, which is
 [merge-on-read vs copy-on-write](/essays/merge-on-read-vs-copy-on-write/).
 
+## Converting existing Parquet to Iceberg, without rewriting it
+
+This is the question that actually follows the comparison, and most write-ups
+skip it: *I already have terabytes of Parquet in object storage. What does
+adopting Iceberg cost me?*
+
+Usually far less than people expect, because **Iceberg can adopt files it did not
+write.** All three of the standard routes produce metadata rather than data, so
+the conversion is measured in minutes rather than in a full rewrite:
+
+```sql
+-- 1. Try it first. Creates an independent Iceberg table that SHARES the
+--    original files, so the source is untouched and you can query both.
+CALL lake.system.snapshot('legacy_db.orders', 'lake.sales.orders_iceberg');
+
+-- 2. Adopt files in place. Reads each Parquet footer for schema and stats,
+--    then writes Iceberg metadata pointing at the files where they already are.
+CALL lake.system.add_files(
+  table       => 'lake.sales.orders',
+  source_table => '`parquet`.`s3://bucket/warehouse/orders/`'
+);
+
+-- 3. Convert a registered Hive/Spark table in place. The original is retained
+--    under a backup name so the change is reversible.
+CALL lake.system.migrate('legacy_db.orders');
+```
+
+Two caveats worth knowing before you run any of them. `add_files` trusts what the
+footers say, so files whose schema drifted from the table definition will fail or
+import wrong. And the imported files keep whatever layout they already had — if
+the legacy folder is fifty thousand 2 MB files, Iceberg will faithfully record
+fifty thousand 2 MB files. Adoption is not compaction. Plan a
+`rewrite_data_files` pass afterwards.
+
+## What Iceberg actually costs
+
+Every comparison of these two on the first page of Google is published by a
+vendor, and none of them tells you this part. Iceberg is worth adopting, and it
+is not free. Four ongoing costs, all of them maintenance you should schedule
+rather than discover:
+
+- **Metadata accumulates.** Every commit writes a new metadata file and snapshot.
+  Left alone on a busy table, query planning slows as the manifest list grows.
+  `expire_snapshots` is not optional housekeeping; it is part of running the table.
+- **Small files multiply.** Frequent commits produce many small data files, and
+  scan cost tracks file count as much as byte count. This is the same trap as
+  [merge-on-read without compaction](/essays/merge-on-read-vs-copy-on-write/).
+- **Orphans are left behind.** Failed or cancelled writes leave data files that no
+  snapshot references. They cost storage silently until `remove_orphan_files`
+  collects them.
+- **The catalog becomes a hard dependency.** Bare Parquet has no runtime
+  dependency at all: point any reader at the path and it works. An Iceberg table
+  cannot be read without the catalog that holds its pointer, which puts that
+  component in the write path of every transaction and makes
+  [choosing it](/essays/how-to-choose-an-iceberg-catalog/) the decision where
+  lock-in now lives.
+
+```sql
+-- The maintenance three. Schedule them; don't wait for symptoms.
+CALL lake.system.rewrite_data_files(table => 'sales.orders');
+CALL lake.system.expire_snapshots(table => 'sales.orders', older_than => TIMESTAMP '2026-07-01 00:00:00');
+CALL lake.system.remove_orphan_files(table => 'sales.orders');
+```
+
+None of this argues for staying on bare Parquet. It argues for adopting Iceberg
+with the maintenance jobs written at the same time as the migration, rather than
+six months later when planning latency has quietly tripled.
+
 ## So when does the comparison even come up?
 
 It comes up because tutorials and vendor pages talk about "storing data in
@@ -127,8 +213,10 @@ Parquet" and "storing data in Iceberg" as if they were alternatives, and they re
 as parallel. They aren't. The honest decision tree:
 
 - **Just need efficient files on disk / in object storage?** Parquet, on its own,
-  is a complete and excellent answer — for one-off exports, ML feature files, or
-  data you'll read as a whole.
+  is a complete and excellent answer — for one-off exports, ML feature files,
+  archival snapshots, or anything written once and read whole. It has no catalog
+  to run, no snapshots to expire, and no maintenance jobs. That is a real
+  advantage and it gets undersold because nobody sells Parquet.
 - **Need those files to behave as a table** — concurrent writers, safe schema
   changes, updates and deletes, reproducible history? Wrap them in a table format.
   That's the jump from a [data lake](/glossary/data-lake/) to a
