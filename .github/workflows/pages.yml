@@ -1,10 +1,15 @@
 name: Build and deploy Jekyll site to Pages
 
-# NOTE: this workflow only runs if Settings -> Pages -> Source is set to
-# "GitHub Actions". If Source is "Deploy from a branch", GitHub's legacy
-# pipeline builds the site instead, using the github-pages gem (Jekyll 3.x)
-# and ignoring this file and the Gemfile entirely. Check the `generator`
-# meta tag on a live page to see which pipeline is actually deploying.
+# THIS IS THE ONLY PAGES WORKFLOW. Do not add a second one.
+# When you set Settings -> Pages -> Source to "GitHub Actions", GitHub offers to
+# create a starter workflow (jekyll.yml). Decline it. That starter shares this
+# file's `concurrency: group: "pages"`, so the two race, and it carries none of
+# the validation below -- if it wins, every assertion here is bypassed. A
+# jekyll.yml was created that way on 2026-08-15 and removed the same day.
+#
+# Check the `generator` meta tag on a live page to confirm which pipeline is
+# actually deploying: Jekyll 4.x means this workflow, 3.10.x means the legacy
+# branch build (which ignores this file and the Gemfile entirely).
 
 on:
   push:
@@ -145,4 +150,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
