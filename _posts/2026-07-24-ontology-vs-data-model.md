@@ -1,5 +1,5 @@
 ---
-title: "Ontology vs Data Model: Meaning You Can Reuse vs Structure You Can Query"
+title: "Ontology vs Data Model: Meaning vs Structure"
 kicker: "Field Notes"
 topic: "Modeling"
 description: "A data model shapes data for one system; an ontology defines what concepts mean, independent of any system — and machines now read your schema."

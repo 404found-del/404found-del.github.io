@@ -1,5 +1,5 @@
 ---
-title: "The Grain of a Fact Table: The First Decision That Decides Everything Else"
+title: "The Grain of a Fact Table: The First Modeling Decision"
 kicker: "Field Notes"
 topic: "Modeling"
 description: "The grain is the business definition of what one fact table row represents. Declare it first — every dimension, measure, and bug traces back to it."

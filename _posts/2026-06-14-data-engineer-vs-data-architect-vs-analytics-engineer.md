@@ -1,5 +1,5 @@
 ---
-title: "Data Engineer vs Data Architect vs Analytics Engineer: Who Does What?"
+title: "Data Engineer vs Data Architect vs Analytics Engineer"
 kicker: "Field Notes"
 topic: "Craft"
 description: "Three overlapping data roles, three different jobs: engineers move the data, analytics engineers shape it, architects design the system. The real division."

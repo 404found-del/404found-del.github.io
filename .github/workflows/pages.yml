@@ -115,6 +115,28 @@ jobs:
           echo "posts: $src   rendered: $out"
           [ "$out" -ge "$src" ] || note "only $out of $src essays rendered"
 
+          echo "--- rendered <title> length ---"
+          # Bing Webmaster flags "Title too long" above ~91 rendered characters,
+          # which includes jekyll-seo-tag's " | dataarchitect.studio" suffix (23).
+          # Five pages breached this from 2026-08-23 until 2026-08-29. Assert on
+          # the BUILT html, not front matter, so the suffix is always counted.
+          long=0
+          while IFS= read -r page; do
+            t=$(sed -n 's:.*<title>\(.*\)</title>.*:\1:p' "$page" | head -1)
+            n=${#t}
+            if [ "$n" -gt 91 ]; then echo "  $n chars: $t"; long=$((long+1)); fi
+          done < <(find _site -name index.html)
+          [ "$long" -eq 0 ] || note "$long page(s) exceed the 91-char rendered title limit"
+
+          echo "--- internal links are canonical (no self-redirects) ---"
+          # Every internal href must end in / or be a real file. A link to
+          # /essays/foo (no slash) 301s to /essays/foo/, which wastes crawl
+          # budget and shows up in GSC as "Page with redirect".
+          bad=$(grep -rhoP 'href="(https://dataarchitect\.studio)?/[A-Za-z0-9/_-]+"' _site --include='*.html' \
+                | sed 's/href="//; s/"$//' | sort -u \
+                | grep -vE '/$|\.[a-z0-9]+$' || true)
+          if [ -n "$bad" ]; then echo "$bad" | head -10; note "internal links missing trailing slash"; fi
+
           echo "--- markdown renderer parity ---"
           # These assert the GFM + rouge pipeline pinned in _config.yml actually
           # took effect. If Pages source is switched and the parser silently

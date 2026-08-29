@@ -1,5 +1,5 @@
 ---
-title: "What GenAI Actually Changes About Data Architecture — and What It Doesn't"
+title: "What GenAI Actually Changes About Data Architecture"
 kicker: "Reconsidered"
 topic: "AI"
 description: "GenAI adds vector storage and new retrieval patterns to the data stack, but structure, quality, governance, and ownership matter more than ever, not less."

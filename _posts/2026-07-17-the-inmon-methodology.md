@@ -1,5 +1,5 @@
 ---
-title: "The Inmon Methodology: The Corporate Information Factory, with an Example"
+title: "The Inmon Methodology: The Corporate Information Factory"
 kicker: "Field Notes"
 topic: "Architecture"
 description: "Inmon's method builds one normalized enterprise warehouse first, then serves dimensional marts from it. How the CIF works, a worked example, and where it fits today."
