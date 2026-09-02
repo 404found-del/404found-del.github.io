@@ -1,7 +1,7 @@
 ---
 last_modified_at: 2026-07-06
 title: "Natural Key"
-description: "A natural key is an identifier that comes from the business or source system itself — like an email, SKU, or account number — as opposed to a generated surrogate key."
+description: "A natural key is an identifier that comes from the business or source system itself, like an email, SKU or account number, as opposed to a generated surrogate key."
 essay: surrogate-keys-vs-natural-keys
 related_terms:
   - surrogate-key

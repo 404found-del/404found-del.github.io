@@ -3,7 +3,7 @@ layout: page
 title: "Start here"
 kicker: "Reading paths"
 permalink: /start-here/
-description: "New to dataarchitect.studio? Curated reading paths through the essays — dimensional modeling, the lakehouse, pipelines, and the craft — in the order that builds understanding."
+description: "Curated reading paths through the essays: dimensional modeling, the lakehouse, pipelines and the craft, in the order that builds understanding."
 ---
 
 This site is a working reference on data architecture, and references read best

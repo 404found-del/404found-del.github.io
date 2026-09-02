@@ -1,7 +1,7 @@
 ---
 last_modified_at: 2026-07-06
 title: "Dimension Table"
-description: "A dimension table stores descriptive context — the attributes you filter and group by, like customer, product, or date — surrounding the facts in a dimensional model."
+description: "A dimension table stores descriptive context: the attributes you filter and group by, like customer, product or date, surrounding the facts in a dimensional model."
 essay: fact-table-vs-dimension-table
 related_terms:
   - fact-table

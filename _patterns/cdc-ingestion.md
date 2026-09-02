@@ -2,7 +2,7 @@
 last_modified_at: 2026-07-18
 title: "Change Data Capture Ingestion"
 intent: "Replicate operational data by streaming the database's own change log, instead of repeatedly querying tables for what's new."
-description: "The CDC ingestion pattern: log-based capture, ordered change streams, merge into analytical tables, trade-offs versus batch extracts, and when polling is honestly fine."
+description: "The CDC ingestion pattern: log-based capture, ordered change streams, merging into analytical tables, trade-offs against batch extracts, and when polling is fine."
 essays:
   - what-is-change-data-capture
   - batch-vs-streaming

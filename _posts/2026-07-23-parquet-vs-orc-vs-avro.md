@@ -12,6 +12,12 @@ faq:
     a: "Both are columnar and both are excellent; the difference is ecosystem more than capability. Parquet is the de facto default across Spark, the cloud warehouses, and most of the modern data stack, and it's what open table formats reach for. ORC has deep roots in the Hive/Hadoop world, including ACID support there. ORC is often said to compress better, but a benchmark on this site found Parquet 23-26% smaller at matched codecs, so treat that claim as something to measure rather than assume. For a new lakehouse, Parquet is the safe default."
   - q: "When should I use Avro instead of Parquet?"
     a: "Use Avro when writes dominate reads: streaming pipelines (it's the standard in the Kafka ecosystem), event logs, and any place records are written whole and often, or where schema evolution across systems matters. Avro's row-based layout and rich schema-evolution support make it ideal for moving data; its weakness is analytical queries, where columnar Parquet or ORC is far faster."
+  - q: "What is the difference between Parquet and Avro?"
+    a: "Layout, and everything follows from it. Parquet is columnar: it stores all of one column together, so a query reading a few columns touches only those, and similar values sitting next to each other compress hard. Avro is row-based: it stores each record whole, so writing an event is one append and the schema travels with the data. Measured on an identical 300,000-row table, Parquet at zstd was 6.47 MB against Avro at deflate's 10.55 MB — 39% smaller. Parquet reads 2 of 11 columns about 7x faster than it reads all 11; Avro reads 2 of 11 slightly slower than all 11, because there is nothing to prune."
+  - q: "Is Parquet or Avro better?"
+    a: "They are not competing for the same job, so the honest answer is that it depends on direction of travel. If you are querying data — scanning many rows and aggregating a few columns — Parquet, by a wide margin: it is smaller on disk and its column pruning is roughly a 7x speedup where Avro's is nothing at all. If you are moving data — streaming through Kafka, exchanging records between systems owned by different teams, evolving a schema over time — Avro, because it carries a rich schema with the data and writes records whole. Most serious platforms run both: Avro on the wire, Parquet at rest."
+  - q: "Is Avro faster than Parquet?"
+    a: "For analytical reads, no, and not marginally. Column pruning is the reason: reading 2 of 11 columns from Parquet was about 7x faster than reading all 11, while the same query against Avro was fractionally slower than reading everything, since a row-based reader must walk each whole record and discard the fields you did not ask for. Avro is often said to write faster, and that is plausible from its layout, but the benchmark on this site cannot confirm it — Avro was written with a pure-Python library against pyarrow's C++ Parquet writer, which measures the implementations rather than the formats."
   - q: "Do open table formats like Iceberg use Parquet, ORC, or Avro?"
     a: "All three are supported as underlying data files by Apache Iceberg, and the choice is a per-table property — but Parquet is the overwhelming default for analytical tables. Interestingly, Avro often appears inside the table format's own metadata layer even when the data files are Parquet, because manifest files are written whole and benefit from Avro's row-based, evolvable format."
 ---
@@ -110,6 +116,86 @@ advantage as fact. Measure it on your data before it decides anything.
 For a greenfield [lakehouse](/glossary/data-lakehouse/), Parquet is the safe
 default and ORC is a deliberate, situational choice — not a mistake, just one you
 should be able to justify.
+
+## Parquet vs Avro: the head-to-head
+
+Parquet vs ORC is a choice between two things in the same slot. **Parquet vs Avro
+is not** — they sit on opposite sides of the columnar/row-based split above, and
+a well-built platform usually runs both. But the question gets asked directly and
+constantly, so here is the direct answer, with the measured numbers.
+
+### Size, measured on the same rows
+
+From the [benchmark](/essays/parquet-vs-orc-vs-avro-benchmark/), on an identical
+300,000-row subset of the same 11-column table:
+
+| Format · codec | Size |
+|---|---|
+| **Parquet · zstd** | **6.47 MB** |
+| ORC · zlib | 6.81 MB |
+| Avro · deflate | 10.55 MB |
+| Avro · snappy | 13.70 MB |
+| Avro · uncompressed | 24.21 MB |
+
+Parquet is **39% smaller than Avro at deflate** and **53% smaller at snappy**.
+That gap is not about compression algorithms — the same codecs are available to
+both. It is the layout. Columnar puts a million similar values next to each other,
+which is exactly what a compressor wants; row-based interleaves eleven different
+types and gives it far less to work with.
+
+### The number that actually decides it
+
+Compression is the smaller half. Here is what column pruning does, with each
+format measured against **itself** on its own data — reading 2 of 11 columns
+versus reading all 11:
+
+| Format | Full scan | 2 of 11 columns | Effect |
+|---|---|---|---|
+| Parquet · zstd | 0.377 s | 0.054 s | **6.9× faster** |
+| Parquet · snappy | 0.420 s | 0.055 s | **7.6× faster** |
+| Avro · deflate | 1.353 s | 1.415 s | **1.05× slower** |
+| Avro · snappy | 1.307 s | 1.427 s | **1.09× slower** |
+
+Asking Avro for two columns is *very slightly worse* than asking it for all
+eleven. There is no pruning to do: the reader walks every record and discards the
+nine fields you didn't want, plus a little bookkeeping for the discarding. That is
+the whole argument in one row of a table. **Analytical queries read a few columns
+from many rows, and Avro cannot make that cheap.**
+
+The two blocks above measure different row counts (3M for Parquet, 300k for
+Avro), so read them as **ratios within each format**, which is what they are —
+not as a head-to-head of absolute seconds.
+
+### What I am deliberately not claiming
+
+The conventional line is that Avro writes faster. **This benchmark cannot support
+that**, and I am not going to pretend otherwise in either direction. Avro was
+written with `fastavro`, a pure-Python library, against pyarrow's C++ Parquet
+writer — that is an implementation gap, not a format gap, and it is also why Avro
+runs on a 300k subset rather than the full 3M rows. The write timings are in the
+[published results](/essays/parquet-vs-orc-vs-avro-benchmark/) if you want them,
+but I would not draw a format conclusion from them, and neither should you.
+
+### Where Avro genuinely wins
+
+None of the above makes Avro the loser. It makes it a different tool:
+
+- **Schema evolution across independent systems.** Avro carries a full schema with
+  the data and has the richest reader/writer resolution rules of the three. When a
+  producer and a consumer are deployed by different teams on different days, that
+  is worth more than scan speed.
+- **Streaming and message payloads.** Avro is the default in the Kafka ecosystem,
+  and pairs with a schema registry. Records arrive one at a time and are written
+  whole — the shape row-based is built for.
+- **Write-once, read-whole workloads.** Event logs and change records that are
+  replayed in full rather than aggregated by column.
+- **Inside table formats.** Iceberg stores its own *manifest metadata* in Avro
+  while the data files are Parquet — a neat illustration that this was never an
+  either/or.
+
+**The rule:** if the question is "what do I query," it is Parquet. If the question
+is "what do I move," it is Avro. Most real platforms answer both questions and so
+run both formats, with Avro on the wire and Parquet at rest.
 
 ## The decision rule
 

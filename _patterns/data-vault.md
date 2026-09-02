@@ -2,7 +2,7 @@
 last_modified_at: 2026-07-18
 title: "Data Vault"
 intent: "Model the integration layer as hubs (business keys), links (relationships), and satellites (history), so the warehouse absorbs change without remodelling."
-description: "The data vault pattern: hubs, links, and satellites, what it buys you in auditability and agility, its real costs, and when dimensional modeling is the better choice."
+description: "The data vault pattern: hubs, links and satellites, what it buys in auditability and agility, its real costs, and when dimensional modeling is the better choice."
 essays:
   - data-vault-vs-dimensional-modeling
   - kimball-vs-inmon

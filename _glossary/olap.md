@@ -1,7 +1,7 @@
 ---
 last_modified_at: 2026-07-06
 title: "OLAP (Online Analytical Processing)"
-description: "OLAP is the analytical workload — large, read-heavy queries aggregating millions of rows — served by warehouses and columnar engines rather than operational databases."
+description: "OLAP is the analytical workload: large, read-heavy queries aggregating millions of rows, served by warehouses and columnar engines rather than operational databases."
 essay: oltp-vs-olap
 related_terms:
   - oltp

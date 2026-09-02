@@ -1,7 +1,7 @@
 ---
 last_modified_at: 2026-07-06
 title: "Semantic Layer"
-description: "A semantic layer is a shared definition layer between the warehouse and its consumers, where metrics like revenue are defined once and queried consistently everywhere."
+description: "A semantic layer sits between the warehouse and its consumers, where metrics like revenue are defined once and queried consistently everywhere."
 essay: what-is-a-semantic-layer
 related_terms:
   - data-catalog
