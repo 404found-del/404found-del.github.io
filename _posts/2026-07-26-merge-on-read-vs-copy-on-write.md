@@ -4,6 +4,7 @@ kicker: "Field Notes"
 topic: "Engineering"
 description: "Copy-on-write rewrites whole files on update; merge-on-read annotates them and resolves at read time. The trade is write cost against read cost, with arithmetic."
 date: 2026-07-26 09:00:00 +0530
+last_modified_at: 2026-08-29
 faq:
   - q: "What is the difference between merge-on-read and copy-on-write?"
     a: "Copy-on-write rewrites every data file that contains a changed row, so the table is always clean for readers and expensive for writers. Merge-on-read leaves the original files alone and writes small delete files or deletion vectors alongside them, so writes are cheap and readers pay to reconcile the deletes at query time. It is a straight trade of write cost against read cost."

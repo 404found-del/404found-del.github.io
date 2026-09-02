@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "A data lake stores raw files cheaply and guarantees nothing. A lakehouse adds a table layer over the same files for ACID, schema, and trust. When each fits."
 date: 2026-06-20 10:00:00 +0530
-last_modified_at: 2026-07-26
+last_modified_at: 2026-08-29
 faq:
   - q: "What is the difference between a data lake and a lakehouse?"
     a: "A data lake is raw files in cheap object storage with no transactions, no enforced schema, and no guarantees. A lakehouse keeps those same files but adds an open table format on top — Iceberg, Delta Lake, or Hudi — that provides ACID transactions, schema enforcement, and time travel. The lakehouse is a data lake plus a table layer."

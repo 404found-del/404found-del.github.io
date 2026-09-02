@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "Inmon's method builds one normalized enterprise warehouse first, then serves dimensional marts from it. How the CIF works, a worked example, and where it fits today."
 date: 2026-07-17 09:00:00 +0530
-last_modified_at: 2026-07-26
+last_modified_at: 2026-08-29
 faq:
   - q: "What is the Inmon methodology in simple terms?"
     a: "Build the enterprise data warehouse first, as a normalized (3NF) integration of all source systems — the single version of the truth — and only then derive department-facing data marts from it, usually as star schemas. Top-down: integrate once, serve many. Kimball inverts this, building dimensional marts first."

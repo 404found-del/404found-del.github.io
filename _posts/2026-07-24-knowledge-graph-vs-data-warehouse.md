@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "A warehouse answers how much; a knowledge graph answers how things connect. They're different query shapes, not rivals — and most serious estates end up with both."
 date: 2026-07-24 11:00:00 +0530
-last_modified_at: 2026-07-26
+last_modified_at: 2026-08-29
 faq:
   - q: "What is the difference between a knowledge graph and a data warehouse?"
     a: "A data warehouse stores modelled, mostly tabular data optimized for aggregation — sum, group, filter across millions of rows. A knowledge graph stores entities and the relationships between them, optimized for traversal — following connections several hops out. The warehouse answers 'how much, by what'; the graph answers 'what connects to what, and how.'"

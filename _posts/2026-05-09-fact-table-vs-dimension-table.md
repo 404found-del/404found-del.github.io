@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Modeling"
 description: "A fact table stores the measurements you analyze; a dimension table stores the context you analyze them by. The distinction every dimensional model rests on."
 date: 2026-05-09
-last_modified_at: 2026-07-26
+last_modified_at: 2026-08-29
 faq:
   - q: "What is the difference between a fact table and a dimension table?"
     a: "A fact table stores measurements — the numeric events you analyze, like sales amounts or quantities — at a defined grain, along with foreign keys. A dimension table stores descriptive context you filter and group by, like customer, product, or date. Facts are what you measure; dimensions are how you slice those measurements."

@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Modeling"
 description: "A data model shapes data for one system; an ontology defines what concepts mean, independent of any system — and machines now read your schema."
 date: 2026-07-24 09:00:00 +0530
-last_modified_at: 2026-07-26
+last_modified_at: 2026-08-29
 faq:
   - q: "What is the difference between an ontology and a data model?"
     a: "A data model defines how data is structured for a particular system — tables, columns, keys, constraints, optimized for storing and querying. An ontology formally defines what concepts mean and how they relate, independent of any system that stores them. The data model answers 'how do I store and query this here'; the ontology answers 'what is a customer, in this business, everywhere.'"

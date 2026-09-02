@@ -4,6 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "Polaris and Nessie were announced as merging in 2024. They didn't. Here's where each actually stands in 2026, and which one your estate should run."
 date: 2026-08-08 11:00:00 +0530
+last_modified_at: 2026-08-08
 faq:
   - q: "What is the difference between Apache Polaris and Nessie?"
     a: "Both are open-source Iceberg catalogs, but they optimize for different things. Polaris is built around the Iceberg REST specification, centralized role-based access control, and credential vending, aimed at broad multi-engine interoperability. Nessie adds a Git-like model over the catalog: branches, tags, commits, and multi-table transactions, so you can isolate and roll back changes across many tables at once."

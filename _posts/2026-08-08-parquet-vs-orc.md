@@ -4,6 +4,7 @@ kicker: "Field Notes"
 topic: "Engineering"
 description: "Received wisdom says ORC compresses better. Measured at matched codecs on 3M rows, Parquet was 23-26% smaller and faster on every axis. Here's the honest call."
 date: 2026-08-08 07:00:00 +0530
+last_modified_at: 2026-08-08
 faq:
   - q: "Is Parquet or ORC better?"
     a: "For a new lakehouse, Parquet, and by a wider margin than the usual advice suggests. Benchmarked at matched compression codecs on a realistic 3-million-row table, Parquet was 23-26% smaller than ORC, wrote faster, and scanned faster. ORC remains the right choice where a Hive-centric stack already expects it, or where you need Hive's ACID support, but the common claim that ORC compresses better did not survive measurement."

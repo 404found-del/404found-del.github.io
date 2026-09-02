@@ -4,7 +4,7 @@ kicker: "Reconsidered"
 topic: "AI"
 description: "GenAI adds vector storage and new retrieval patterns to the data stack, but structure, quality, governance, and ownership matter more than ever, not less."
 date: 2026-05-31 08:30:00 +0530
-last_modified_at: 2026-07-26
+last_modified_at: 2026-08-29
 faq:
   - q: "Does generative AI change data architecture?"
     a: "It adds genuinely new components — vector storage, embedding pipelines, and retrieval as a first-class access pattern — and it adds a new class of consumer that reads your schema without tribal knowledge. What it does not do is remove the need for declared grain, agreed definitions, ownership, or quality. Those become more load-bearing, not less."

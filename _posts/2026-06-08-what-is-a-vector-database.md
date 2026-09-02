@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "AI"
 description: "A vector database stores embeddings and finds items by meaning rather than exact match. What that's for, how it fits your stack, and when a dedicated one pays."
 date: 2026-06-08
-last_modified_at: 2026-07-26
+last_modified_at: 2026-08-29
 faq:
   - q: "What is a vector database used for?"
     a: "Searching by meaning rather than exact match. It stores embeddings — numerical representations of text, images, or other data — and finds the items closest in meaning to a query. Its most common use is powering retrieval-augmented generation (RAG), where relevant context is fetched to ground a language model's answer."

@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Modeling"
 description: "Normalization splits data into many tables to remove redundancy; denormalization combines them to remove joins. One favors writes, the other reads. The trade."
 date: 2026-06-20 11:00:00 +0530
-last_modified_at: 2026-07-26
+last_modified_at: 2026-08-29
 faq:
   - q: "What is the difference between normalization and denormalization?"
     a: "Normalization splits data into multiple related tables to eliminate redundancy, so each fact is stored once. Denormalization deliberately combines data into fewer, wider tables, accepting redundancy to eliminate joins. Normalization optimizes for writes and integrity; denormalization optimizes for read speed and simplicity."

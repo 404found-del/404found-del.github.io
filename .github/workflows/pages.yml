@@ -115,6 +115,18 @@ jobs:
           echo "posts: $src   rendered: $out"
           [ "$out" -ge "$src" ] || note "only $out of $src essays rendered"
 
+          echo "--- every post declares last_modified_at ---"
+          # jekyll-sitemap derives <lastmod> from last_modified_at. If an edit
+          # does not bump it, the sitemap keeps advertising the old date and
+          # Google gets no change signal at all -- the page footer and
+          # article:modified_time go stale too. 18 posts were edited on
+          # 2026-08-29 with none of them bumped; caught before the push.
+          nolm=0
+          for post in _posts/*.md; do
+            grep -q '^last_modified_at:' "$post" || { echo "  $post"; nolm=$((nolm+1)); }
+          done
+          [ "$nolm" -eq 0 ] || note "$nolm post(s) missing last_modified_at"
+
           echo "--- diagram legibility on mobile ---"
           # Diagrams are authored on an ~800-unit viewBox. On a 375px phone the
           # figure is held at 640px by CSS, so a font-size of N units renders at

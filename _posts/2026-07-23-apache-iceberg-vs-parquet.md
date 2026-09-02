@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "Parquet is a file format, Iceberg is a table format that manages Parquet files. The difference, what Iceberg costs, and how to migrate without rewriting."
 date: 2026-07-23 09:00:00 +0530
-last_modified_at: 2026-08-15
+last_modified_at: 2026-08-29
 faq:
   - q: "What is the difference between Apache Iceberg and Parquet?"
     a: "Parquet is a file format — it defines how the bytes of a single file are laid out on disk, column by column, compressed. Apache Iceberg is a table format — it defines how many files together form one logical table, tracking which files are current, what schema applies, and how changes commit atomically. Iceberg tables are almost always made of Parquet files, so it's not a choice between them; it's two layers of the same stack."

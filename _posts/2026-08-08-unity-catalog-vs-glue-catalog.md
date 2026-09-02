@@ -4,6 +4,7 @@ kicker: "Field Notes"
 topic: "Architecture"
 description: "Glue is the zero-effort default inside AWS; Unity Catalog buys deeper governance for platform commitment. Both now speak Iceberg REST, and they federate."
 date: 2026-08-08 09:00:00 +0530
+last_modified_at: 2026-08-29
 faq:
   - q: "What is the difference between Unity Catalog and AWS Glue Data Catalog?"
     a: "Glue Data Catalog is a serverless metastore native to AWS, governed by IAM, with crawlers that register tables automatically. Unity Catalog is Databricks' governance layer, now open-sourced under the Linux Foundation, offering fine-grained access control, lineage, and audit across data and AI assets in one place. Glue is the lower-effort choice inside AWS; Unity is the deeper governance choice, priced in platform commitment."

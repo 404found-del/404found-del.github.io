@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Craft"
 description: "Three overlapping data roles, three different jobs: engineers move the data, analytics engineers shape it, architects design the system. The real division."
 date: 2026-06-14 13:00:00 +0530
-last_modified_at: 2026-07-26
+last_modified_at: 2026-08-29
 faq:
   - q: "What is the difference between a data engineer and a data architect?"
     a: "A data engineer builds and operates the pipelines and infrastructure that move data reliably from sources into the warehouse. A data architect decides the structure, standards, and principles the whole system follows — where data lives, what it means, who owns it. The engineer builds the system; the architect designs it."

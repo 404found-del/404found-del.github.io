@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Engineering"
 description: "Change data capture identifies inserts, updates, and deletes in a source database and delivers them downstream. How the three methods compare, and when batch wins."
 date: 2026-06-10
-last_modified_at: 2026-07-26
+last_modified_at: 2026-08-29
 faq:
   - q: "What is the best CDC method?"
     a: "Log-based CDC, where available. Reading the database's transaction log captures every change including deletes, in commit order, with minimal load on the source and no application changes. Triggers and timestamp polling are compromises for when log access isn't possible."

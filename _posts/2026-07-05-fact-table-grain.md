@@ -4,6 +4,7 @@ kicker: "Field Notes"
 topic: "Modeling"
 description: "The grain is the business definition of what one fact table row represents. Declare it first — every dimension, measure, and bug traces back to it."
 date: 2026-07-05 10:30:00 +0530
+last_modified_at: 2026-08-29
 faq:
   - q: "What is the grain of a fact table?"
     a: "The grain is the precise business definition of what a single row in the fact table represents — for example, 'one row per order line' or 'one row per account per month.' It's declared in business terms, before choosing dimensions or measures, and every element of the table must honor it."

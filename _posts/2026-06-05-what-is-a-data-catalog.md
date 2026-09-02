@@ -4,7 +4,7 @@ kicker: "Field Notes"
 topic: "Governance"
 description: "A data catalog is a searchable inventory of your data: what exists, where it lives, what it means, who owns it. What it's for, and when you actually need one."
 date: 2026-06-05
-last_modified_at: 2026-07-26
+last_modified_at: 2026-08-29
 faq:
   - q: "What is the difference between a data catalog and a semantic layer?"
     a: "A catalog is an inventory — it documents what data exists, where it lives, and who owns it. A semantic layer defines what metrics mean and computes them consistently at query time. The catalog helps you find and understand data; the semantic layer governs and serves the definitions."
