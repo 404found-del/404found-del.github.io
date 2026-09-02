@@ -87,10 +87,10 @@ subtract the dead rows from every file they scan.
   <text x="648" y="142" font-size="10" fill="#a4391f">annotate</text>
   <rect x="470" y="152" width="120" height="46" rx="5" fill="#1c1a17"/>
   <text x="530" y="174" font-size="10" fill="#f6f3ec" text-anchor="middle">deletes.puffin</text>
-  <text x="530" y="190" font-size="9" fill="#8b857a" text-anchor="middle">~KB</text>
+  <text x="530" y="190" font-size="11" fill="#8b857a" text-anchor="middle">~KB</text>
   <rect x="606" y="152" width="124" height="46" rx="5" fill="#c8472b"/>
   <text x="668" y="174" font-size="10" fill="#f6f3ec" text-anchor="middle">new rows</text>
-  <text x="668" y="190" font-size="9" fill="#f6f3ec" text-anchor="middle">~KB</text>
+  <text x="668" y="190" font-size="11" fill="#f6f3ec" text-anchor="middle">~KB</text>
   <text x="600" y="232" font-size="11" fill="#56514a" text-anchor="middle">writer is cheap · reader subtracts at query time</text>
   <line x1="400" y1="70" x2="400" y2="250" stroke="#ddd6c8" stroke-width="1.5" stroke-dasharray="4 4"/>
   <text x="400" y="286" font-size="12" fill="#8b857a" text-anchor="middle">the cost doesn't disappear — it moves, from the writer to the reader</text>

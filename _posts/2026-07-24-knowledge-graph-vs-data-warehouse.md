@@ -89,7 +89,7 @@ serving dashboards, or a warehouse full of self-joins nobody can maintain.
   <text x="200" y="206" font-size="11" fill="#8b857a" text-anchor="middle">SUM(amount) GROUP BY region, quarter</text>
   <text x="600" y="30" font-size="13" fill="#1c1a17" text-anchor="middle" font-weight="700">Knowledge graph — traversal</text>
   <circle cx="600" cy="70" r="16" fill="#c8472b"/>
-  <text x="600" y="74" font-size="9" fill="#f6f3ec" text-anchor="middle">you</text>
+  <text x="600" y="74" font-size="11" fill="#f6f3ec" text-anchor="middle">you</text>
   <circle cx="520" cy="120" r="14" fill="#1c1a17"/>
   <circle cx="680" cy="120" r="14" fill="#1c1a17"/>
   <circle cx="470" cy="176" r="12" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>

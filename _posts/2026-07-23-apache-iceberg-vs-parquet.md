@@ -89,7 +89,33 @@ data files. Committing a change writes new files and swaps one pointer — atomi
 even on eventually-consistent object storage.
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="apache-iceberg-vs-parquet-t apache-iceberg-vs-parquet-d">
+<svg class="dia-mob" viewBox="0 0 400 470" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="aivp-mt aivp-md">
+  <title id="aivp-mt">Iceberg and Parquet occupy different layers</title>
+  <desc id="aivp-md">Apache Iceberg as a table format on top, chaining catalog to metadata to snapshot to file list and supplying ACID, schema evolution and time travel. Beneath it, three self-contained columnar Parquet files holding the actual bytes. The files store the data; Iceberg decides which of them are the table right now.</desc>
+  <rect x="20" y="16" width="360" height="72" rx="6" fill="#c8472b"/>
+  <text x="200" y="42" font-size="14" fill="#f6f3ec" text-anchor="middle" font-weight="700">Iceberg — table format</text>
+  <text x="200" y="62" font-size="10" fill="#f6f3ec" text-anchor="middle">catalog → metadata → snapshot</text>
+  <text x="200" y="78" font-size="10" fill="#f6f3ec" text-anchor="middle">→ file list</text>
+  <text x="200" y="108" font-size="10" fill="#8b857a" text-anchor="middle">ACID · schema evolution · time travel</text>
+  <line x1="200" y1="118" x2="200" y2="146" stroke="#cabfac" stroke-width="2"/>
+  <text x="248" y="138" font-size="10" fill="#8b857a">manages ↓</text>
+  <rect x="20" y="150" width="360" height="52" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
+  <text x="200" y="173" font-size="13" fill="#1c1a17" text-anchor="middle" font-weight="700">part-001.parquet</text>
+  <text x="200" y="192" font-size="10" fill="#56514a" text-anchor="middle">columnar bytes</text>
+  <rect x="20" y="212" width="360" height="52" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
+  <text x="200" y="235" font-size="13" fill="#1c1a17" text-anchor="middle" font-weight="700">part-002.parquet</text>
+  <text x="200" y="254" font-size="10" fill="#56514a" text-anchor="middle">columnar bytes</text>
+  <rect x="20" y="274" width="360" height="52" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
+  <text x="200" y="297" font-size="13" fill="#1c1a17" text-anchor="middle" font-weight="700">part-003.parquet</text>
+  <text x="200" y="316" font-size="10" fill="#56514a" text-anchor="middle">columnar bytes</text>
+  <text x="200" y="352" font-size="10" fill="#1c1a17" text-anchor="middle">Parquet — file format: each box is one</text>
+  <text x="200" y="368" font-size="10" fill="#1c1a17" text-anchor="middle">self-contained columnar file</text>
+  <text x="200" y="400" font-size="10" fill="#8b857a" text-anchor="middle">the files store the data; Iceberg decides</text>
+  <text x="200" y="416" font-size="10" fill="#8b857a" text-anchor="middle">which of them <tspan font-style="italic">are</tspan> the table, right now</text>
+  <text x="200" y="444" font-size="10" fill="#8b857a" text-anchor="middle">swap the pointer at the top and the</text>
+  <text x="200" y="460" font-size="10" fill="#8b857a" text-anchor="middle">whole table changes atomically</text>
+</svg>
+<svg class="dia-desk" viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="apache-iceberg-vs-parquet-t apache-iceberg-vs-parquet-d">
   <title id="apache-iceberg-vs-parquet-t">Iceberg and Parquet occupy different layers</title>
   <desc id="apache-iceberg-vs-parquet-d">Apache Iceberg as a table format on top, chaining catalog to metadata to snapshot to file list and supplying ACID, schema evolution and time travel. Beneath it, three self-contained columnar Parquet files holding the actual bytes. The files store the data; Iceberg decides which of them are the table right now.</desc>
   <rect x="250" y="16" width="300" height="60" rx="6" fill="#c8472b"/>

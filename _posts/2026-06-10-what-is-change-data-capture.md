@@ -84,19 +84,19 @@ consciously accepted.
   <line x1="460" y1="58" x2="650" y2="106" stroke="#cabfac" stroke-width="2"/>
   <rect x="40" y="106" width="220" height="96" rx="6" fill="#c8472b"/>
   <text x="150" y="130" font-size="12" fill="#f6f3ec" text-anchor="middle" font-weight="700">log-based</text>
-  <text x="150" y="150" font-size="9" fill="#f6f3ec" text-anchor="middle">reads the write-ahead log</text>
-  <text x="150" y="170" font-size="9" fill="#f6f3ec" text-anchor="middle">inserts · updates · DELETES</text>
-  <text x="150" y="190" font-size="9" fill="#f6f3ec" text-anchor="middle">in commit order · no source load</text>
+  <text x="150" y="150" font-size="11" fill="#f6f3ec" text-anchor="middle">reads the write-ahead log</text>
+  <text x="150" y="170" font-size="11" fill="#f6f3ec" text-anchor="middle">inserts · updates · DELETES</text>
+  <text x="150" y="190" font-size="11" fill="#f6f3ec" text-anchor="middle">in commit order · no source load</text>
   <rect x="290" y="106" width="220" height="96" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
   <text x="400" y="130" font-size="12" fill="#1c1a17" text-anchor="middle" font-weight="700">trigger-based</text>
-  <text x="400" y="150" font-size="9" fill="#56514a" text-anchor="middle">triggers write audit tables</text>
-  <text x="400" y="170" font-size="9" fill="#56514a" text-anchor="middle">catches deletes</text>
-  <text x="400" y="190" font-size="9" fill="#a4391f" text-anchor="middle">taxes every production write</text>
+  <text x="400" y="150" font-size="11" fill="#56514a" text-anchor="middle">triggers write audit tables</text>
+  <text x="400" y="170" font-size="11" fill="#56514a" text-anchor="middle">catches deletes</text>
+  <text x="400" y="190" font-size="11" fill="#a4391f" text-anchor="middle">taxes every production write</text>
   <rect x="540" y="106" width="220" height="96" rx="6" fill="#f6f3ec" stroke="#ddd6c8" stroke-width="1.5"/>
   <text x="650" y="130" font-size="12" fill="#1c1a17" text-anchor="middle" font-weight="700">query-based</text>
-  <text x="650" y="150" font-size="9" fill="#56514a" text-anchor="middle">polls updated_at</text>
-  <text x="650" y="170" font-size="9" fill="#a4391f" text-anchor="middle">misses deletes entirely</text>
-  <text x="650" y="190" font-size="9" fill="#a4391f" text-anchor="middle">misses states between polls</text>
+  <text x="650" y="150" font-size="11" fill="#56514a" text-anchor="middle">polls updated_at</text>
+  <text x="650" y="170" font-size="11" fill="#a4391f" text-anchor="middle">misses deletes entirely</text>
+  <text x="650" y="190" font-size="11" fill="#a4391f" text-anchor="middle">misses states between polls</text>
   <text x="400" y="242" font-size="12" fill="#8b857a" text-anchor="middle">a deleted row leaves nothing behind to poll — which is why the log is the gold standard</text>
   <text x="400" y="272" font-size="12" fill="#8b857a" text-anchor="middle">default to log-based; treat the other two as compromises you consciously accepted</text>
 </svg>

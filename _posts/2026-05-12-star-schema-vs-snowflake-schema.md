@@ -46,7 +46,45 @@ dimension "snowflakes" out into smaller related tables, which is where the name 
 from.
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="star-schema-vs-snowflake-schema-t star-schema-vs-snowflake-schema-d">
+<svg class="dia-mob" viewBox="0 0 400 590" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="sss-mt sss-md">
+  <title id="sss-mt">Star schema versus snowflake schema</title>
+  <desc id="sss-md">Two layouts, one above the other. In the star, shown first, dimension tables attach directly to the central fact table, one hop away. In the snowflake below, the product dimension is normalized into further sub-tables for category and brand, adding hops.</desc>
+  <text x="200" y="24" text-anchor="middle" font-size="15" fill="#c8472b" font-weight="600" letter-spacing="2">STAR</text>
+  <g stroke="#cabfac" stroke-width="1.5">
+    <line x1="200" y1="138" x2="200" y2="94"/>
+    <line x1="200" y1="182" x2="200" y2="216"/>
+    <line x1="150" y1="160" x2="104" y2="160"/>
+    <line x1="250" y1="160" x2="296" y2="160"/>
+  </g>
+  <g font-size="12" fill="#1c1a17">
+    <rect x="150" y="138" width="100" height="44" rx="4" fill="#fdfcf9" stroke="#c8472b" stroke-width="2"/><text x="200" y="164" text-anchor="middle" font-weight="600">fact_sales</text>
+    <rect x="150" y="60" width="100" height="34" rx="4" fill="#fdfcf9" stroke="#cabfac"/><text x="200" y="81" text-anchor="middle">dim_date</text>
+    <rect x="150" y="216" width="100" height="34" rx="4" fill="#fdfcf9" stroke="#cabfac"/><text x="200" y="237" text-anchor="middle">dim_store</text>
+    <rect x="4" y="142" width="100" height="36" rx="4" fill="#fdfcf9" stroke="#cabfac"/><text x="54" y="164" text-anchor="middle" font-size="11">dim_customer</text>
+    <rect x="296" y="142" width="100" height="36" rx="4" fill="#fdfcf9" stroke="#cabfac"/><text x="346" y="164" text-anchor="middle" font-size="11">dim_product</text>
+  </g>
+  <line x1="20" y1="278" x2="380" y2="278" stroke="#ddd6c8" stroke-width="1" stroke-dasharray="4 5"/>
+  <text x="200" y="326" text-anchor="middle" font-size="15" fill="#c8472b" font-weight="600" letter-spacing="2">SNOWFLAKE</text>
+  <g stroke="#cabfac" stroke-width="1.5">
+    <line x1="200" y1="440" x2="200" y2="396"/>
+    <line x1="200" y1="484" x2="200" y2="518"/>
+    <line x1="150" y1="462" x2="104" y2="462"/>
+    <line x1="250" y1="462" x2="296" y2="462"/>
+    <line x1="346" y1="480" x2="346" y2="496"/>
+    <line x1="346" y1="524" x2="346" y2="532"/>
+  </g>
+  <g font-size="12" fill="#1c1a17">
+    <rect x="150" y="440" width="100" height="44" rx="4" fill="#fdfcf9" stroke="#c8472b" stroke-width="2"/><text x="200" y="466" text-anchor="middle" font-weight="600">fact_sales</text>
+    <rect x="150" y="362" width="100" height="34" rx="4" fill="#fdfcf9" stroke="#cabfac"/><text x="200" y="383" text-anchor="middle">dim_date</text>
+    <rect x="150" y="518" width="100" height="34" rx="4" fill="#fdfcf9" stroke="#cabfac"/><text x="200" y="539" text-anchor="middle">dim_store</text>
+    <rect x="4" y="444" width="100" height="36" rx="4" fill="#fdfcf9" stroke="#cabfac"/><text x="54" y="466" text-anchor="middle" font-size="11">dim_customer</text>
+    <rect x="296" y="444" width="100" height="36" rx="4" fill="#fdfcf9" stroke="#cabfac"/><text x="346" y="466" text-anchor="middle" font-size="11">dim_product</text>
+    <rect x="302" y="496" width="88" height="28" rx="4" fill="#f0ece2" stroke="#cabfac"/><text x="346" y="514" text-anchor="middle" font-size="10">category</text>
+    <rect x="302" y="532" width="88" height="28" rx="4" fill="#f0ece2" stroke="#cabfac"/><text x="346" y="550" text-anchor="middle" font-size="10">brand</text>
+  </g>
+  <text x="200" y="580" text-anchor="middle" font-size="10" fill="#8b857a">product normalizes into sub-tables — extra hops</text>
+</svg>
+<svg class="dia-desk" viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="star-schema-vs-snowflake-schema-t star-schema-vs-snowflake-schema-d">
   <title id="star-schema-vs-snowflake-schema-t">Star schema versus snowflake schema</title>
   <desc id="star-schema-vs-snowflake-schema-d">Two layouts side by side. In the star, dimension tables attach directly to the central fact table, one hop away. In the snowflake, the product dimension is normalized into further sub-tables, adding hops.</desc>
   <text x="195" y="28" text-anchor="middle" font-size="15" fill="#c8472b" font-weight="600" letter-spacing="2">STAR</text>

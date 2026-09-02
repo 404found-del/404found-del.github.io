@@ -86,15 +86,15 @@ statement about lock-in risk, not a statement about features.
   <rect x="40" y="110" width="220" height="72" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
   <text x="150" y="134" font-size="12" fill="#1c1a17" text-anchor="middle" font-weight="700">Athena · EMR · Redshift</text>
   <text x="150" y="155" font-size="11" fill="#c8472b" text-anchor="middle" font-weight="700">→ Glue Data Catalog</text>
-  <text x="150" y="173" font-size="9" fill="#56514a" text-anchor="middle">serverless · IAM · crawlers</text>
+  <text x="150" y="173" font-size="11" fill="#56514a" text-anchor="middle">serverless · IAM · crawlers</text>
   <rect x="290" y="110" width="220" height="72" rx="6" fill="#c8472b"/>
   <text x="400" y="134" font-size="12" fill="#f6f3ec" text-anchor="middle" font-weight="700">Databricks on AWS</text>
   <text x="400" y="155" font-size="11" fill="#f6f3ec" text-anchor="middle" font-weight="700">→ usually BOTH</text>
-  <text x="400" y="173" font-size="9" fill="#f6f3ec" text-anchor="middle">Unity governs · Glue federated in</text>
+  <text x="400" y="173" font-size="11" fill="#f6f3ec" text-anchor="middle">Unity governs · Glue federated in</text>
   <rect x="540" y="110" width="220" height="72" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
   <text x="650" y="134" font-size="12" fill="#1c1a17" text-anchor="middle" font-weight="700">Databricks-centred</text>
   <text x="650" y="155" font-size="11" fill="#c8472b" text-anchor="middle" font-weight="700">→ Unity Catalog</text>
-  <text x="650" y="173" font-size="9" fill="#56514a" text-anchor="middle">lineage · fine-grained · audit</text>
+  <text x="650" y="173" font-size="11" fill="#56514a" text-anchor="middle">lineage · fine-grained · audit</text>
   <rect x="170" y="216" width="460" height="46" rx="6" fill="#f6f3ec" stroke="#ddd6c8" stroke-width="1.5"/>
   <text x="400" y="236" font-size="11" fill="#1c1a17" text-anchor="middle">both now expose an Iceberg REST endpoint</text>
   <text x="400" y="253" font-size="10" fill="#8b857a" text-anchor="middle">Iceberg support stopped being the differentiator</text>

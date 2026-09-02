@@ -92,7 +92,55 @@ approach was supposed to prevent. The conformity is doing the integration work t
 Inmon does up front; skip it and the method quietly fails.
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="kimball-vs-inmon-t kimball-vs-inmon-d">
+<svg class="dia-mob" viewBox="0 0 400 640" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="kvi-mt kvi-md">
+  <title id="kvi-mt">Inmon top-down versus Kimball bottom-up</title>
+  <desc id="kvi-md">Two build orders from the same sources. Inmon, shown first, integrates every source into a normalized enterprise warehouse first and derives dependent dimensional marts from it afterwards. Kimball, shown below, builds dimensional marts per business process directly, and the enterprise view emerges as those marts come to share conformed dimensions. Integration first and delivery later, or delivery first and integration as you go.</desc>
+  <text x="200" y="22" font-size="13" fill="#1c1a17" text-anchor="middle" font-weight="700">Inmon — top-down</text>
+  <rect x="40" y="36" width="320" height="28" rx="4" fill="#1c1a17"/>
+  <text x="200" y="55" font-size="11" fill="#f6f3ec" text-anchor="middle">source systems</text>
+  <line x1="200" y1="64" x2="200" y2="92" stroke="#cabfac" stroke-width="2"/>
+  <rect x="40" y="92" width="320" height="60" rx="6" fill="#c8472b"/>
+  <text x="200" y="117" font-size="12" fill="#f6f3ec" text-anchor="middle" font-weight="700">enterprise warehouse — 3NF</text>
+  <text x="200" y="137" font-size="10" fill="#f6f3ec" text-anchor="middle">built first · integrated · governed</text>
+  <line x1="100" y1="152" x2="88" y2="186" stroke="#cabfac" stroke-width="2"/>
+  <line x1="200" y1="152" x2="200" y2="186" stroke="#cabfac" stroke-width="2"/>
+  <line x1="300" y1="152" x2="312" y2="186" stroke="#cabfac" stroke-width="2"/>
+  <rect x="40" y="186" width="96" height="34" rx="4" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.4"/>
+  <text x="88" y="208" font-size="10" fill="#1c1a17" text-anchor="middle">mart</text>
+  <rect x="152" y="186" width="96" height="34" rx="4" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.4"/>
+  <text x="200" y="208" font-size="10" fill="#1c1a17" text-anchor="middle">mart</text>
+  <rect x="264" y="186" width="96" height="34" rx="4" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.4"/>
+  <text x="312" y="208" font-size="10" fill="#1c1a17" text-anchor="middle">mart</text>
+  <text x="200" y="244" font-size="10" fill="#8b857a" text-anchor="middle">marts are dependent — derived from the core</text>
+  <text x="200" y="266" font-size="10" fill="#a4391f" text-anchor="middle">value arrives late · consistency by construction</text>
+  <line x1="30" y1="292" x2="370" y2="292" stroke="#ddd6c8" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <text x="200" y="322" font-size="13" fill="#1c1a17" text-anchor="middle" font-weight="700">Kimball — bottom-up</text>
+  <rect x="40" y="336" width="320" height="28" rx="4" fill="#1c1a17"/>
+  <text x="200" y="355" font-size="11" fill="#f6f3ec" text-anchor="middle">source systems</text>
+  <line x1="88" y1="364" x2="88" y2="392" stroke="#cabfac" stroke-width="2"/>
+  <line x1="200" y1="364" x2="200" y2="392" stroke="#cabfac" stroke-width="2"/>
+  <line x1="312" y1="364" x2="312" y2="392" stroke="#cabfac" stroke-width="2"/>
+  <rect x="40" y="392" width="96" height="52" rx="4" fill="#c8472b"/>
+  <text x="88" y="414" font-size="10" fill="#f6f3ec" text-anchor="middle">sales</text>
+  <text x="88" y="432" font-size="11" fill="#f6f3ec" text-anchor="middle">star</text>
+  <rect x="152" y="392" width="96" height="52" rx="4" fill="#c8472b"/>
+  <text x="200" y="414" font-size="10" fill="#f6f3ec" text-anchor="middle">shipping</text>
+  <text x="200" y="432" font-size="11" fill="#f6f3ec" text-anchor="middle">star</text>
+  <rect x="264" y="392" width="96" height="52" rx="4" fill="#c8472b"/>
+  <text x="312" y="414" font-size="10" fill="#f6f3ec" text-anchor="middle">support</text>
+  <text x="312" y="432" font-size="11" fill="#f6f3ec" text-anchor="middle">star</text>
+  <line x1="88" y1="444" x2="88" y2="478" stroke="#cabfac" stroke-width="2"/>
+  <line x1="200" y1="444" x2="200" y2="478" stroke="#cabfac" stroke-width="2"/>
+  <line x1="312" y1="444" x2="312" y2="478" stroke="#cabfac" stroke-width="2"/>
+  <rect x="40" y="478" width="320" height="46" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
+  <text x="200" y="498" font-size="11" fill="#1c1a17" text-anchor="middle" font-weight="700">conformed dimensions</text>
+  <text x="200" y="516" font-size="10" fill="#56514a" text-anchor="middle">the bus that makes the marts one warehouse</text>
+  <text x="200" y="552" font-size="10" fill="#8b857a" text-anchor="middle">the enterprise view emerges from the marts</text>
+  <text x="200" y="574" font-size="10" fill="#a4391f" text-anchor="middle">value arrives early · consistency is your discipline</text>
+  <text x="200" y="608" font-size="10" fill="#8b857a" text-anchor="middle">each method's signature weakness</text>
+  <text x="200" y="624" font-size="10" fill="#8b857a" text-anchor="middle">is the other's signature strength</text>
+</svg>
+<svg class="dia-desk" viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="kimball-vs-inmon-t kimball-vs-inmon-d">
   <title id="kimball-vs-inmon-t">Inmon top-down versus Kimball bottom-up</title>
   <desc id="kimball-vs-inmon-d">Two build orders from the same sources. Inmon, on the left, integrates every source into a normalized enterprise warehouse first and derives dependent dimensional marts from it afterwards. Kimball, on the right, builds dimensional marts per business process directly, and the enterprise view emerges as those marts come to share conformed dimensions. Integration first and delivery later, or delivery first and integration as you go.</desc>
   <text x="200" y="26" font-size="13" fill="#1c1a17" text-anchor="middle" font-weight="700">Inmon — top-down</text>
@@ -121,19 +169,19 @@ Inmon does up front; skip it and the method quietly fails.
   <line x1="695" y1="74" x2="695" y2="104" stroke="#cabfac" stroke-width="2"/>
   <rect x="462" y="104" width="86" height="52" rx="4" fill="#c8472b"/>
   <text x="505" y="127" font-size="10" fill="#f6f3ec" text-anchor="middle">sales</text>
-  <text x="505" y="144" font-size="9" fill="#f6f3ec" text-anchor="middle">star</text>
+  <text x="505" y="144" font-size="11" fill="#f6f3ec" text-anchor="middle">star</text>
   <rect x="557" y="104" width="86" height="52" rx="4" fill="#c8472b"/>
   <text x="600" y="127" font-size="10" fill="#f6f3ec" text-anchor="middle">shipping</text>
-  <text x="600" y="144" font-size="9" fill="#f6f3ec" text-anchor="middle">star</text>
+  <text x="600" y="144" font-size="11" fill="#f6f3ec" text-anchor="middle">star</text>
   <rect x="652" y="104" width="86" height="52" rx="4" fill="#c8472b"/>
   <text x="695" y="127" font-size="10" fill="#f6f3ec" text-anchor="middle">support</text>
-  <text x="695" y="144" font-size="9" fill="#f6f3ec" text-anchor="middle">star</text>
+  <text x="695" y="144" font-size="11" fill="#f6f3ec" text-anchor="middle">star</text>
   <line x1="505" y1="156" x2="505" y2="192" stroke="#cabfac" stroke-width="2"/>
   <line x1="600" y1="156" x2="600" y2="192" stroke="#cabfac" stroke-width="2"/>
   <line x1="695" y1="156" x2="695" y2="192" stroke="#cabfac" stroke-width="2"/>
   <rect x="460" y="192" width="280" height="46" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
   <text x="600" y="212" font-size="11" fill="#1c1a17" text-anchor="middle" font-weight="700">conformed dimensions</text>
-  <text x="600" y="230" font-size="9" fill="#56514a" text-anchor="middle">the bus that makes the marts one warehouse</text>
+  <text x="600" y="230" font-size="11" fill="#56514a" text-anchor="middle">the bus that makes the marts one warehouse</text>
   <text x="600" y="266" font-size="10" fill="#8b857a" text-anchor="middle">the enterprise view emerges from the marts</text>
   <text x="600" y="290" font-size="10" fill="#a4391f" text-anchor="middle">value arrives early · consistency is your discipline</text>
   <line x1="400" y1="40" x2="400" y2="300" stroke="#ddd6c8" stroke-width="1.5" stroke-dasharray="4 4"/>

@@ -60,7 +60,50 @@ table, in what version, under what schema, and in doing so retrofits the guarant
 lake never had.
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="data-lake-vs-lakehouse-t data-lake-vs-lakehouse-d">
+<svg class="dia-mob" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="dlvl-mt dlvl-md">
+  <title id="dlvl-mt">Data lake versus lakehouse</title>
+  <desc id="dlvl-md">The same object-storage files shown twice, one above the other: first as a bare lake of files with no transactions, schema or guarantees, and below with an open table format layered on top that turns the same pile of cheap files into reliable, versioned, transactional tables.</desc>
+  <text x="200" y="24" text-anchor="middle" font-size="13" fill="#c8472b" font-weight="600" letter-spacing="1">DATA LAKE</text>
+  <rect x="20" y="36" width="360" height="184" rx="8" fill="#fdfcf9" stroke="#cabfac"/>
+  <g fill="#e7e1d4" stroke="#cabfac">
+    <rect x="60" y="70" width="56" height="30" rx="3"/>
+    <rect x="140" y="76" width="38" height="38" rx="19"/>
+    <rect x="204" y="66" width="62" height="26" rx="3"/>
+    <rect x="290" y="74" width="46" height="30" rx="3"/>
+    <rect x="70" y="124" width="52" height="34" rx="3" transform="rotate(45 96 141)"/>
+    <rect x="152" y="130" width="66" height="30" rx="3"/>
+    <rect x="244" y="124" width="46" height="32" rx="3"/>
+    <rect x="86" y="176" width="66" height="24" rx="3"/>
+    <rect x="180" y="172" width="50" height="28" rx="3"/>
+    <rect x="258" y="176" width="58" height="24" rx="3"/>
+  </g>
+  <text x="200" y="244" text-anchor="middle" font-size="10" fill="#56514a">just files — no transactions,</text>
+  <text x="200" y="260" text-anchor="middle" font-size="10" fill="#56514a">no schema, no guarantees</text>
+  <text x="200" y="298" text-anchor="middle" font-size="22" fill="#cabfac">↓</text>
+  <text x="200" y="336" text-anchor="middle" font-size="13" fill="#c8472b" font-weight="600" letter-spacing="1">LAKEHOUSE</text>
+  <rect x="20" y="348" width="360" height="196" rx="8" fill="#fdfcf9" stroke="#cabfac"/>
+  <rect x="44" y="366" width="312" height="30" rx="4" fill="#c8472b" opacity="0.14" stroke="#c8472b" stroke-dasharray="3 3"/>
+  <text x="200" y="385" text-anchor="middle" font-size="10" fill="#a4391f">table format: ACID · schema · time travel</text>
+  <g>
+    <rect x="52" y="412" width="94" height="28" rx="3" fill="#f0ece2" stroke="#cabfac"/><rect x="52" y="412" width="94" height="8" rx="3" fill="#c8472b" opacity="0.7"/>
+    <rect x="156" y="412" width="94" height="28" rx="3" fill="#f0ece2" stroke="#cabfac"/><rect x="156" y="412" width="94" height="8" rx="3" fill="#c8472b" opacity="0.7"/>
+    <rect x="260" y="412" width="90" height="28" rx="3" fill="#f0ece2" stroke="#cabfac"/><rect x="260" y="412" width="90" height="8" rx="3" fill="#c8472b" opacity="0.7"/>
+  </g>
+  <g fill="#e7e1d4" stroke="#cabfac">
+    <rect x="56" y="464" width="48" height="24" rx="3"/>
+    <rect x="120" y="466" width="30" height="30" rx="15"/>
+    <rect x="168" y="462" width="54" height="22" rx="3"/>
+    <rect x="240" y="464" width="52" height="26" rx="3"/>
+    <rect x="308" y="466" width="44" height="24" rx="3"/>
+    <rect x="82" y="502" width="56" height="20" rx="3"/>
+    <rect x="158" y="500" width="44" height="24" rx="3"/>
+    <rect x="222" y="502" width="58" height="20" rx="3"/>
+    <rect x="300" y="500" width="52" height="24" rx="3"/>
+  </g>
+  <text x="200" y="568" text-anchor="middle" font-size="10" fill="#56514a">same cheap files + a metadata</text>
+  <text x="200" y="584" text-anchor="middle" font-size="10" fill="#56514a">layer that makes them tables</text>
+</svg>
+<svg class="dia-desk" viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="data-lake-vs-lakehouse-t data-lake-vs-lakehouse-d">
   <title id="data-lake-vs-lakehouse-t">Data lake versus lakehouse</title>
   <desc id="data-lake-vs-lakehouse-d">The same object-storage files shown twice: as a bare lake of files, and with an open table format layered on top that turns the pile into reliable, versioned, transactional tables.</desc>
   <text x="180" y="34" text-anchor="middle" font-size="13" fill="#c8472b" font-weight="600" letter-spacing="1">DATA LAKE</text>

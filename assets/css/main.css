@@ -550,6 +550,37 @@ a {
   .prose tbody th { padding: 0.55rem 0.7rem; }
   /* the row-label column stays put while the comparison columns scroll */
   .prose tbody td:first-child { white-space: normal; min-width: 8.5rem; }
+
+  /* Diagrams: readability floor.
+     Every inline diagram is authored on an ~800-unit viewBox. Squeezed into a
+     335px column that is a 0.42x scale, so 10-unit label text lands at 4.2px --
+     illegible, and mobile-first indexing means that is the rendering Google
+     evaluates. min-width holds the SVG at 640px (9-unit text -> 7.2px, 11 ->
+     8.8px) and lets the figure pan instead of crushing.
+     This is a FLOOR, not the destination. Diagrams carrying a .dia-desk /
+     .dia-mob pair below get a purpose-built narrow layout and never pan. */
+  .prose figure {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-inline: 0;
+  }
+  .prose figure svg { min-width: 640px; }
+  .prose figcaption { min-width: 0; }
+}
+
+/* ---- Responsive diagram pairs -------------------------------------------
+   A diagram may ship two SVGs: .dia-desk (wide, side-by-side) and .dia-mob
+   (narrow, stacked, authored on a ~400-unit viewBox so text lands near 8px
+   with no panning). Exactly one is in the accessibility tree at a time --
+   the hidden one carries aria-hidden in the markup, and display:none keeps
+   it out of the a11y tree regardless. */
+.dia-mob { display: none; }
+@media (max-width: 640px) {
+  .dia-desk { display: none; }
+  .dia-mob  { display: block; }
+  /* a purpose-built narrow diagram must never trigger the pan floor above */
+  .prose figure:has(.dia-mob) { overflow-x: visible; }
+  .prose figure .dia-mob { min-width: 0; width: 100%; }
 }
 
 /* ---- Related posts ------------------------------------------------------- */

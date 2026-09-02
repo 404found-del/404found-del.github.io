@@ -84,7 +84,36 @@ fact-in-the-middle, dimensions-around-it arrangement is what forms a
 [star schema](/essays/star-schema-vs-snowflake-schema/).
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="fact-vs-dim-t fact-vs-dim-d">
+<svg class="dia-mob" viewBox="0 0 400 444" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="fvd-mt fvd-md">
+  <title id="fvd-mt">How fact and dimension tables work together</title>
+  <desc id="fvd-md">A central fact_sales table holding measures — quantity, amount, discount — and foreign keys, attached to four dimension tables: dim_date, dim_customer, dim_product and dim_store, each holding descriptive attributes. The measures are what you aggregate; the dimension attributes are what you filter and group by. Every connection is one join from a measurement to its context.</desc>
+  <rect x="40" y="30" width="320" height="80" rx="6" fill="#c8472b"/>
+  <text x="200" y="57" font-size="14" fill="#f6f3ec" text-anchor="middle" font-weight="700">fact_sales</text>
+  <text x="200" y="78" font-size="11" fill="#f6f3ec" text-anchor="middle">quantity · amount · discount</text>
+  <text x="200" y="97" font-size="10" fill="#f6f3ec" text-anchor="middle">+ foreign keys</text>
+  <text x="200" y="128" font-size="10" fill="#a4391f" text-anchor="middle">MEASURES — the things you SUM</text>
+  <text x="200" y="156" font-size="10" fill="#8b857a" text-anchor="middle">ATTRIBUTES — the things you FILTER and GROUP BY</text>
+  <line x1="24" y1="170" x2="24" y2="384" stroke="#cabfac" stroke-width="2"/>
+  <line x1="24" y1="193" x2="40" y2="193" stroke="#cabfac" stroke-width="2"/>
+  <rect x="40" y="170" width="320" height="46" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
+  <text x="200" y="190" font-size="12" fill="#1c1a17" text-anchor="middle" font-weight="700">dim_date</text>
+  <text x="200" y="207" font-size="11" fill="#56514a" text-anchor="middle">day · month · quarter · holiday</text>
+  <line x1="24" y1="249" x2="40" y2="249" stroke="#cabfac" stroke-width="2"/>
+  <rect x="40" y="226" width="320" height="46" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
+  <text x="200" y="246" font-size="12" fill="#1c1a17" text-anchor="middle" font-weight="700">dim_customer</text>
+  <text x="200" y="263" font-size="11" fill="#56514a" text-anchor="middle">name · segment · region</text>
+  <line x1="24" y1="305" x2="40" y2="305" stroke="#cabfac" stroke-width="2"/>
+  <rect x="40" y="282" width="320" height="46" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
+  <text x="200" y="302" font-size="12" fill="#1c1a17" text-anchor="middle" font-weight="700">dim_product</text>
+  <text x="200" y="319" font-size="11" fill="#56514a" text-anchor="middle">sku · category · brand</text>
+  <line x1="24" y1="361" x2="40" y2="361" stroke="#cabfac" stroke-width="2"/>
+  <rect x="40" y="338" width="320" height="46" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
+  <text x="200" y="358" font-size="12" fill="#1c1a17" text-anchor="middle" font-weight="700">dim_store</text>
+  <text x="200" y="375" font-size="11" fill="#56514a" text-anchor="middle">store · city · country</text>
+  <text x="200" y="412" font-size="10" fill="#8b857a" text-anchor="middle">would you SUM it? it's a measure.</text>
+  <text x="200" y="430" font-size="10" fill="#8b857a" text-anchor="middle">would you GROUP BY it? it's an attribute.</text>
+</svg>
+<svg class="dia-desk" viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="fact-vs-dim-t fact-vs-dim-d">
   <title id="fact-vs-dim-t">How fact and dimension tables work together</title>
   <desc id="fact-vs-dim-d">A central fact_sales table holding measures — quantity, amount, discount — and foreign keys, surrounded by four dimension tables: dim_date, dim_customer, dim_product and dim_store, each holding descriptive attributes. The measures are what you aggregate; the dimension attributes are what you filter and group by. Every arrow is one join from a measurement to its context.</desc>
   <rect x="300" y="128" width="200" height="84" rx="6" fill="#c8472b"/>
@@ -98,16 +127,16 @@ fact-in-the-middle, dimensions-around-it arrangement is what forms a
   <line x1="500" y1="190" x2="600" y2="248" stroke="#cabfac" stroke-width="2"/>
   <rect x="110" y="58" width="180" height="52" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
   <text x="200" y="80" font-size="12" fill="#1c1a17" text-anchor="middle" font-weight="700">dim_date</text>
-  <text x="200" y="98" font-size="9" fill="#56514a" text-anchor="middle">day · month · quarter · holiday</text>
+  <text x="200" y="98" font-size="11" fill="#56514a" text-anchor="middle">day · month · quarter · holiday</text>
   <rect x="510" y="58" width="180" height="52" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
   <text x="600" y="80" font-size="12" fill="#1c1a17" text-anchor="middle" font-weight="700">dim_customer</text>
-  <text x="600" y="98" font-size="9" fill="#56514a" text-anchor="middle">name · segment · region</text>
+  <text x="600" y="98" font-size="11" fill="#56514a" text-anchor="middle">name · segment · region</text>
   <rect x="110" y="230" width="180" height="52" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
   <text x="200" y="252" font-size="12" fill="#1c1a17" text-anchor="middle" font-weight="700">dim_product</text>
-  <text x="200" y="270" font-size="9" fill="#56514a" text-anchor="middle">sku · category · brand</text>
+  <text x="200" y="270" font-size="11" fill="#56514a" text-anchor="middle">sku · category · brand</text>
   <rect x="510" y="230" width="180" height="52" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
   <text x="600" y="252" font-size="12" fill="#1c1a17" text-anchor="middle" font-weight="700">dim_store</text>
-  <text x="600" y="270" font-size="9" fill="#56514a" text-anchor="middle">store · city · country</text>
+  <text x="600" y="270" font-size="11" fill="#56514a" text-anchor="middle">store · city · country</text>
   <text x="400" y="30" font-size="11" fill="#8b857a" text-anchor="middle">ATTRIBUTES — the things you FILTER and GROUP BY</text>
   <text x="400" y="316" font-size="12" fill="#8b857a" text-anchor="middle">would you SUM it? it's a measure. would you GROUP BY it? it's an attribute.</text>
 </svg>

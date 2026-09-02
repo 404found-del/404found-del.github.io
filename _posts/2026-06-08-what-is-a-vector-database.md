@@ -49,7 +49,40 @@ is useful when you evaluate vendors: the differentiator is rarely the search
 algorithm, because they are largely running the same one.
 
 <figure style="margin:2rem auto;text-align:center;">
-<svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="vector-db-t vector-db-d">
+<svg class="dia-mob" viewBox="0 0 400 560" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="vdb-mt vdb-md">
+  <title id="vdb-mt">Search by meaning versus search by value</title>
+  <desc id="vdb-md">First, an exact-match query in a normal database returns the row whose id equals 1077. Below it, two differently-worded questions about resetting a password are converted to embeddings and land close together in vector space, so a nearest-neighbour search returns them as similar despite sharing almost no words. Exact match answers what equals this; vector search answers what is near this in meaning.</desc>
+  <text x="200" y="24" font-size="13" fill="#1c1a17" text-anchor="middle" font-weight="700">Exact match</text>
+  <rect x="40" y="38" width="320" height="34" rx="4" fill="#1c1a17"/>
+  <text x="200" y="60" font-size="11" fill="#f6f3ec" text-anchor="middle">WHERE id = 1077</text>
+  <line x1="200" y1="72" x2="200" y2="98" stroke="#cabfac" stroke-width="2"/>
+  <rect x="80" y="98" width="240" height="26" rx="3" fill="#c8472b"/>
+  <text x="200" y="116" font-size="10" fill="#f6f3ec" text-anchor="middle">one row · exactly right</text>
+  <rect x="80" y="130" width="240" height="18" rx="3" fill="#f6f3ec" stroke="#ddd6c8"/>
+  <rect x="80" y="152" width="240" height="18" rx="3" fill="#f6f3ec" stroke="#ddd6c8"/>
+  <rect x="80" y="174" width="240" height="18" rx="3" fill="#f6f3ec" stroke="#ddd6c8"/>
+  <text x="200" y="216" font-size="10" fill="#56514a" text-anchor="middle">cannot answer "what means roughly this?"</text>
+  <line x1="20" y1="240" x2="380" y2="240" stroke="#ddd6c8" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <text x="200" y="276" font-size="13" fill="#1c1a17" text-anchor="middle" font-weight="700">Similarity in meaning</text>
+  <rect x="20" y="290" width="360" height="180" rx="8" fill="#fdfcf9" stroke="#cabfac"/>
+  <circle cx="120" cy="352" r="7" fill="#c8472b"/>
+  <circle cx="148" cy="372" r="7" fill="#c8472b"/>
+  <circle cx="134" cy="362" r="36" fill="none" stroke="#c8472b" stroke-width="1.4" stroke-dasharray="3 3"/>
+  <text x="184" y="348" font-size="10" fill="#a4391f">"how do I reset</text>
+  <text x="184" y="362" font-size="10" fill="#a4391f">my password"</text>
+  <text x="184" y="388" font-size="10" fill="#a4391f">"I forgot my login</text>
+  <text x="184" y="402" font-size="10" fill="#a4391f">credentials"</text>
+  <circle cx="56" cy="440" r="6" fill="#cabfac"/>
+  <circle cx="348" cy="316" r="6" fill="#cabfac"/>
+  <circle cx="318" cy="446" r="6" fill="#cabfac"/>
+  <circle cx="62" cy="312" r="6" fill="#cabfac"/>
+  <circle cx="196" cy="444" r="6" fill="#cabfac"/>
+  <text x="200" y="496" font-size="10" fill="#56514a" text-anchor="middle">near in the embedding space, though</text>
+  <text x="200" y="512" font-size="10" fill="#56514a" text-anchor="middle">they share almost no words</text>
+  <text x="200" y="540" font-size="10" fill="#8b857a" text-anchor="middle">a serious system needs both: the vector store</text>
+  <text x="200" y="556" font-size="10" fill="#8b857a" text-anchor="middle">for retrieval, the structured store for truth</text>
+</svg>
+<svg class="dia-desk" viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;" role="img" aria-labelledby="vector-db-t vector-db-d">
   <title id="vector-db-t">Search by meaning versus search by value</title>
   <desc id="vector-db-d">On the left, an exact-match query in a normal database returns the row whose id equals 1077. On the right, two differently-worded questions about resetting a password are converted to embeddings and land close together in vector space, so a nearest-neighbour search returns them as similar despite sharing almost no words. Exact match answers what equals this; vector search answers what is near this in meaning.</desc>
   <text x="190" y="28" font-size="13" fill="#1c1a17" text-anchor="middle" font-weight="700">Exact match</text>
@@ -66,8 +99,8 @@ algorithm, because they are largely running the same one.
   <rect x="440" y="48" width="300" height="180" rx="8" fill="#fdfcf9" stroke="#cabfac"/>
   <circle cx="560" cy="112" r="7" fill="#c8472b"/>
   <circle cx="588" cy="128" r="7" fill="#c8472b"/>
-  <text x="640" y="106" font-size="9" fill="#a4391f">"how do I reset my password"</text>
-  <text x="648" y="146" font-size="9" fill="#a4391f">"I forgot my login credentials"</text>
+  <text x="640" y="106" font-size="11" fill="#a4391f">"how do I reset my password"</text>
+  <text x="648" y="146" font-size="11" fill="#a4391f">"I forgot my login credentials"</text>
   <circle cx="490" cy="196" r="6" fill="#cabfac"/>
   <circle cx="700" cy="86" r="6" fill="#cabfac"/>
   <circle cx="676" cy="200" r="6" fill="#cabfac"/>

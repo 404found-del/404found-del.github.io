@@ -83,10 +83,10 @@ is faster and far easier to write.
     <line x1="436" y1="120" x2="684" y2="120" stroke="#cabfac"/>
     <line x1="524" y1="96" x2="524" y2="216" stroke="#eee5d6"/>
     <line x1="604" y1="96" x2="604" y2="216" stroke="#eee5d6"/>
-    <text x="480" y="113" text-anchor="middle" font-size="9" fill="#8b857a">order</text>
-    <text x="564" y="113" text-anchor="middle" font-size="9" fill="#8b857a">customer</text>
-    <text x="644" y="113" text-anchor="middle" font-size="9" fill="#8b857a">product</text>
-    <g fill="#56514a" font-size="9">
+    <text x="480" y="113" text-anchor="middle" font-size="11" fill="#8b857a">order</text>
+    <text x="564" y="113" text-anchor="middle" font-size="11" fill="#8b857a">customer</text>
+    <text x="644" y="113" text-anchor="middle" font-size="11" fill="#8b857a">product</text>
+    <g fill="#56514a" font-size="11">
       <text x="480" y="140" text-anchor="middle">#1001</text><text x="564" y="140" text-anchor="middle">Acme</text><text x="644" y="140" text-anchor="middle">Buds</text>
       <text x="480" y="162" text-anchor="middle">#1002</text><text x="564" y="162" text-anchor="middle">Acme</text><text x="644" y="162" text-anchor="middle">Cable</text>
       <text x="480" y="184" text-anchor="middle">#1003</text><text x="564" y="184" text-anchor="middle">Acme</text><text x="644" y="184" text-anchor="middle">Buds</text>

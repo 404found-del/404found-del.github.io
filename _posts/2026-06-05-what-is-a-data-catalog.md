@@ -43,15 +43,15 @@ institutional memory that a sprawling data estate otherwise loses.
   <rect x="140" y="30" width="520" height="62" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
   <text x="400" y="56" font-size="12" fill="#1c1a17" text-anchor="middle" font-weight="700">technical metadata</text>
   <text x="400" y="78" font-size="10" fill="#56514a" text-anchor="middle">schema · types · size · last updated</text>
-  <text x="700" y="66" font-size="9" fill="#8b857a">auto ✓</text>
+  <text x="700" y="66" font-size="11" fill="#8b857a">auto ✓</text>
   <rect x="140" y="104" width="520" height="62" rx="6" fill="#f6f3ec" stroke="#1c1a17" stroke-width="1.5"/>
   <text x="400" y="130" font-size="12" fill="#1c1a17" text-anchor="middle" font-weight="700">operational metadata</text>
   <text x="400" y="152" font-size="10" fill="#56514a" text-anchor="middle">usage · freshness · lineage</text>
-  <text x="700" y="140" font-size="9" fill="#8b857a">auto ✓</text>
+  <text x="700" y="140" font-size="11" fill="#8b857a">auto ✓</text>
   <rect x="140" y="178" width="520" height="62" rx="6" fill="#c8472b"/>
   <text x="400" y="204" font-size="12" fill="#f6f3ec" text-anchor="middle" font-weight="700">business metadata</text>
   <text x="400" y="226" font-size="10" fill="#f6f3ec" text-anchor="middle">descriptions · meaning · ownership</text>
-  <text x="686" y="214" font-size="9" fill="#a4391f">humans</text>
+  <text x="686" y="214" font-size="11" fill="#a4391f">humans</text>
   <text x="400" y="272" font-size="12" fill="#8b857a" text-anchor="middle">the top two bands stay current by themselves; the bottom one is the reason people</text>
   <text x="400" y="294" font-size="12" fill="#8b857a" text-anchor="middle">bought the catalog — and the only one that needs a named, ongoing owner</text>
 </svg>

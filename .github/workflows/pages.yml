@@ -115,6 +115,19 @@ jobs:
           echo "posts: $src   rendered: $out"
           [ "$out" -ge "$src" ] || note "only $out of $src essays rendered"
 
+          echo "--- diagram legibility on mobile ---"
+          # Diagrams are authored on an ~800-unit viewBox. On a 375px phone the
+          # figure is held at 640px by CSS, so a font-size of N units renders at
+          # N*0.8 px. Below 10 units that is under 8px and unreadable -- which is
+          # what Google sees, since indexing is mobile-first. All 33 diagrams sat
+          # at 3.8-5.0px until 2026-08-29.
+          small=$(grep -rhoP 'font-size="\d+"' _posts _patterns \
+                  | grep -oP '\d+' | awk '$1<10' | wc -l)
+          [ "$small" -eq 0 ] || note "$small SVG font-size value(s) below 10 units (<8px on mobile)"
+          wide=$(grep -rhoP 'viewBox="0 0 (\d+)' _posts _patterns \
+                 | grep -oP '\d+$' | awk '$1>800' | wc -l)
+          [ "$wide" -eq 0 ] || note "$wide SVG viewBox wider than 800 units"
+
           echo "--- rendered <title> length ---"
           # Bing Webmaster flags "Title too long" above ~91 rendered characters,
           # which includes jekyll-seo-tag's " | dataarchitect.studio" suffix (23).
