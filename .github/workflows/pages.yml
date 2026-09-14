@@ -92,7 +92,9 @@ jobs:
           echo "--- core files present ---"
           for p in _site/sitemap.xml _site/llms.txt _site/robots.txt _site/feed.xml \
                    _site/benchmarks/index.html _site/benchmarks/file-format-benchmark.py \
-                   _site/benchmarks/results-2026-07-26.json; do
+                   _site/benchmarks/results-2026-07-26.json \
+                   _site/benchmarks/delete-mode-benchmark.py \
+                   _site/benchmarks/results-delete-mode-2026-09-14.json; do
             test -f "$p" || note "missing from build output: $p"
           done
 

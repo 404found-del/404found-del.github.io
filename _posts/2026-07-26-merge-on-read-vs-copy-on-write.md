@@ -4,8 +4,14 @@ kicker: "Field Notes"
 topic: "Engineering"
 description: "Copy-on-write rewrites whole files on update; merge-on-read annotates them and resolves at read time. The trade is write cost against read cost, with arithmetic."
 date: 2026-07-26 09:00:00 +0530
-last_modified_at: 2026-08-29
+last_modified_at: 2026-09-14
 faq:
+  - q: "Does pyiceberg support merge-on-read deletes?"
+    a: "Not as of pyiceberg 0.12.0. Setting write.delete.mode to merge-on-read is accepted and stored, but the delete emits the warning 'Merge on read is not yet supported, falling back to copy-on-write' and rewrites whole data files instead of writing position delete files. Measured on a million-row table, the bytes written were identical whether merge-on-read or copy-on-write was requested. Merge-on-read on Iceberg currently requires the JVM engines, such as Spark with the Iceberg runtime."
+  - q: "Do deletion vectors work in delta-rs (the Python deltalake package)?"
+    a: "Not as of deltalake 1.6.3, and it fails silently, which is the dangerous part. Setting delta.enableDeletionVectors to true is stored faithfully in the table metadata, so the table looks merge-on-read to anyone inspecting its properties, but deletes rewrite data files exactly as copy-on-write does and no deletion vector file appears. Unlike pyiceberg it prints no warning. If you configured deletion vectors from Python and assumed they were active, verify by checking whether a delete produces a .bin deletion vector or a new Parquet file."
+  - q: "How much does a copy-on-write delete actually amplify writes?"
+    a: "Measured on a million-row table with the deleted rows spread across every data file: deleting 0.1% of rows wrote 259 times the removed data on delta-rs and 1,073 times on pyiceberg. At 1% it was 24x and 105x. At 10% it fell to 2.2x and 9.4x. The smaller the delete, the worse copy-on-write looks, because the unit of rewriting is the file rather than the row — so amplification scales with file size, not with format choice."
   - q: "What is the difference between merge-on-read and copy-on-write?"
     a: "Copy-on-write rewrites every data file that contains a changed row, so the table is always clean for readers and expensive for writers. Merge-on-read leaves the original files alone and writes small delete files or deletion vectors alongside them, so writes are cheap and readers pay to reconcile the deletes at query time. It is a straight trade of write cost against read cost."
   - q: "When should I use merge-on-read instead of copy-on-write?"
@@ -13,7 +19,7 @@ faq:
   - q: "Does merge-on-read make queries slower?"
     a: "Yes, and the slowdown grows with every un-compacted write. Each read must apply the accumulated delete files or deletion vectors before returning rows, so latency degrades roughly in proportion to how many delete files have piled up since the last compaction. Compaction is not optional maintenance on a merge-on-read table; it is part of the design."
   - q: "Do Iceberg and Delta Lake both support merge-on-read?"
-    a: "Both do, with different vocabulary and defaults. Iceberg exposes it per operation through table properties like write.update.mode and write.delete.mode, defaulting to copy-on-write. Delta Lake implements the same idea through deletion vectors, enabled with delta.enableDeletionVectors. The mechanism differs; the trade-off is identical."
+    a: "Both specifications do, with different vocabulary and defaults. Iceberg exposes it per operation through table properties like write.update.mode and write.delete.mode, defaulting to copy-on-write. Delta Lake implements the same idea through deletion vectors, enabled with delta.enableDeletionVectors. The mechanism differs; the trade-off is identical. But support in the specification is not support in your client: measured here, neither pyiceberg 0.12.0 nor deltalake 1.6.3 actually writes merge-on-read deletes, and both silently or explicitly fall back to copy-on-write. Merge-on-read today means a JVM engine."
 ---
 
 Every [open table format](/essays/what-is-an-open-table-format/) has to answer one
@@ -100,13 +106,70 @@ subtract the dead rows from every file they scan.
 <figcaption style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:#8b857a;margin-top:0.6rem;">Same change, two places to put the cost: rewrite now, or reconcile on every read until you compact.</figcaption>
 </figure>
 
-## A worked scenario, with the arithmetic shown
+## Measured: what a small delete actually costs
 
-**This scenario is constructed, not measured.** The figures below are chosen to
-be plausible and are worked through so you can check the reasoning and substitute
-your own numbers — they are not a benchmark, and no system was run to produce
-them. What matters is the *shape* of the arithmetic, which holds regardless of
-the exact inputs.
+The amplification above is usually asserted. Here it is measured, with
+[a script you can run](/benchmarks/). One table, five columns, deleted at three
+selectivities, with the matching rows spread across every data file rather than
+conveniently clustered in one — which is the realistic case, since a GDPR erasure
+or a late-arriving correction does not land tidily.
+
+**Bytes written per byte of data actually removed**, at 1,000,000 rows:
+
+| Rows deleted | delta-rs | pyiceberg |
+|---|---|---|
+| **0.1%** | **259×** | **1,073×** |
+| **1%** | **24×** | **105×** |
+| **10%** | 2.2× | 9.4× |
+
+Read the top row twice. Removing one row in a thousand wrote **259 times** the
+volume of the data removed on delta-rs, and **over a thousand times** on
+pyiceberg. The two engines differ mainly because they chose different default
+file sizes and codecs, which is the point rather than a flaw in the comparison:
+**amplification is a function of file size, not of the format's logo.** Bigger
+files make it worse.
+
+The pattern held when the table was 5× smaller, so this is not an artifact of one
+run. And the trend is the whole argument for merge-on-read: the *less* you delete,
+the *worse* copy-on-write looks. At 10% it is a reasonable 2–9×. At 0.1% it is
+indefensible.
+
+### The catch: you probably cannot turn merge-on-read on
+
+Both engines accept a merge-on-read setting. **Neither honours it.**
+
+Every row in that table is identical whether the table was created with
+copy-on-write or with merge-on-read requested. No delete file, no deletion vector,
+same bytes rewritten.
+
+- **pyiceberg 0.12.0** at least says so. Set `write.delete.mode=merge-on-read`
+  and it emits: *"Merge on read is not yet supported, falling back to
+  copy-on-write."*
+- **delta-rs 1.6.3** says nothing at all. Set
+  `delta.enableDeletionVectors=true`, and the property is faithfully stored in
+  the table metadata — where a reader will see it and believe it. The delete then
+  rewrites files exactly as copy-on-write would.
+
+That second one is the trap. The setting persists, so the table *looks*
+merge-on-read to anyone inspecting its properties, while behaving as
+copy-on-write. If you have configured deletion vectors from Python and assumed
+they were active, check.
+
+**Merge-on-read is a JVM feature today.** Spark with the Iceberg or Delta runtime
+does it properly. The pure-Python clients that most pipelines reach for do not,
+as of these versions. That is a materially different situation from the one most
+writing on this topic implies, including the earlier version of this essay.
+
+Versions matter and will date quickly: pyarrow 25.0.0, deltalake 1.6.3,
+pyiceberg 0.12.0, Python 3.10.12. The script re-runs in under a minute and prints
+what your versions actually do, which is the only answer that counts.
+
+## Scaling that up: the arithmetic at 2 TB
+
+The measurement above is small enough to run on a laptop. Production tables are
+not, so here is the same arithmetic at realistic scale. **The amplification ratio
+is measured; the table size, batch rate and file count below are assumptions**
+chosen to be plausible — substitute your own. What holds regardless is the shape.
 
 Take an `orders` table on object storage:
 

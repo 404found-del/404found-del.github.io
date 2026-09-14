@@ -68,3 +68,54 @@ laptop CPU. The ratios are the point, and the ratios are what the essay reports.
 
 If you rerun it and get materially different results, that's worth knowing —
 open an issue on [GitHub](https://github.com/404found-del/404found-del.github.io/issues).
+
+## delete-mode-benchmark.py
+
+Copy-on-write delete amplification, and whether merge-on-read is available at all
+from Python.
+
+Essay: <https://dataarchitect.studio/essays/merge-on-read-vs-copy-on-write/>
+Raw results: [`results-delete-mode-2026-09-14.json`](results-delete-mode-2026-09-14.json)
+
+```bash
+pip install pyarrow deltalake "pyiceberg[sql-sqlite,pyarrow]"
+python3 delete-mode-benchmark.py --rows 1000000
+```
+
+Runs in about a minute on local disk. No cloud credentials, nothing uploaded.
+
+### What it found
+
+Deleting rows scattered across every data file, measured as bytes written per
+byte actually removed:
+
+| Rows deleted | delta-rs | pyiceberg |
+|---|---|---|
+| 0.1% | **259×** | **1,073×** |
+| 1% | 24× | 105× |
+| 10% | 2.2× | 9.4× |
+
+And the part worth checking on your own versions: **neither client honoured a
+merge-on-read request.** Identical bytes written either way, no delete file
+produced. pyiceberg 0.12.0 warns *"Merge on read is not yet supported, falling
+back to copy-on-write"*. deltalake 1.6.3 stores `delta.enableDeletionVectors`
+in the table metadata and then ignores it, with no warning at all — so the table
+advertises a property it is not honouring.
+
+### Known limitations, stated up front
+
+- **Two Python clients, not the JVM engines.** Spark with the Iceberg or Delta
+  runtime does implement merge-on-read. This measures what the pure-Python path
+  does, because that is what a lot of pipelines actually run.
+- **Default file sizes and codecs.** delta-rs and pyiceberg chose different ones,
+  which is most of why their amplification figures differ. That is the honest
+  lesson rather than a defect: amplification tracks file size, so the comparison
+  between the two engines is less meaningful than the trend within each.
+- **Local disk, single writer, no concurrency.** Object-storage latency and
+  competing writers both change the picture and neither is simulated.
+- **Amplification is measured against the pre-delete table size**, with
+  tombstoned files left in place (no VACUUM / expire_snapshots). That is the cost
+  of the operation, not the steady-state size of the table.
+- **Versions date fast.** Both projects are moving quickly and may well ship
+  merge-on-read soon. The script prints what *your* versions do, which is the
+  only answer that matters.
