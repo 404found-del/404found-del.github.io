@@ -1,0 +1,96 @@
+{
+ "config": {
+  "rows": 2000000,
+  "columns": 11,
+  "codec": "zstd",
+  "trials": 3,
+  "in_memory_mb": 226.6,
+  "pyarrow": "25.0.0",
+  "duckdb": "1.5.5",
+  "python": "3.10.12",
+  "generated": "2026-11-08",
+  "caveats": [
+   "Local disk. On object storage each file is an HTTP round trip, so per-file overhead is far higher there. These numbers are a floor.",
+   "Warm page cache; clearing it needs root. Cold reads would widen the gap between few large files and many small ones.",
+   "ROW COUNT is held constant; TOTAL BYTES ARE NOT, and that is a result rather than a flaw. Splitting the same rows across more files inflates total size, because compression and dictionary encoding work on smaller blocks and every file carries its own footer. The read slowdown is therefore partly more bytes to read and partly per-file overhead; this benchmark does not separate the two.",
+   "Default row group sizes. A single 2M-row file still contains many row groups, which is why the one-file case is not a pathological best case."
+  ]
+ },
+ "results": [
+  {
+   "files": 1,
+   "bytes": 24870817,
+   "avg_file_kb": 24287.9,
+   "plan_s": 0.0002,
+   "full_scan_s": 0.2887,
+   "two_col_s": 0.0275,
+   "duckdb_agg_s": 0.0264,
+   "plan_vs_single_file": 1.0,
+   "full_scan_vs_single_file": 1.0,
+   "two_col_vs_single_file": 1.0,
+   "duckdb_agg_vs_single_file": 1.0,
+   "bytes_vs_single_file": 1.0,
+   "pruning_speedup": 10.5
+  },
+  {
+   "files": 10,
+   "bytes": 32371767,
+   "avg_file_kb": 3161.3,
+   "plan_s": 0.0002,
+   "full_scan_s": 0.2436,
+   "two_col_s": 0.0284,
+   "duckdb_agg_s": 0.0284,
+   "plan_vs_single_file": 1.0,
+   "full_scan_vs_single_file": 0.8,
+   "two_col_vs_single_file": 1.0,
+   "duckdb_agg_vs_single_file": 1.1,
+   "bytes_vs_single_file": 1.3,
+   "pruning_speedup": 8.58
+  },
+  {
+   "files": 100,
+   "bytes": 43859305,
+   "avg_file_kb": 428.3,
+   "plan_s": 0.0005,
+   "full_scan_s": 0.2921,
+   "two_col_s": 0.0615,
+   "duckdb_agg_s": 0.0391,
+   "plan_vs_single_file": 2.5,
+   "full_scan_vs_single_file": 1.0,
+   "two_col_vs_single_file": 2.2,
+   "duckdb_agg_vs_single_file": 1.5,
+   "bytes_vs_single_file": 1.76,
+   "pruning_speedup": 4.75
+  },
+  {
+   "files": 1000,
+   "bytes": 47213816,
+   "avg_file_kb": 46.1,
+   "plan_s": 0.004,
+   "full_scan_s": 0.8874,
+   "two_col_s": 0.3543,
+   "duckdb_agg_s": 0.1688,
+   "plan_vs_single_file": 20.0,
+   "full_scan_vs_single_file": 3.1,
+   "two_col_vs_single_file": 12.9,
+   "duckdb_agg_vs_single_file": 6.4,
+   "bytes_vs_single_file": 1.9,
+   "pruning_speedup": 2.5
+  },
+  {
+   "files": 5000,
+   "bytes": 64922095,
+   "avg_file_kb": 12.7,
+   "plan_s": 0.0196,
+   "full_scan_s": 2.5436,
+   "two_col_s": 1.2471,
+   "duckdb_agg_s": 0.954,
+   "plan_vs_single_file": 98.0,
+   "full_scan_vs_single_file": 8.8,
+   "two_col_vs_single_file": 45.3,
+   "duckdb_agg_vs_single_file": 36.1,
+   "bytes_vs_single_file": 2.61,
+   "pruning_speedup": 2.04
+  }
+ ]
+}
